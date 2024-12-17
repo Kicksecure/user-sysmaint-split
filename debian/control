@@ -1,0 +1,25 @@
+## Copyright (C) 2012 - 2023 ENCRYPTED SUPPORT LP <adrelanos@kicksecure.com>
+## See the file COPYING for copying conditions.
+
+Source: user-admin-split
+Section: misc
+Priority: optional
+Maintainer: Patrick Schleizer <adrelanos@kicksecure.com>
+Build-Depends: debhelper (>= 13), debhelper-compat (= 13)
+Homepage: https://github.com/Kicksecure/user-admin-split
+Vcs-Browser: https://github.com/Kicksecure/user-admin-split
+Vcs-Git: https://github.com/Kicksecure/user-admin-split.git
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+
+Package: user-admin-split
+Architecture: all
+Depends: security-misc, ${misc:Depends}
+Description: Role-Based Boot Modes - user versus admin
+ Adds a GRUB boot menu entry "PERSISTENT mode ADMIN
+ (For administrative tasks.)"
+ .
+ Makes Privilege Escalation Tools (such as sudo, su,
+ pkexec) inaccessible to limited user accounts such as user "user".
+ .
+ Adds kernel parameter "boot-role=admin".

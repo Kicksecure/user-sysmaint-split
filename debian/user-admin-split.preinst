@@ -1,0 +1,99 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
+   source /usr/libexec/helper-scripts/pre.bsh
+fi
+
+set -e
+
+true "
+#####################################################################
+## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+#####################################################################
+"
+
+admin_user_creation_and_groups_setup() {
+   if [ -f "/var/lib/user-admin-split/do_once/${FUNCNAME}_version_1" ]; then
+      return 0
+   fi
+   mkdir --parents "/var/lib/user-admin-split/do_once"
+
+   user_to_be_created="admin"
+
+   if command -v qubesdb-read >/dev/null 2>&1 ; then
+      ## Qubes works differently.
+      ## - User "admin" does not run GUI / tools such as a terminal-emulator.
+      ## - Users are instead expected to use user "root" instead by using a Qubes Root Console.
+      ## https://www.kicksecure.com/wiki/Root#Qubes_Root_Console
+      ##
+      ## https://forums.whonix.org/t/qubes-sudo-su-root-hardening-development-discussion/8561
+      ##
+      ## create user `admin` by default and add user `admin` to group `sudo` by default
+      ## https://github.com/QubesOS/qubes-issues/issues/9519
+      true "INFO: Skipping because Qubes detected."
+      return 1
+   fi
+
+   ## TODO: distribution morphing: What should happen during distribution morphing?
+
+   if id "$user_to_be_created" &>/dev/null ; then
+      true "INFO: User '$user_to_be_created' already exists, skip creation."
+      return 0
+   fi
+
+   ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
+   adduser --no-create-home --disabled-password --comment "" "$user_to_be_created"
+   true "INFO: User created."
+
+   ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
+   ## Set empty password for user "admin".
+   passwd --delete "$user_to_be_created"
+
+
+   ## group 'sudo' membership required to use 'sudo'
+   ##
+   ## group 'sudo' membership required to use 'su'
+   ## /usr/share/pam-configs/wheel-security-misc
+   adduser "$user_to_be_created" sudo
+
+   ## TODO: required?
+   ## security-misc does that too.
+   ## Duplicating that here to avoid race conditions.
+   ## Might not be required because user-admin-split 'Depends: security-misc'?
+   ## Maybe user-admin-split should not depend on security-misc?
+   ##
+   ## Related to Console Lockdown.
+   ## /usr/share/pam-configs/console-lockdown-security-misc
+   ## /etc/security/access-security-misc.conf
+   #addgroup --system console
+   #addgroup --system console-unrestricted
+
+   ## TODO: debian/security-misc.postinst sudo_users_check
+   ##       depending on above
+
+   ## security-misc: Console Lockdown.
+   adduser "$user_to_be_created" console
+   adduser "$user_to_be_created" ssh
+
+   touch "/var/lib/user-admin-split/do_once/${FUNCNAME}_version_1"
+}
+
+admin_user_creation_and_groups_setup
+
+true "INFO: debhelper beginning here."
+
+#DEBHELPER#
+
+true "INFO: Done with debhelper."
+
+true "
+#####################################################################
+## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+#####################################################################
+"
+
+## Explicitly "exit 0", so eventually trapped errors can be ignored.
+exit 0
