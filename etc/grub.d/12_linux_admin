@@ -5,7 +5,7 @@
 
 #set -x
 
-true "user-admin-split $0: START"
+true "user-sysmaint-split $0: START"
 
 set -e
 set -o allexport
@@ -21,4 +21,4 @@ if test -x /etc/grub.d/10_linux ; then
 	/etc/grub.d/10_linux
 fi
 
-true "user-admin-split $0: OK: END"
+true "user-sysmaint-split $0: OK: END"

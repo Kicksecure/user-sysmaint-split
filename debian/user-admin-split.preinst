@@ -16,10 +16,10 @@ true "
 "
 
 admin_user_creation_and_groups_setup() {
-   if [ -f "/var/lib/user-admin-split/do_once/${FUNCNAME}_version_1" ]; then
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
       return 0
    fi
-   mkdir --parents "/var/lib/user-admin-split/do_once"
+   mkdir --parents "/var/lib/user-sysmaint-split/do_once"
 
    user_to_be_created="admin"
 
@@ -62,8 +62,8 @@ admin_user_creation_and_groups_setup() {
    ## TODO: required?
    ## security-misc does that too.
    ## Duplicating that here to avoid race conditions.
-   ## Might not be required because user-admin-split 'Depends: security-misc'?
-   ## Maybe user-admin-split should not depend on security-misc?
+   ## Might not be required because user-sysmaint-split 'Depends: security-misc'?
+   ## Maybe user-sysmaint-split should not depend on security-misc?
    ##
    ## Related to Console Lockdown.
    ## /usr/share/pam-configs/console-lockdown-security-misc
@@ -78,7 +78,7 @@ admin_user_creation_and_groups_setup() {
    adduser "$user_to_be_created" console
    adduser "$user_to_be_created" ssh
 
-   touch "/var/lib/user-admin-split/do_once/${FUNCNAME}_version_1"
+   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
 
 admin_user_creation_and_groups_setup
