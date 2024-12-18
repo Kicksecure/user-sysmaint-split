@@ -15,11 +15,11 @@ Rules-Requires-Root: no
 Package: user-sysmaint-split
 Architecture: all
 Depends: security-misc, ${misc:Depends}
-Description: Role-Based Boot Modes - user versus admin
- Adds a GRUB boot menu entry "PERSISTENT mode ADMIN
- (For administrative tasks.)"
+Description: Role-Based Boot Modes - user versus sysmaint
+ Adds a GRUB boot menu entry "PERSISTENT mode SYSMAINT
+ (For system maintenance tasks.)"
  .
  Makes Privilege Escalation Tools (such as sudo, su,
  pkexec) inaccessible to limited user accounts such as user "user".
  .
- Adds kernel parameter "boot-role=admin".
+ Adds kernel parameter "boot-role=sysmaint".

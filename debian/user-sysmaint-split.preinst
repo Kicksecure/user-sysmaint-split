@@ -15,23 +15,23 @@ true "
 #####################################################################
 "
 
-admin_user_creation_and_groups_setup() {
+sysmaint_user_creation_and_groups_setup() {
    if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
       return 0
    fi
    mkdir --parents "/var/lib/user-sysmaint-split/do_once"
 
-   user_to_be_created="admin"
+   user_to_be_created="sysmaint"
 
    if command -v qubesdb-read >/dev/null 2>&1 ; then
       ## Qubes works differently.
-      ## - User "admin" does not run GUI / tools such as a terminal-emulator.
+      ## - User "sysmaint" does not run GUI / tools such as a terminal-emulator.
       ## - Users are instead expected to use user "root" instead by using a Qubes Root Console.
       ## https://www.kicksecure.com/wiki/Root#Qubes_Root_Console
       ##
       ## https://forums.whonix.org/t/qubes-sudo-su-root-hardening-development-discussion/8561
       ##
-      ## create user `admin` by default and add user `admin` to group `sudo` by default
+      ## create user `sysmaint` by default and add user `sysmaint` to group `sudo` by default
       ## https://github.com/QubesOS/qubes-issues/issues/9519
       true "INFO: Skipping because Qubes detected."
       return 1
@@ -49,7 +49,7 @@ admin_user_creation_and_groups_setup() {
    true "INFO: User created."
 
    ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
-   ## Set empty password for user "admin".
+   ## Set empty password for user "sysmaint".
    passwd --delete "$user_to_be_created"
 
 
@@ -81,7 +81,7 @@ admin_user_creation_and_groups_setup() {
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
 
-admin_user_creation_and_groups_setup
+sysmaint_user_creation_and_groups_setup
 
 true "INFO: debhelper beginning here."
 

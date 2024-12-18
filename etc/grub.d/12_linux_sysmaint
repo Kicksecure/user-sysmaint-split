@@ -12,9 +12,9 @@ set -o allexport
 
 GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
 unset GRUB_DEVICE_UUID
-GRUB_DISTRIBUTOR="PERSISTENT mode ADMIN (For administrative tasks.)"
+GRUB_DISTRIBUTOR="PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
 GRUB_DISABLE_RECOVERY="true"
-GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX boot-role=admin systemd.unit=minimal-session.target"
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX boot-role=sysmaint systemd.unit=minimal-session.target"
 GRUB_DISABLE_LINUX_UUID="true"
 
 if test -x /etc/grub.d/10_linux ; then
