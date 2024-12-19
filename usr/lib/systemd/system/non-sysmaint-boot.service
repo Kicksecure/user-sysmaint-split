@@ -8,7 +8,7 @@ Before=multi-user.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/passwd --lock sysmaint
+ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-password-control lock
 
 [Install]
 WantedBy=multi-user.target

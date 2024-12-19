@@ -8,7 +8,7 @@ Before=sysmaint-boot.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/passwd --unlock sysmaint
+ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-password-control unlock
 
 [Install]
 WantedBy=sysmaint-boot.target
