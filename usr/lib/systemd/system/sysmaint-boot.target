@@ -1,0 +1,8 @@
+## Copyright (C) 2018 - 2023 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+[Unit]
+Description=Sysmaint user session
+Requires=basic.target systemd-user-sessions.service
+Wants=lightdm.service network.target NetworkManager.service tor@default.service
+After=basic.target network.target systemd-user-sessions.service

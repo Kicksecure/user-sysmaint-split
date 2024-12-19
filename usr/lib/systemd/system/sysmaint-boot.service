@@ -1,0 +1,14 @@
+## Copyright (C) 2018 - 2023 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+[Unit]
+Description=Hook for ensuring sysmaint boots can use sysmaint account
+Before=sysmaint-boot.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/passwd --unlock sysmaint
+
+[Install]
+WantedBy=sysmaint-boot.target
