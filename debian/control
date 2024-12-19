@@ -22,4 +22,5 @@ Description: Role-Based Boot Modes - user versus sysmaint
  Makes Privilege Escalation Tools (such as sudo, su,
  pkexec) inaccessible to limited user accounts such as user "user".
  .
- Adds kernel parameter "boot-role=sysmaint".
+ Adds kernel parameter "boot-role=sysmaint" and
+ "systemd.unit=sysmaint-boot.target".
