@@ -2,13 +2,14 @@
 ## See the file COPYING for copying conditions.
 
 [Unit]
-Description=Hook for ensuring sysmaint boots can use sysmaint account
+Description=Hook for sysmaint account lock/unlock
+Before=multi-user.target
 Before=sysmaint-boot.target
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-password-control unlock
+ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-password-adjust
 
 [Install]
-WantedBy=sysmaint-boot.target
+WantedBy=basic.target
