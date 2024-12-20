@@ -21,10 +21,13 @@ if [ "$1" = 'remove' ] || [ "$1" = 'purge' ]; then
    ## Until the following has been implemented:
    ## Reset file attributes if no configuration matches #286
    ## https://github.com/Kicksecure/security-misc/pull/286
-   permission-hardener disable /usr/bin/sudo
-   permission-hardener disable /bin/sudo
-   permission-hardener disable /usr/bin/pkexec
-   permission-hardener disable /bin/pkexec
+   ##
+   ## Overwrite with '|| true' in case the user used
+   ## 'dummy-dependency security-misc'.
+   permission-hardener disable /usr/bin/sudo || true
+   permission-hardener disable /bin/sudo || true
+   permission-hardener disable /usr/bin/pkexec || true
+   permission-hardener disable /bin/pkexec || true
 fi
 
 true "INFO: debhelper beginning here."
