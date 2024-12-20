@@ -1,0 +1,45 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+kernel_cmdline="$(cat /proc/cmdline)"
+
+# Fix up password locking for sysmaint user
+if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
+   passwd_exit_code=0
+   passwd --unlock sysmaint || passwd_exit_code="$?"
+
+   ## `passwd --unlock` will fail and exit 3 if the account is locked and
+   ## passwordless. In this instance, the proper way to unlock the account is
+   ## with `passwd -d`.
+   if [ "${passwd_exit_code}" = '3' ]; then
+      passwd -d sysmaint
+   elif [ "${passwd_exit_code}" != '0' ]; then
+      exit "${passwd_exit_code}"
+   fi
+else
+   passwd --lock 'sysmaint'
+fi
+
+if [ -e '/usr/sbin/lightdm' ]; then
+   # If LightDM present, configure autologin
+   if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
+      echo "[Seat:*]
+autologin-user=sysmaint
+autologin-session=sysmaint-session" \
+         | sponge -- '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+   else
+      safe-rm -f '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+   fi
+
+   echo "[Desktop]
+   Session=sysmaint-session" \
+      | sponge -- '/home/sysmaint/.dmrc'
+   chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
+fi
