@@ -1,0 +1,5 @@
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+## The whole point of the package.
+user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target basic.target [usr/lib/systemd/system/sysmaint-boot.service]
