@@ -1,0 +1,71 @@
+commit ed1f87a24fc2c675a3e3653e19b904aec86a7676
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Dec 19 02:43:32 2024 -0500
+
+    output
+
+commit 879f7ed6314637bdc14f54b6a34157ad5f14e2b3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 19 01:07:00 2024 -0600
+
+    Simplify boot code and systemd config
+
+commit 96e664c6d790302dcba124542d3c9645af725cff
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 19 00:00:14 2024 -0600
+
+    Run update-grub post-installation so boot menu entry is created
+
+commit c02fbe4604a3848a197a3bee01e1dfab905637f3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 23:59:59 2024 -0600
+
+    Fix systemd unit name for sysmaint boot.
+
+commit cda19edb62a5ecb436cd371df4d920a9802b895a
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 23:42:36 2024 -0600
+
+    Work around limitations in passwd for unlocking passwordless accounts
+
+commit 48ba692e656d167f7f40ded5b48b2d3bf593a0ed
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 23:42:14 2024 -0600
+
+    Fix package name in changelog
+
+commit 4349cc617923a53dab49c01c7316cec911472774
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 21:41:59 2024 -0600
+
+    Show caution message in sysmaint terminals
+
+commit f5fe78b39af0edd21863e016f8abbc75269de011
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 18 21:41:37 2024 -0600
+
+    Add systemd config
+
+commit 882aafe56b0fe4808900eff4ff65f74637ee158a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Dec 18 02:42:36 2024 -0500
+
+    rename admin to sysmaint
+
+commit c92ada1a1be3370bb68e147e68fc05dc6d14caaa
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 17 22:11:26 2024 -0500
+
+    rename
+
+commit 96b6d979c7797a23a47c7e2169aeab67a24e1f19
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 17 22:10:15 2024 -0500
+
+    rename
+
+commit c0dbbbbbd6ac30f32b5a77eda8714fd5764bb4b9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 16 20:03:48 2024 -0500
+
+    initial implementation

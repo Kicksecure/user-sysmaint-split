@@ -14,7 +14,7 @@ Rules-Requires-Root: no
 
 Package: user-sysmaint-split
 Architecture: all
-Depends: security-misc, ${misc:Depends}
+Depends: security-misc, adduser, ${misc:Depends}
 Description: Role-Based Boot Modes - user versus sysmaint
  Adds a GRUB boot menu entry "PERSISTENT mode SYSMAINT
  (For system maintenance tasks.)"
