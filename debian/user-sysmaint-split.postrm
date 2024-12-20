@@ -16,21 +16,10 @@ true "
 "
 
 if [ "$1" = 'remove' ] || [ "$1" = 'purge' ]; then
-   true "INFO: Fixing permissions on sudo."
-   chown root:root '/usr/bin/sudo' || true
-   chown root:root '/bin/sudo' || true
-   chmod 4755 '/usr/bin/sudo' || true
-   chmod 4755 '/bin/sudo' || true
-   dpkg-statoverride --remove '/usr/bin/sudo'
-   dpkg-statoverride --remove '/bin/sudo'
-
-   true "INFO: Fixing permissions on pkexec."
-   chown root:root '/usr/bin/pkexec' || true
-   chown root:root '/bin/pkexec' || true
-   chmod 4755 '/usr/bin/pkexec' || true
-   chmod 4755 '/bin/pkexec' || true
-   dpkg-statoverride --remove '/usr/bin/pkexec'
-   dpkg-statoverride --remove '/bin/pkexec'
+   permission-hardener disable /usr/bin/sudo
+   permission-hardener disable /bin/sudo
+   permission-hardener disable /usr/bin/pkexec
+   permission-hardener disable /bin/pkexec
 fi
 
 true "INFO: debhelper beginning here."
