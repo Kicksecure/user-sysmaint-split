@@ -1,0 +1,15 @@
+#!/bin/sh
+
+## Copyright (C) 2012 - 2023 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+if [ "$(id -un)" = 'sysmaint' ] \
+   && [ "$XDG_CURRENT_DESKTOP" != 'sysmaint-session' ]; then
+   xfwm4 &
+   sleep 1
+   /usr/libexec/helper-scripts/terminal-wrapper 'echo' '-e' \
+      '\n\n\nYou are attempting to log into the sysmaint user without using' \
+      '\nthe sysmaint graphical session. This is potentially dangerous and' \
+      '\nhas been disabled for safety.';
+   exit 1;
+fi

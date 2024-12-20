@@ -1,0 +1,58 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
+   source /usr/libexec/helper-scripts/pre.bsh
+fi
+
+set -e
+
+true "
+#####################################################################
+## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+#####################################################################
+"
+
+if [ "$1" = 'remove' ] || [ "$1" = 'purge' ]; then
+   true "INFO: Fixing permissions on sudo."
+   chown root:root '/usr/bin/sudo' || true
+   chown root:root '/bin/sudo' || true
+   chmod 4755 '/usr/bin/sudo' || true
+   chmod 4755 '/bin/sudo' || true
+   dpkg-statoverride --remove '/usr/bin/sudo'
+   dpkg-statoverride --remove '/bin/sudo'
+
+   true "INFO: Fixing permissions on pkexec."
+   chown root:root '/usr/bin/pkexec' || true
+   chown root:root '/bin/pkexec' || true
+   chmod 4755 '/usr/bin/pkexec' || true
+   chmod 4755 '/bin/pkexec' || true
+   dpkg-statoverride --remove '/usr/bin/pkexec'
+   dpkg-statoverride --remove '/bin/pkexec'
+fi
+
+true "INFO: debhelper beginning here."
+
+#DEBHELPER#
+
+true "INFO: Done with debhelper."
+
+if command -v update-grub >/dev/null 2>&1; then
+   update-grub || \
+      echo "$DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME ERROR: Running \
+'update-grub' failed with exit code $?. $DPKG_MAINTSCRIPT_PACKAGE is most \
+likely only the trigger, not the cause. Unless you know this is not an issue, \
+you should fix running 'update-grub', otherwise your system might no longer \
+boot." >&2
+fi
+
+true "
+#####################################################################
+## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+#####################################################################
+"
+
+## Explicitly "exit 0", so eventually trapped errors can be ignored.
+exit 0

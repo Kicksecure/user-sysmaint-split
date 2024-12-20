@@ -1,0 +1,33 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2024 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+window_manager_list=(
+   '/usr/bin/xfwm4'
+   # Add other window managers here later
+)
+selected_window_manager=''
+for window_manager in "${window_manager_list[@]}"; do
+   if [ -e "${window_manager}" ]; then
+      selected_window_manager="${window_manager}"
+      break
+   fi
+done
+
+sysmaint_app_list=(
+  '/usr/bin/sysmaint-panel'
+  '/usr/bin/x-terminal-emulator'
+)
+selected_sysmaint_app=''
+for sysmaint_app in "${sysmaint_app_list[@]}"; do
+   if [ -e "${sysmaint_app}" ]; then
+      selected_sysmaint_app="${sysmaint_app}"
+      break
+   fi
+done
+
+"${selected_window_manager}" &
+# Needed to prevent window ordering problems
+sleep 1;
+"${selected_sysmaint_app}"

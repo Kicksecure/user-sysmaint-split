@@ -9,7 +9,7 @@ Before=sysmaint-boot.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-password-adjust
+ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-boot
 
 [Install]
 WantedBy=basic.target
