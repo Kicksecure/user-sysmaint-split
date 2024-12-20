@@ -16,6 +16,11 @@ true "
 "
 
 if [ "$1" = 'remove' ] || [ "$1" = 'purge' ]; then
+   ## TODO: permission-hardener
+   ## Undo /usr/lib/permission-hardener.d/20_user-sysmaint-split.conf
+   ## Until the following has been implemented:
+   ## Reset file attributes if no configuration matches #286
+   ## https://github.com/Kicksecure/security-misc/pull/286
    permission-hardener disable /usr/bin/sudo
    permission-hardener disable /bin/sudo
    permission-hardener disable /usr/bin/pkexec
