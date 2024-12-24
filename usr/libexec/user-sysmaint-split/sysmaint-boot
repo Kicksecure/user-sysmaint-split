@@ -38,8 +38,10 @@ autologin-session=sysmaint-session" \
       safe-rm -f '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
    fi
 
-   echo "[Desktop]
-   Session=sysmaint-session" \
-      | sponge -- '/home/sysmaint/.dmrc'
-   chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
+   if [ -d '/home/sysmaint' ]; then
+      echo "[Desktop]
+Session=sysmaint-session" \
+         | sponge -- '/home/sysmaint/.dmrc'
+      chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
+   fi
 fi
