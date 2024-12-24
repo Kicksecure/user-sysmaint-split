@@ -33,9 +33,9 @@ if [ -e '/usr/sbin/lightdm' ]; then
       echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
-         | sponge -- '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+         | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
    else
-      safe-rm -f '/etc/lightdm/lightdm.conf.d/99_sysmaint-boot.conf'
+      safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
    fi
 
    if [ -d '/home/sysmaint' ]; then
