@@ -5,3 +5,4 @@ Exec=/usr/libexec/user-sysmaint-split/sysmaint-session
 Icon=
 Type=Application
 DesktopNames=sysmaint-session
+Keywords=sysmaint;admin
