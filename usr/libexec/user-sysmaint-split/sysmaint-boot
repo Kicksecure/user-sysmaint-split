@@ -27,13 +27,24 @@ else
    passwd --lock 'sysmaint'
 fi
 
+## Configure autologin if:
+## * lightdm exists
+## * booted into PERSISTENT mode SYSMAINT
+## * no password set on sysmaint account
 if [ -e '/usr/sbin/lightdm' ]; then
-   # If LightDM present, configure autologin
    if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
-      echo "[Seat:*]
+      if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+         echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
-         | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+            | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+      else
+         # Prevent autologin in this instance, or the normal user account will
+         # end up logged in
+         echo "[Seat:*]
+autologin-user=" \
+            | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+      fi
    fi
 
    if [ -d '/home/sysmaint' ]; then
