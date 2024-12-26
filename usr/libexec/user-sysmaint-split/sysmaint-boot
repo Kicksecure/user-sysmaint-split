@@ -10,49 +10,49 @@ set -o pipefail
 
 kernel_cmdline="$(cat /proc/cmdline)"
 
-# Fix up password locking for sysmaint user
-if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
-   passwd_exit_code=0
-   passwd --unlock sysmaint || passwd_exit_code="$?"
-
-   ## `passwd --unlock` will fail and exit 3 if the account is locked and
-   ## passwordless. In this instance, the proper way to unlock the account is
-   ## with `passwd --delete`.
-   if [ "${passwd_exit_code}" = '3' ]; then
-      passwd --delete sysmaint
-   elif [ "${passwd_exit_code}" != '0' ]; then
-      exit "${passwd_exit_code}"
-   fi
-else
+if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
    passwd --lock 'sysmaint'
+   safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+   exit 0
+fi
+
+# Fix up password locking for sysmaint user
+passwd_exit_code=0
+passwd --unlock sysmaint || passwd_exit_code="$?"
+
+## `passwd --unlock` will fail and exit 3 if the account is locked and
+## passwordless. In this instance, the proper way to unlock the account is
+## with `passwd --delete`.
+if [ "${passwd_exit_code}" = '3' ]; then
+   passwd --delete sysmaint
+elif [ "${passwd_exit_code}" != '0' ]; then
+   exit "${passwd_exit_code}"
 fi
 
 ## Configure autologin if:
 ## * lightdm exists
 ## * booted into PERSISTENT mode SYSMAINT
 ## * no password set on sysmaint account
-if [ -e '/usr/sbin/lightdm' ]; then
-   if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
-      if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
-         echo "[Seat:*]
+if ! [ -e '/usr/sbin/lightdm' ]; then
+   exit 0
+fi
+
+if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+   echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
-            | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-      else
-         # Prevent autologin in this instance, or the normal user account will
-         # end up logged in
-         echo "[Seat:*]
-autologin-user=" \
-            | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-      fi
-   fi
-
-   if [ -d '/home/sysmaint' ]; then
-      echo "[Desktop]
-Session=sysmaint-session" \
-         | sponge -- '/home/sysmaint/.dmrc'
-      chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
-   fi
+      | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
 else
-   safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+   # Prevent autologin in this instance, or the normal user account will
+   # end up logged in
+   echo "[Seat:*]
+autologin-user=" \
+      | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+fi
+
+if [ -d '/home/sysmaint' ]; then
+   echo "[Desktop]
+Session=sysmaint-session" \
+      | sponge -- '/home/sysmaint/.dmrc'
+   chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
 fi
