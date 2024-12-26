@@ -21,6 +21,10 @@ true "INFO: debhelper beginning here."
 
 true "INFO: Done with debhelper."
 
+## The sysmaint-boot.service unit isn't being enabled by default, probably
+## because it is WantedBy=basic.target. Thus enable it manually here.
+deb-systemd-helper enable sysmaint-boot.service
+
 ## https://phabricator.whonix.org/T377
 ## Debian has no update-grub trigger yet:
 ## https://bugs.debian.org/481542
