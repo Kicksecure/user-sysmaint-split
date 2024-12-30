@@ -1,3 +1,66 @@
+commit fad19054955e663e8a3ef9631417bcab9200a376
+Merge: 8a5f2c1 b46efc6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 07:23:59 2024 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit b46efc6e1006db99429b269b6f807231015210a2
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Dec 30 02:14:06 2024 -0600
+
+    Make sysmaint grub boot menu entries better organized
+
+commit 8a5f2c1e98032dcf78c3368dad53c84c367857cc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 02:14:51 2024 -0500
+
+    debugging
+
+commit 027fbd0a969e468f269e2f6b2c8b5ed51bf7e71d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 02:06:13 2024 -0500
+
+    refactoring
+
+commit 08fe4690fc36a47e81fda38840d3bb97be97e0c8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 02:02:34 2024 -0500
+
+    port to marker files
+
+commit b89c80afeb6fdb3e8c8ca400f8d217ad59af0a3c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 01:54:55 2024 -0500
+
+    new line at the end
+
+commit 5f4535e30092a17731ceff9d7d52bacc9e447f2c
+Merge: 26140f3 96643a2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 01:53:37 2024 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/master'
+
+commit 96643a2b598b9d8876cbede4d9c32267ea996a80
+Merge: 793ae44 26140f3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Dec 29 17:36:23 2024 -0600
+
+    Merge branch 'master' of github.com:Kicksecure/user-sysmaint-split
+
+commit 26140f350b7eeb927d230d99a62185e6299b8b71
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Dec 29 12:43:57 2024 +0000
+
+    bumped changelog version
+
+commit 793ae445389b498f988c46b487b84e2de5f6c124
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 26 12:47:56 2024 -0600
+
+    Fix up boot entry logic
+
 commit 2600b255b5ebfd4e04555114e9cd745733d43789
 Merge: 12b7d2a 65fb771
 Author: Patrick Schleizer <adrelanos@whonix.org>
