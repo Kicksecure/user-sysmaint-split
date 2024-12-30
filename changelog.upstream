@@ -1,3 +1,15 @@
+commit 25bed685cf5d049099b2dc363b0d0106d0247984
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 07:27:57 2024 -0500
+
+    fix lintian warning
+
+commit 8ed18cbf3a67d9fdaa8833b00e118024462ae8b2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 30 12:25:14 2024 +0000
+
+    bumped changelog version
+
 commit fad19054955e663e8a3ef9631417bcab9200a376
 Merge: 8a5f2c1 b46efc6
 Author: Patrick Schleizer <adrelanos@whonix.org>
