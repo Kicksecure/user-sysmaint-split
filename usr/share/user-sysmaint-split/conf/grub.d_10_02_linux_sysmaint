@@ -27,8 +27,8 @@ GRUB_DISABLE_RECOVERY="true"
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX boot-role=sysmaint systemd.unit=sysmaint-boot.target"
 GRUB_DISABLE_LINUX_UUID="true"
 
-if test -x /etc/grub.d/10_linux ; then
-	/etc/grub.d/10_linux
+if test -x /etc/grub.d/10_00_linux_dist ; then
+	/etc/grub.d/10_00_linux_dist
 fi
 
 true "user-sysmaint-split $0: OK: END"
