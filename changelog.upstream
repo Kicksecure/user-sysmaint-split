@@ -1,3 +1,21 @@
+commit 260289f1a040042535a8b704d74bedf33797f24a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 07:24:46 2025 -0500
+
+    comment
+
+commit 5579944f5387af785a6ecc97f03901db590b24fa
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 07:22:07 2025 -0500
+
+    also create user sysmaint on Qubes
+
+commit f171ce959d7c94b595b875917869b1e7648841b3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 12:04:35 2025 +0000
+
+    bumped changelog version
+
 commit d82cfd0c1917b983f07f3ec2d00eaff321c25a91
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Jan 6 06:11:39 2025 -0500
