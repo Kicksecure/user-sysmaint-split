@@ -1,3 +1,15 @@
+commit a1dd8dbc4de9e9d5b5641c16edd8680ce1bfb282
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 05:42:50 2025 -0500
+
+    fix exit code
+
+commit 2c98f1281634d924854c60b70057d39f22a8ed98
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 31 19:20:33 2024 +0000
+
+    bumped changelog version
+
 commit a319d328df8ba4d62da7af7211035e87ba826aff
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Dec 31 13:26:23 2024 -0500
