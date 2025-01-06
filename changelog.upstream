@@ -1,3 +1,27 @@
+commit eb771b9cc583067a714a7ea2a6e57d22e0546bdb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 08:05:00 2025 -0500
+
+    comment
+
+commit 4ed4caf1562638b5e9623fc2bd5db8959fbdfcfa
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 08:03:48 2025 -0500
+
+    make sure group `ssh` exists
+
+commit 154ecae5792ec4cbd2e10b60e7443e7e18c54470
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 08:01:38 2025 -0500
+
+    comment
+
+commit df4d59d7752efe8efd496a13442fce8931af45d3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 12:34:41 2025 +0000
+
+    bumped changelog version
+
 commit 6448e25f18caa1eaa46586575fd776b11c1af7d1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Jan 6 07:31:05 2025 -0500
