@@ -51,15 +51,17 @@ sysmaint_user_creation_and_groups_setup() {
 
    if id "$user_to_be_created" &>/dev/null ; then
       true "INFO: User '$user_to_be_created' already exists, skip creation."
-      return 0
+      ## This could in theory lead to race conditions.
+      ## Not needed due to using do_once.
+      #return 0
+   else
+      ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
+      ## '--disabled-password' results in /etc/shadow password field entry '!' (exlamation mark),
+      ## which stands for "password empty, locked".
+
+      adduser --no-create-home --disabled-password --comment "" "$user_to_be_created"
+      true "INFO: User created."
    fi
-
-   ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
-   ## '--disabled-password' results in /etc/shadow password field entry '!' (exlamation mark),
-   ## which stands for "password empty, locked".
-
-   adduser --no-create-home --disabled-password --comment "" "$user_to_be_created"
-   true "INFO: User created."
 
    ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
    ## Set empty password for user "sysmaint".
