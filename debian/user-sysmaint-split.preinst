@@ -88,8 +88,9 @@ sysmaint_user_creation_and_groups_setup() {
    #addgroup --system console
    #addgroup --system console-unrestricted
 
-   ## TODO: debian/security-misc.postinst sudo_users_check
-   ##       depending on above
+   ## file: debian/security-misc.postinst
+   ## function: sudo_users_check
+   ## Not required because user 'sysmaint' is unconditionally added to group 'sudo'.
 
    ## security-misc: Console Lockdown.
    adduser "$user_to_be_created" console
