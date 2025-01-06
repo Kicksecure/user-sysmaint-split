@@ -23,7 +23,7 @@ sysmaint_user_creation_and_groups_setup() {
 
    user_to_be_created="sysmaint"
 
-   if command -v qubesdb-read >/dev/null 2>&1 ; then
+   #if command -v qubesdb-read >/dev/null 2>&1 ; then
       ## Qubes works differently.
       ## - User "sysmaint" does not run GUI / tools such as a terminal-emulator.
       ## - Users are instead expected to use user "root" instead by using a Qubes Root Console.
@@ -33,9 +33,14 @@ sysmaint_user_creation_and_groups_setup() {
       ##
       ## create user `sysmaint` by default and add user `sysmaint` to group `sudo` by default
       ## https://github.com/QubesOS/qubes-issues/issues/9519
-      true "INFO: Skipping because Qubes detected."
-      return 0
-   fi
+      #true "INFO: Skipping because Qubes detected."
+      #return 0
+   #fi
+   ## User "sysmaint" should be created in Qubes nontheless.
+   ## This is because:
+   ## - user "sysmaint" is hardcoded in file:
+   ##   /usr/lib/permission-hardener.d/20_user-sysmaint-split.conf
+   ## - user-sysmaint-split is a shared package, installed on both non-Qubes and Qubes systems
 
    ## TODO: distribution morphing: What should happen during distribution morphing?
 
