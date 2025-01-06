@@ -1,3 +1,21 @@
+commit d82cfd0c1917b983f07f3ec2d00eaff321c25a91
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 06:11:39 2025 -0500
+
+    newline at the end
+
+commit b2a0ddbbeb62749dab236f89d533585c5ce736d5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 06:09:58 2025 -0500
+
+    no longer using `passwd --delete` during installation as this unlocks the account
+
+commit e1cad8f31a0c998c1e12f3a964ab35bab5a911b4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 10:43:07 2025 +0000
+
+    bumped changelog version
+
 commit a1dd8dbc4de9e9d5b5641c16edd8680ce1bfb282
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Jan 6 05:42:50 2025 -0500
