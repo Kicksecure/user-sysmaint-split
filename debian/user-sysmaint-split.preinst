@@ -94,6 +94,7 @@ sysmaint_user_creation_and_groups_setup() {
 
    ## security-misc: Console Lockdown.
    adduser "$user_to_be_created" console
+   ## dist-base-files creates group 'ssh'.
    adduser "$user_to_be_created" ssh
 
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
