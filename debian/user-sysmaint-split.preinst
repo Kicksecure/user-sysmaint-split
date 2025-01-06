@@ -88,6 +88,11 @@ sysmaint_user_creation_and_groups_setup() {
    #addgroup --system console
    #addgroup --system console-unrestricted
 
+   ## Make sure this group exists.
+   ## - Might not exist if security-misc is not (yet) installed.
+   ## - Might not exist if dist-base-files is not (yet) installed.
+   addgroup --system ssh
+
    ## file: debian/security-misc.postinst
    ## function: sudo_users_check
    ## Not required because user 'sysmaint' is unconditionally added to group 'sudo'.
