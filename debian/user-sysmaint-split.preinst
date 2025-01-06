@@ -43,6 +43,11 @@ sysmaint_user_creation_and_groups_setup() {
    ## - user-sysmaint-split is a shared package, installed on both non-Qubes and Qubes systems
 
    ## TODO: distribution morphing: What should happen during distribution morphing?
+   ##       - Kicksecure 17: Probably nothing during Kicksecure 17 because no meta package will
+   ##                        'Depends: user-sysmaint-split'
+   ##                        distribution morphing user documentation can mention, suggest to
+   ##                        install user-sysmaint-split.
+   ##       - Kicksecure 18: A meta package will depend on user-sysmaint-split.
 
    if id "$user_to_be_created" &>/dev/null ; then
       true "INFO: User '$user_to_be_created' already exists, skip creation."
