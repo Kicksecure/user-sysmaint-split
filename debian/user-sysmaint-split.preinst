@@ -45,13 +45,18 @@ sysmaint_user_creation_and_groups_setup() {
    fi
 
    ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
+   ## '--disabled-password' results in /etc/shadow password field entry '!' (exlamation mark),
+   ## which stands for "password empty, locked".
+
    adduser --no-create-home --disabled-password --comment "" "$user_to_be_created"
    true "INFO: User created."
 
    ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
    ## Set empty password for user "sysmaint".
-   passwd --delete "$user_to_be_created"
-
+   ## Not using as this would set the /etc/shadow password to '' (nothing),
+   ## which stands for "empty password" (not locked).
+   ## Avoiding race conditions.
+   #passwd --delete "$user_to_be_created"
 
    ## group 'sudo' membership required to use 'sudo'
    ##
