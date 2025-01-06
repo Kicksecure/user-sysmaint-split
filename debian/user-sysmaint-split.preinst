@@ -34,7 +34,7 @@ sysmaint_user_creation_and_groups_setup() {
       ## create user `sysmaint` by default and add user `sysmaint` to group `sudo` by default
       ## https://github.com/QubesOS/qubes-issues/issues/9519
       true "INFO: Skipping because Qubes detected."
-      return 1
+      return 0
    fi
 
    ## TODO: distribution morphing: What should happen during distribution morphing?
