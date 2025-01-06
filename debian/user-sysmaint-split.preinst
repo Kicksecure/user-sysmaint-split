@@ -76,8 +76,9 @@ sysmaint_user_creation_and_groups_setup() {
    ## /usr/share/pam-configs/wheel-security-misc
    adduser "$user_to_be_created" sudo
 
-   ## TODO: required?
-   ## security-misc does that too.
+   ## Not required because security-misc does that and user-sysmaint-split
+   ## 'Depends: security-misc'.
+   ##
    ## Duplicating that here to avoid race conditions.
    ## Might not be required because user-sysmaint-split 'Depends: security-misc'?
    ## Maybe user-sysmaint-split should not depend on security-misc?
