@@ -1,8 +1,10 @@
 ## Copyright (C) 2018 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+# Display manager startup is handled by sysmaint-boot.service.
+
 [Unit]
 Description=Sysmaint user session
 Requires=basic.target systemd-user-sessions.service
-Wants=lightdm.service network.target NetworkManager.service tor@default.service
+Wants=network.target NetworkManager.service tor@default.service
 After=basic.target network.target systemd-user-sessions.service

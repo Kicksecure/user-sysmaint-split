@@ -9,10 +9,20 @@ set -o errtrace
 set -o pipefail
 
 kernel_cmdline="$(cat /proc/cmdline)"
+default_display_manager="$(basename "$(cat /etc/X11/default-display-manager)")"
+wayland_enabled='no'
+if [ -f '/var/lib/user-sysmaint-split/wayland-enabled' ]; then
+   wayland_enabled='yes'
+fi
 
 if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
    passwd --lock 'sysmaint'
    safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+   # Typically files under /etc/sddm.conf.d are NOT prefixed with a number, for
+   # instance KDE generates an /etc/sddm.conf.d/kde_settings.conf file, thus
+   # to get this file to be loaded last we have to use a name that sorts last
+   # in the alphabet without using a number prefix.
+   safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
    exit 0
 fi
 
@@ -26,33 +36,81 @@ passwd --unlock sysmaint || passwd_exit_code="$?"
 if [ "${passwd_exit_code}" = '3' ]; then
    passwd --delete sysmaint
 elif [ "${passwd_exit_code}" != '0' ]; then
+   # Start RADS before bailing out so the user has a chance of getting a desktop
+   systemctl start rads.service
    exit "${passwd_exit_code}"
 fi
 
-## Configure autologin if:
-## * lightdm exists
-## * booted into PERSISTENT mode SYSMAINT
-## * no password set on sysmaint account
-if ! [ -e '/usr/sbin/lightdm' ]; then
-   exit 0
-fi
+if [ "${default_display_manager}" = 'lightdm' ]; then
+   mkdir -p '/etc/lightdm/lightdm.conf.d'
 
-if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
-   echo "[Seat:*]
+   if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+      if [ "${wayland_enabled}" = 'yes' ]; then
+         echo "[Seat:*]
+autologin-user=sysmaint
+autologin-session=sysmaint-session-wayland" \
+            | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+      else
+         echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
-      | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-else
-   # Prevent autologin in this instance, or the normal user account will
-   # end up logged in
-   echo "[Seat:*]
+            | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+      fi
+   else
+      # Prevent autologin in this instance, or the normal user account will
+      # end up logged in
+      echo "[Seat:*]
 autologin-user=" \
-      | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+         | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+   fi
+
+   if [ -d '/home/sysmaint' ]; then
+      if [ "${wayland_enabled}" = 'yes' ]; then
+         echo "[Desktop]
+Session=sysmaint-session-wayland" \
+            | sponge -- '/home/sysmaint/.dmrc'
+      else
+         echo "[Desktop]
+Session=sysmaint-session" \
+            | sponge -- '/home/sysmaint/.dmrc'
+      fi
+      chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
+   fi
+elif [ "${default_display_manager}" = 'sddm' ]; then
+   mkdir -p '/etc/sddm.conf.d'
+
+   if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+      if [ "${wayland_enabled}" = 'yes' ]; then
+         echo "[Autologin]
+User=sysmaint
+Session=sysmaint-session-wayland.desktop" \
+            | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+      else
+         echo "[Autologin]
+User=sysmaint
+Session=sysmaint-session.desktop" \
+            | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+      fi
+   else
+      # Prevent autologin in this instance, or the normal user account will
+      # end up logged in
+      echo "[Autologin]
+User=
+Session=" \
+         | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+   fi
+
+   if [ "${wayland_enabled}" = 'yes' ]; then
+      echo "[Last]
+User=sysmaint
+Session=/usr/share/wayland-sessions/sysmaint-session-wayland.desktop" \
+         | sponge -- '/var/lib/sddm/state.conf'
+   else
+      echo "[Last]
+User=sysmaint
+Session=/usr/share/xsessions/sysmaint-session.desktop" \
+         | sponge -- '/var/lib/sddm/state.conf'
+   fi
 fi
 
-if [ -d '/home/sysmaint' ]; then
-   echo "[Desktop]
-Session=sysmaint-session" \
-      | sponge -- '/home/sysmaint/.dmrc'
-   chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
-fi
+systemctl start rads.service
