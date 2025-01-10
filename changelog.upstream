@@ -1,3 +1,79 @@
+commit 3f5ca094de837d0ba2c20b5906f7854e9ae545ef
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 10:18:53 2025 -0500
+
+    usrmerge
+    
+    https://github.com/Kicksecure/security-misc/pull/294
+
+commit f37104f40267b01bb0dd308f36f72ce4d1dbe9b7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 08:26:49 2025 -0500
+
+    Qubes support
+
+commit 56b673affccb2ee57feee96fa302f027792c6118
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 08:17:49 2025 -0500
+
+    output
+
+commit 55be1330b9d4adec42caf7eebf6f3e182914f64a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 08:16:03 2025 -0500
+
+    output
+
+commit 914d1bd6e84e6003a84afea7ebb098ed4323c171
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 08:11:40 2025 -0500
+
+    output
+
+commit 8235840dbecd962c936b24caa166ef073efd89e7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 08:05:55 2025 -0500
+
+    output
+
+commit 079a933c3f549d71b13fd0a0c0c9fc13a28e6be1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 08:03:31 2025 -0500
+
+    refactoring
+
+commit c7c020da89964685f9bf3daac0b58058eed9cf80
+Merge: c66b87c 0965f00
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 07:48:45 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/wayland-sddm-support'
+
+commit 0965f00f18f3d283daf9cf26847ece962c893b8f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Jan 9 22:23:31 2025 -0600
+
+    Add support for Wayland (untested) and SDDM (tested)
+
+commit c66b87c4911f86a9cf805cd8220ca8f1a25b9ae7
+Merge: 0435736 2bd561a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jan 9 09:35:49 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/dist-installer-sysmaint'
+
+commit 2bd561a59cc164baefff818c7aa063cd6363b780
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jan 7 18:57:59 2025 -0600
+
+    Allow sysmaint user to use sudo -D
+
+commit 043573632274cbcb3f931f5a059190cd9f080fc2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 6 13:14:56 2025 +0000
+
+    bumped changelog version
+
 commit c193298f529985fe29e972d655a559384ad500c9
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Jan 6 08:11:02 2025 -0500
