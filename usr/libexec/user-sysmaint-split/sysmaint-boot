@@ -8,6 +8,8 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+echo "INFO: START"
+
 kernel_cmdline="$(cat /proc/cmdline)"
 default_display_manager="$(basename "$(cat /etc/X11/default-display-manager)")"
 wayland_enabled='no'
@@ -19,6 +21,10 @@ echo "INFO: default_display_manager: '$default_display_manager'"
 echo "INFO: wayland_enabled: '$wayland_enabled'"
 
 if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
+   echo "INFO: user mode boot detected. (Not sysmaint boot mode.)"
+   echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)"
+   echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)."
+
    passwd --lock 'sysmaint'
    safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
    # Typically files under /etc/sddm.conf.d are NOT prefixed with a number, for
@@ -28,6 +34,9 @@ if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
    safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
    exit 0
 fi
+
+echo "INFO: sysmaint boot mode detected."
+echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)"
 
 # Fix up password locking for sysmaint user
 passwd_exit_code=0
