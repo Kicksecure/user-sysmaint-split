@@ -41,10 +41,18 @@ elif [ "${passwd_exit_code}" != '0' ]; then
    exit "${passwd_exit_code}"
 fi
 
+if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+   echo "INFO: account 'sysmaint' is passwordless."
+   sysmaint_passwordless=true
+else
+   echo "INFO: account 'sysmaint' is password protected."
+   sysmaint_passwordless=false
+fi
+
 if [ "${default_display_manager}" = 'lightdm' ]; then
    mkdir -p '/etc/lightdm/lightdm.conf.d'
 
-   if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+   if [ "${sysmaint_passwordless}" = "true" ]; then
       if [ "${wayland_enabled}" = 'yes' ]; then
          echo "[Seat:*]
 autologin-user=sysmaint
@@ -79,7 +87,7 @@ Session=sysmaint-session" \
 elif [ "${default_display_manager}" = 'sddm' ]; then
    mkdir -p '/etc/sddm.conf.d'
 
-   if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+   if [ "${sysmaint_passwordless}" = "true" ]; then
       if [ "${wayland_enabled}" = 'yes' ]; then
          echo "[Autologin]
 User=sysmaint
