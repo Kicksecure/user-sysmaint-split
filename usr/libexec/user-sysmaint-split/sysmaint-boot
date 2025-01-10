@@ -15,6 +15,9 @@ if [ -f '/var/lib/user-sysmaint-split/wayland-enabled' ]; then
    wayland_enabled='yes'
 fi
 
+echo "INFO: default_display_manager: '$default_display_manager'"
+echo "INFO: wayland_enabled: '$wayland_enabled'"
+
 if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
    passwd --lock 'sysmaint'
    safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
