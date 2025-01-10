@@ -83,6 +83,7 @@ autologin-session=sysmaint-session" \
 autologin-user=" \
          | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
    fi
+   echo "INFO: Created file: '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'"
 
    if [ -d '/home/sysmaint' ]; then
       if [ "${wayland_enabled}" = 'yes' ]; then
@@ -95,6 +96,7 @@ Session=sysmaint-session" \
             | sponge -- '/home/sysmaint/.dmrc'
       fi
       chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
+      echo "INFO: Created file: '/home/sysmaint/.dmrc'"
    fi
 elif [ "${default_display_manager}" = 'sddm' ]; then
    mkdir -p '/etc/sddm.conf.d'
@@ -119,6 +121,7 @@ User=
 Session=" \
          | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
    fi
+   echo "INFO: Created file: '/etc/sddm.conf.d/z-sysmaint-boot.conf'"
 
    if [ "${wayland_enabled}" = 'yes' ]; then
       echo "[Last]
@@ -131,6 +134,7 @@ User=sysmaint
 Session=/usr/share/xsessions/sysmaint-session.desktop" \
          | sponge -- '/var/lib/sddm/state.conf'
    fi
+   echo "INFO: Created file: '/var/lib/sddm/state.conf'"
 fi
 
 systemctl start rads.service
