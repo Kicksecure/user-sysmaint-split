@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Sysmaint Session (wayland)
+Exec=/usr/libexec/user-sysmaint-split/sysmaint-session-wayland
+Icon=
+Type=Application
+DesktopNames=sysmaint-session
+Keywords=sysmaint;admin
