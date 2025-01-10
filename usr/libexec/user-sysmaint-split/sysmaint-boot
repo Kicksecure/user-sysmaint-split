@@ -97,6 +97,8 @@ Session=sysmaint-session" \
       fi
       chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
       echo "INFO: Created file: '/home/sysmaint/.dmrc'"
+   else
+      echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created."
    fi
 elif [ "${default_display_manager}" = 'sddm' ]; then
    mkdir -p '/etc/sddm.conf.d'
