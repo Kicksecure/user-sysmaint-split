@@ -76,7 +76,9 @@ fi
 echo "INFO: sysmaint boot mode detected."
 echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)"
 
-if [ -z "$(getent shadow sysmaint | cut -d':' -f2)" ]; then
+password_field="$(getent shadow sysmaint | cut -d':' -f2)"
+
+if [ -z "${password_field}" ]; then
    echo "INFO: account 'sysmaint' is passwordless."
    sysmaint_passwordless=true
 else
