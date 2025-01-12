@@ -47,12 +47,23 @@ fi
 echo "INFO: default_display_manager: '$default_display_manager'"
 echo "INFO: wayland_enabled: '$wayland_enabled'"
 
+sysmaint_passwd_locked_field=$(passwd -S "sysmaint" 2>/dev/null | awk '{print $2}')
+if [ "$sysmaint_passwd_locked_field" == "L" ]; then
+   sysmaint_account_already_locked=yes
+else
+   sysmaint_account_already_locked=no
+fi
+
 if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
    echo "INFO: user mode boot detected. (Not sysmaint boot mode.)"
    echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)"
-   echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)."
 
-   passwd --lock 'sysmaint'
+   echo "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'"
+   if [ "$sysmaint_account_already_locked" = "no" ]; then
+      echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)."
+      passwd --lock 'sysmaint'
+   fi
+
    safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
    # Typically files under /etc/sddm.conf.d are NOT prefixed with a number, for
    # instance KDE generates an /etc/sddm.conf.d/kde_settings.conf file, thus
