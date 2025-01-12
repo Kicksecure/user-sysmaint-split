@@ -76,7 +76,7 @@ fi
 echo "INFO: sysmaint boot mode detected."
 echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)"
 
-# Fix up password locking for sysmaint user
+## Fix up password locking for account 'sysmaint'.
 passwd_exit_code=0
 passwd --unlock sysmaint || passwd_exit_code="$?"
 
@@ -86,7 +86,6 @@ passwd --unlock sysmaint || passwd_exit_code="$?"
 if [ "${passwd_exit_code}" = '3' ]; then
    passwd --delete sysmaint
 elif [ "${passwd_exit_code}" != '0' ]; then
-   # Start RADS before bailing out so the user has a chance of getting a desktop
    exit "${passwd_exit_code}"
 fi
 
@@ -114,8 +113,8 @@ autologin-session=sysmaint-session" \
             | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
       fi
    else
-      # Prevent autologin in this instance, or the normal user account will
-      # end up logged in
+      ## Prevent autologin in this instance, or the normal user account will
+      ## end up logged in.
       echo "[Seat:*]
 autologin-user=" \
          | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
@@ -153,8 +152,8 @@ Session=sysmaint-session.desktop" \
             | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
       fi
    else
-      # Prevent autologin in this instance, or the normal user account will
-      # end up logged in
+      ## Prevent autologin in this instance, or the normal user account will
+      ## end up logged in
       echo "[Autologin]
 User=
 Session=" \
