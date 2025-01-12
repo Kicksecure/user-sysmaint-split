@@ -6,5 +6,6 @@
 [Unit]
 Description=Sysmaint user session
 Requires=basic.target systemd-user-sessions.service
-Wants=network.target NetworkManager.service tor@default.service
+Wants=network.target NetworkManager.service tor@default.service rads.service
+Before=rads.service
 After=basic.target network.target systemd-user-sessions.service

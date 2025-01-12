@@ -49,7 +49,6 @@ if [ "${passwd_exit_code}" = '3' ]; then
    passwd --delete sysmaint
 elif [ "${passwd_exit_code}" != '0' ]; then
    # Start RADS before bailing out so the user has a chance of getting a desktop
-   systemctl start rads.service || true
    exit "${passwd_exit_code}"
 fi
 
@@ -138,5 +137,3 @@ Session=/usr/share/xsessions/sysmaint-session.desktop" \
    fi
    echo "INFO: Created file: '/var/lib/sddm/state.conf'"
 fi
-
-systemctl start rads.service || true
