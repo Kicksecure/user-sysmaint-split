@@ -8,7 +8,21 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
-echo "INFO: START"
+echo "$0: INFO: START"
+
+exit_handler() {
+   local exit_code=$?
+   echo "INFO: If installed, rads (Ram Adjusted Desktop Starter) should be starting, ok."
+   echo "INFO: (Because sysmaint-boot.target runs 'Before=rads.service' and 'Wants=rads.service'.)"
+   if [ "$exit_code" = "0" ]; then
+      echo "$0: END: with OK exit code: '$exit_code'"
+   else
+      echo "$0: END: with ERROR exit code: '$exit_code'"
+   fi
+   exit "$exit_code"
+}
+
+trap exit_handler EXIT
 
 kernel_cmdline="$(cat /proc/cmdline)"
 default_display_manager="$(basename "$(cat /etc/X11/default-display-manager)")"
