@@ -1,3 +1,34 @@
+commit e07910c28b9b6140f4e8b5d4c74586f004034868
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 12 06:28:01 2025 -0500
+
+    add error handler
+
+commit 6b8973e7cb1cd49d09635321759eadfa8f1e2bf8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 12 06:24:57 2025 -0500
+
+    add informational exit handler
+
+commit 5852edfbd5029f7e9a1cd6dd01e8f691f09d8641
+Merge: 8b964b2 55ccb4b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 12 06:18:22 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/avoid-rads-in-script'
+
+commit 55ccb4b92b72dc81db3312bfc0b352e042bac07d
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Jan 11 22:47:33 2025 -0600
+
+    Use sysmaint-boot.target to start rads rather than doing it manually with systemctl
+
+commit 8b964b2908faf2a24acdc28f87e10f1cb7ecbfb5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 10 15:35:11 2025 +0000
+
+    bumped changelog version
+
 commit 3f5ca094de837d0ba2c20b5906f7854e9ae545ef
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Jan 10 10:18:53 2025 -0500
