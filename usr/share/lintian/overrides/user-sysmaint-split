@@ -3,6 +3,7 @@
 
 ## The whole point of the package.
 user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target basic.target [usr/lib/systemd/system/sysmaint-boot.service]
+user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target final.target [usr/lib/systemd/system/sysmaint-boot-cleanup.service]
 
 ## The script is checking which interpreter is run, has code paths for 'sh' versus 'bash' / 'zsh'.
 user-sysmaint-split: bash-term-in-posix-shell '$BASH_VERSION' [usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh:13]
