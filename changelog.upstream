@@ -1,3 +1,22 @@
+commit 2a8302985285b654b9bf1949fac6e40c77e0efd7
+Merge: 5c5621a 519f24e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 14 03:07:02 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/lock-sysmaint-on-shutdown'
+
+commit 519f24e8e3a41ef408b4c6d1d5d9df6e230dbfa3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jan 12 20:31:45 2025 -0600
+
+    Lock the sysmaint account on system shutdown
+
+commit 5c5621a6ff56769fb0447fcc9d0bab4428fff5b9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 12 13:15:05 2025 +0000
+
+    bumped changelog version
+
 commit 784c4d3441043e0fa6972f74f0ae11b397aceb9e
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Jan 12 08:04:29 2025 -0500
