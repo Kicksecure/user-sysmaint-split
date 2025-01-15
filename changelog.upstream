@@ -1,3 +1,15 @@
+commit e43e5fea0cbde7be15fda3ef4585c9c7ab3b3cda
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 15 10:39:40 2025 -0500
+
+    make polkit-agent-helper-1 accessible by sysmaint only
+
+commit edd568d65acb49de5db7aae6d29a023a8b5d50ba
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 14 09:26:26 2025 +0000
+
+    bumped changelog version
+
 commit 5e6d482e39c35e6464efdaceffb7819151a349e1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Jan 14 04:15:17 2025 -0500
