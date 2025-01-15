@@ -1,3 +1,15 @@
+commit e59837c5c3615c70556fee68f03e6b862a1522f6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 15 10:55:32 2025 -0500
+
+    usrmerge
+
+commit f71cdabd94be644c82f74a45849afa48ba99a89a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 15 15:42:28 2025 +0000
+
+    bumped changelog version
+
 commit e43e5fea0cbde7be15fda3ef4585c9c7ab3b3cda
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jan 15 10:39:40 2025 -0500
