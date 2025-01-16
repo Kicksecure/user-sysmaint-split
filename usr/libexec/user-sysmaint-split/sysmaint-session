@@ -27,6 +27,16 @@ for sysmaint_app in "${sysmaint_app_list[@]}"; do
    fi
 done
 
+background_process_list=(
+  '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1'
+)
+
+for background_process in "${background_process_list}"; do
+  if [ -e "${background_process}" ]; then
+    "${background_process}" &
+  fi
+done
+
 "${selected_window_manager}" &
 # Needed to prevent window ordering problems
 sleep 1;
