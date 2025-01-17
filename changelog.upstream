@@ -1,3 +1,22 @@
+commit 8dd11176174a17776bc2186c03e0c1b117ad2af4
+Merge: 139c434 035c488
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 17 07:43:59 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/polkit'
+
+commit 035c4881b70b3ec836248f38cf7f3a9bb3b03020
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Jan 16 00:02:42 2025 -0600
+
+    Fix polkit for sysmaint sessions
+
+commit 139c434cf1309b80c3e885c0d3ba9213f195b074
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 15 15:55:43 2025 +0000
+
+    bumped changelog version
+
 commit e59837c5c3615c70556fee68f03e6b862a1522f6
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jan 15 10:55:32 2025 -0500
