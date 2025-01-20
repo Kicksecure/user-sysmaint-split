@@ -1,3 +1,15 @@
+commit 5d1640aea7220f58ece975bbdaad2e9ce8435c46
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 20 06:43:25 2025 -0500
+
+    fix path to polkit-agent-helper-1
+
+commit 0bc69bf459ba9431aaceac039261e3c8439dc0a9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 17 13:35:56 2025 +0000
+
+    bumped changelog version
+
 commit 8dd11176174a17776bc2186c03e0c1b117ad2af4
 Merge: 139c434 035c488
 Author: Patrick Schleizer <adrelanos@whonix.org>
