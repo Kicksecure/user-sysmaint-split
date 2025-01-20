@@ -1,3 +1,15 @@
+commit 8f89674c9b9279f3aa11b5ed8632c03bf4392d89
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 20 06:58:29 2025 -0500
+
+    remove obsolte comment
+
+commit 814bf4f6c391c1b3c75a57235d85a5c399e225ca
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 20 11:43:46 2025 +0000
+
+    bumped changelog version
+
 commit 5d1640aea7220f58ece975bbdaad2e9ce8435c46
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Jan 20 06:43:25 2025 -0500
