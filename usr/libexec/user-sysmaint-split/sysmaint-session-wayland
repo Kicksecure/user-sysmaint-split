@@ -27,6 +27,26 @@ for sysmaint_app in "${sysmaint_app_list[@]}"; do
    fi
 done
 
+# The polkit agent isn't started by systemd, but is rather usually run as a
+# non-root user by way of /etc/xdg/autostart. Running everything in
+# /etc/xdg/autostart would be bad here because sysmaint's graphical session is
+# intentionally running as few services as possible to keep attack surface
+# low. At the same time there's no robust way to pick out just the polkit
+# agent from /etc/xdg/autostart, so we have to hardcode them. One enhancement
+# might be to hardcode a whole list of agents and then only start the one we
+# find listed in /etc/xdg/autostart (assuming there's only one of them), but
+# for now this works well. When this script gains support for window managers
+# beyond xfwm4, expanding our polkit agent support may be a good idea.
+background_process_list=(
+  '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1'
+)
+
+for background_process in "${background_process_list}"; do
+  if [ -e "${background_process}" ]; then
+    "${background_process}" &
+  fi
+done
+
 "${selected_window_manager}" &
 # Needed to prevent window ordering problems
 sleep 1;
