@@ -1,3 +1,35 @@
+commit 570c6939e99ae691ad7fd126673256d0da65a538
+Merge: b9fe678 0692a69
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 22 08:45:08 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/polkit'
+
+commit b9fe678eda74e7f4033fad2e7a385ace2ebe4a0d
+Merge: ea1e369 c790c2e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 22 08:44:05 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/ssh'
+
+commit 0692a695cd598cf1b00b3d9a9ffac2e9de407b82
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jan 21 16:34:53 2025 -0600
+
+    Fix polkit handling for Wayland, add documentation comments
+
+commit c790c2e5bac6634b12288d721ec64c14af261cc3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jan 20 20:29:39 2025 -0600
+
+    Allow SSH access to sysmaint bootup
+
+commit ea1e369ae1e882ac59d399336c961613d82c8502
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 20 11:58:47 2025 +0000
+
+    bumped changelog version
+
 commit 8f89674c9b9279f3aa11b5ed8632c03bf4392d89
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Jan 20 06:58:29 2025 -0500
