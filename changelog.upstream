@@ -1,3 +1,19 @@
+commit 6d84fe3df7e657576eb70493e83a90ad7983e3e0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 24 10:04:04 2025 -0500
+
+    add `Breaks: qubes-core-agent-passwordless-root`
+    
+    to simplify installation of `user-sysmaint-split`,
+    to automatically remove `qubes-core-agent-passwordless-root` once
+    `sudo apt isntall user-sysmaint-split`.
+
+commit f41e0f1b0d6ba165af7571a78dd9d0ba4e4ed841
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 24 11:12:24 2025 +0000
+
+    bumped changelog version
+
 commit e42a4d3091288bda11e60c8797b1dbfd7e02d2e0
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Jan 23 11:13:44 2025 -0500
