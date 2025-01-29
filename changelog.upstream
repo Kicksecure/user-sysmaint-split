@@ -1,3 +1,25 @@
+commit 258363ad538b999eca6c6ae5ae2f800cf96a4aa9
+Merge: e6f38b9 f732500
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 29 08:02:58 2025 -0500
+
+    Merge remote-tracking branch 'github-kicksecure/master'
+
+commit f7325002a73df8a7170e39345218d2adc7ad9752
+Merge: e6f38b9 af77143
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 29 08:01:36 2025 -0500
+
+    Merge pull request #1 from ben-grande/pass-state
+    
+    Use helper scripts to manage account state
+
+commit e6f38b93897ce1f7f56f547b55a6f2e2df2722f3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 24 15:10:31 2025 +0000
+
+    bumped changelog version
+
 commit c1c2bc1c96ce08ebcf8dcf0266f96a22fa4061e1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Jan 24 10:10:21 2025 -0500
@@ -63,6 +85,12 @@ Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
 Date:   Mon Jan 20 20:29:39 2025 -0600
 
     Allow SSH access to sysmaint bootup
+
+commit af771433273d2c4685ba583ae1b88a46e225c06b
+Author: Ben Grande <ben.grande.b@gmail.com>
+Date:   Mon Jan 13 17:06:09 2025 +0100
+
+    Use helper scripts to manage account state
 
 commit ea1e369ae1e882ac59d399336c961613d82c8502
 Author: Patrick Schleizer <adrelanos@whonix.org>
