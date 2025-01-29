@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## Copyright (C) 2025 - 2025 Benjamin Grande M. S. <ben.grande.b@gmail.com>
 ## See the file COPYING for copying conditions.
 
 set -o errexit
@@ -47,11 +48,9 @@ fi
 echo "INFO: default_display_manager: '$default_display_manager'"
 echo "INFO: wayland_enabled: '$wayland_enabled'"
 
-sysmaint_passwd_locked_field=$(passwd -S "sysmaint" 2>/dev/null | awk '{print $2}')
-if [ "$sysmaint_passwd_locked_field" == "L" ]; then
+sysmaint_account_already_locked=no
+if accountctl sysmaint is-pass-locked; then
    sysmaint_account_already_locked=yes
-else
-   sysmaint_account_already_locked=no
 fi
 
 if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
@@ -61,7 +60,7 @@ if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
    echo "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'"
    if [ "$sysmaint_account_already_locked" = "no" ]; then
       echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)."
-      passwd --lock 'sysmaint'
+      accountctl sysmaint lock-pass
    fi
 
    safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
@@ -76,24 +75,10 @@ fi
 echo "INFO: sysmaint boot mode detected."
 echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)"
 
-## Fix up password locking for account 'sysmaint'.
-passwd_exit_code=0
-passwd --unlock sysmaint || passwd_exit_code="$?"
+## Unlocking account 'sysmaint'.
+accountctl sysmaint unlock-pass
 
-## `passwd --unlock` will fail and exit 3 if the account is locked and
-## passwordless. In this instance, the proper way to unlock the account is
-## with `passwd --delete`.
-if [ "${passwd_exit_code}" = '3' ]; then
-   passwd --delete sysmaint
-elif [ "${passwd_exit_code}" != '0' ]; then
-   exit "${passwd_exit_code}"
-fi
-
-## This should only be done after 'passwd --unlock' and/or 'passwd --delete',
-## because parsing /etc/shadow file is difficult.
-## https://www.kicksecure.com/wiki/User#Meanings_of_Special_Characters_in_the_Password_Field_of_/etc/shadow_File
-sysmaint_password_field="$(getent shadow sysmaint | cut -d':' -f2)"
-if [ -z "${sysmaint_password_field}" ]; then
+if accountctl sysmaint is-pass-empty; then
    echo "INFO: account 'sysmaint' is passwordless."
    sysmaint_passwordless=true
 else
