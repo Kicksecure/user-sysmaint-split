@@ -41,7 +41,7 @@ background_process_list=(
   '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1'
 )
 
-for background_process in "${background_process_list}"; do
+for background_process in "${background_process_list[@]}"; do
   if [ -e "${background_process}" ]; then
     "${background_process}" &
   fi

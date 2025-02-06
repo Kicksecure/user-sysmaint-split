@@ -9,7 +9,7 @@ Before=sysmaint-boot.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-boot
+ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-boot handle-boot
 
 [Install]
 WantedBy=basic.target
