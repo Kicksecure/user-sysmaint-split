@@ -8,5 +8,9 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+echo "INFO: Removing sysmaint autologin files because system is shutting down."
+safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+
 echo "INFO: Locking account 'sysmaint' because system is shutting down."
 passwd --lock 'sysmaint'
