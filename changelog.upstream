@@ -1,3 +1,28 @@
+commit 40585a6b04947a4d3c1cd5d228b7a8b4e35f757e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 13 17:57:07 2025 -0500
+
+    Before=getty.target
+
+commit 639622c4a84006980137916612bec435025cdf2d
+Merge: 84a422d 89feb35
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 13 17:56:13 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/race-fix'
+
+commit 89feb354d708a0830b71a39b16cc59fba45a34e1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Feb 12 01:13:27 2025 -0600
+
+    Fix race condition that could result in sysmaint login during normal boot
+
+commit 84a422db8ba1a0b7119e6655234456c07ed1e3c5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 6 14:58:56 2025 +0000
+
+    bumped changelog version
+
 commit 8a5b3318dea066c5d506653a269448a077cda913
 Merge: c28082e fc4c0d8
 Author: Patrick Schleizer <adrelanos@whonix.org>
