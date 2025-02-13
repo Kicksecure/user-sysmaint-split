@@ -5,6 +5,7 @@
 Description=Hook for sysmaint account lock/unlock
 Before=multi-user.target
 Before=sysmaint-boot.target
+Before=getty.target
 Before=graphical.target
 Before=rads.service
 
