@@ -1,3 +1,22 @@
+commit 7a6235b8be0425f912ffe7fc2049790f95ec1629
+Merge: eba7992 d4c7d1e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 17 07:19:40 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/policy-rcd'
+
+commit d4c7d1ed6e36872de5053072a1fa5436c4902b6f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Feb 16 15:54:11 2025 -0600
+
+    Add policy-rc.d script for preventing service start on install in sysmaint mode
+
+commit eba7992924b1401730f736e6c465656cd037c2ee
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Feb 13 23:04:53 2025 +0000
+
+    bumped changelog version
+
 commit 40585a6b04947a4d3c1cd5d228b7a8b4e35f757e
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Feb 13 17:57:07 2025 -0500
