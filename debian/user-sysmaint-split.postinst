@@ -26,6 +26,9 @@ true "INFO: Done with debhelper."
 deb-systemd-helper enable sysmaint-boot.service
 deb-systemd-helper enable sysmaint-boot-cleanup.service
 
+## Install policy-rc.d alternative
+update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/libexec/user-sysmaint-split/policy-rc.d 100
+
 ## https://phabricator.whonix.org/T377
 ## Debian has no update-grub trigger yet:
 ## https://bugs.debian.org/481542
