@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Copyright here
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
 
 kernel_cmdline="$(cat /proc/cmdline)"
 
