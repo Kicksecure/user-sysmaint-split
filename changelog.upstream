@@ -1,3 +1,22 @@
+commit ff1d6488f794b8b1d38cfde02723960d1820d99e
+Merge: 6b32095 7a1e79d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Feb 22 00:46:20 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/policy-rcd'
+
+commit 7a1e79d330471d48bfc68169b7993f646803800c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Feb 21 10:33:47 2025 -0600
+
+    Fix copyright header on policy-rc.d script
+
+commit 6b320956abb362b9a2058ff0fb4a00abb3ee38ae
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Feb 17 12:28:46 2025 +0000
+
+    bumped changelog version
+
 commit 7a6235b8be0425f912ffe7fc2049790f95ec1629
 Merge: eba7992 d4c7d1e
 Author: Patrick Schleizer <adrelanos@whonix.org>
