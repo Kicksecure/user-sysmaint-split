@@ -44,7 +44,7 @@ wayland_enabled='no'
 if [ -f '/var/lib/user-sysmaint-split/wayland-enabled' ]; then
    wayland_enabled='yes'
 fi
-sysmaint_passwordless='true'
+sysmaint_autologin='n'
 
 echo "INFO: default_display_manager: '$default_display_manager'"
 echo "INFO: wayland_enabled: '$wayland_enabled'"
@@ -67,13 +67,13 @@ remove_sysmaint_autologin_files() {
    safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 }
 
-detect_sysmaint_passwordless() {
-   if accountctl sysmaint is-pass-empty; then
-      echo "INFO: account 'sysmaint' is passwordless."
-      sysmaint_passwordless='true'
+detect_sysmaint_autologin() {
+   if grep -q '^sysmaint-autologin=y$' /etc/user-sysmaint-split.conf; then
+      echo "INFO: account 'sysmaint' has autologin enabled."
+      sysmaint_autologin='y'
    else
-      echo "INFO: account 'sysmaint' is password protected."
-      sysmaint_passwordless=false
+      echo "INFO: account 'sysmaint' does NOT have autologin enabled."
+      sysmaint_autologin='n'
    fi
 }
 
@@ -169,12 +169,12 @@ handle_boot() {
 
    ## Unlocking account 'sysmaint'.
    accountctl sysmaint unlock-pass
-   detect_sysmaint_passwordless
+   detect_sysmaint_autologin
 
    if [ "${default_display_manager}" = 'lightdm' ]; then
       mkdir -p '/etc/lightdm/lightdm.conf.d'
 
-      if [ "${sysmaint_passwordless}" = "true" ]; then
+      if [ "${sysmaint_autologin}" = "y" ]; then
          write_lightdm_enable_autologin_config
       else
          ## Prevent autologin in this instance, or the normal user account will
@@ -187,7 +187,7 @@ handle_boot() {
    elif [ "${default_display_manager}" = 'sddm' ]; then
       mkdir -p '/etc/sddm.conf.d'
 
-      if [ "${sysmaint_passwordless}" = "true" ]; then
+      if [ "${sysmaint_autologin}" = "y" ]; then
          write_sddm_enable_autologin_config
       else
          ## Prevent autologin in this instance, or the normal user account will
