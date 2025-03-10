@@ -21,13 +21,20 @@ true "INFO: debhelper beginning here."
 
 true "INFO: Done with debhelper."
 
-## The sysmaint-boot.service unit isn't being enabled by default, probably
-## because it is WantedBy=basic.target. Thus enable it manually here.
-deb-systemd-helper enable sysmaint-boot.service
-deb-systemd-helper enable sysmaint-boot-cleanup.service
+case "$1" in
+   configure)
+      ## The sysmaint-boot.service unit isn't being enabled by default, probably
+      ## because it is WantedBy=basic.target. Thus enable it manually here.
+      deb-systemd-helper enable sysmaint-boot.service
+      deb-systemd-helper enable sysmaint-boot-cleanup.service
 
-## Install policy-rc.d alternative
-update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/libexec/user-sysmaint-split/policy-rc.d 100
+      ## Install policy-rc.d alternative
+      update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/libexec/user-sysmaint-split/policy-rc.d 100
+      ;;
+
+   *)
+      ;;
+esac
 
 ## https://phabricator.whonix.org/T377
 ## Debian has no update-grub trigger yet:

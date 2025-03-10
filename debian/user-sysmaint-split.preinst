@@ -6,6 +6,7 @@
 if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
    source /usr/libexec/helper-scripts/pre.bsh
 fi
+source /usr/libexec/helper-scripts/user_create.bsh
 
 set -e
 
@@ -15,180 +16,24 @@ true "
 #####################################################################
 "
 
-zsh_yes_or_no() {
-   zsh_enable=""
-   if [ -f "/etc/nozsh" ]; then
-      echo "$0: INFO: No shell change because file /etc/nozsh exists, ok."
-      zsh_enable=no
-      return 0
-   fi  
-   if [ -f "/usr/local/etc/nozsh" ]; then
-      echo "$0: INFO: No shell change because file /usr/local/etc/nozsh exists, ok."
-      zsh_enable=no
-      return 0
-   fi  
-
-   if grep -q 'nozsh' /proc/cmdline; then
-      echo "$0: INFO: No shell change because nozsh in kernel command line, ok."
-      zsh_enable=no
-      return 0
-   fi  
-
-   if ! test -x /usr/bin/zsh ; then
-      echo "$0: INFO: No shell change because /usr/bin/zsh does not exist or is not executable, ok."
-      zsh_enable=no
-      return 0
-   fi  
-
-   true "$0: INFO: /usr/bin/zsh is executable."
-
-   zsh_enable=yes
-}
-
-sysmaint_shell_to_zsh() {
-   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
-      return 0
-   fi
-   mkdir --parents "/var/lib/user-sysmaint-split/do_once"
-
-   if [ ! "$zsh_enable" = "yes" ]; then
-      return 0
-   fi
-
-   local user_list
-   user_list="$user_to_be_created"
-
-   echo "$0: INFO: For more information, see: https://www.kicksecure.com/shell#default"
-
-   for user_item in $user_list ; do
-      if ! id "$user_item" &>/dev/null ; then
-         echo "$0: INFO: user '$user_item' does not exist. Not setting shell to zsh."
-         continue
-      fi
-
-      ## Use getent to retrieve the user's entry from /etc/passwd
-      user_passwd_entry=$(getent passwd "$user_item")
-
-      ## Extract the shell field (the last field) from the user's entry
-      user_default_shell=$(echo "$user_passwd_entry" | awk -F: '{print $NF}')
-
-      if [ "$user_default_shell" = "/usr/bin/zsh" ]; then
-         touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
-         continue
-      fi
-
-      echo "$0: INFO: Setting shell for user '$user_item' to zsh."
-      ## Use timeout to prevent unexplained bug password prompt caused by chsh.
-      if ! timeout --kill-after 5 5 chsh --shell /usr/bin/zsh "$user_item" ; then
-         if [ ! "$derivative_maker" = "true" ] && ! [ -f '/var/lib/dist-base-files/live_build' ]; then
-            echo "$0: ERROR: Command 'chsh --shell /usr/bin/zsh $user_item' failed during the build process."
-            exit 1
-         else
-            echo "$0: ERROR: Command 'chsh --shell /usr/bin/zsh $user_item' failed. This is only a minor issue."
-         fi
-      fi
-
-      touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
-   done
-}
-
 sysmaint_user_creation_and_groups_setup() {
    if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
       return 0
    fi
    mkdir --parents "/var/lib/user-sysmaint-split/do_once"
 
-   user_to_be_created="sysmaint"
-
-   #if command -v qubesdb-read >/dev/null 2>&1 ; then
-      ## Qubes works differently.
-      ## - User "sysmaint" does not run GUI / tools such as a terminal-emulator.
-      ## - Users are instead expected to use user "root" instead by using a Qubes Root Console.
-      ## https://www.kicksecure.com/wiki/Root#Qubes_Root_Console
-      ##
-      ## https://forums.whonix.org/t/qubes-sudo-su-root-hardening-development-discussion/8561
-      ##
-      ## create user `sysmaint` by default and add user `sysmaint` to group `sudo` by default
-      ## https://github.com/QubesOS/qubes-issues/issues/9519
-      #true "INFO: Skipping because Qubes detected."
-      #return 0
-   #fi
-   ## User "sysmaint" should be created in Qubes nontheless.
-   ## This is because:
-   ## - user "sysmaint" is hardcoded in file:
-   ##   /usr/lib/permission-hardener.d/20_user-sysmaint-split.conf
-   ## - user-sysmaint-split is a shared package, installed on both non-Qubes and Qubes systems
-
-   ## TODO: distribution morphing: What should happen during distribution morphing?
-   ##       - Kicksecure 17: Probably nothing during Kicksecure 17 because no meta package will
-   ##                        'Depends: user-sysmaint-split'
-   ##                        distribution morphing user documentation can mention, suggest to
-   ##                        install user-sysmaint-split.
-   ##       - Kicksecure 18: A meta package will depend on user-sysmaint-split.
-
-   if id "$user_to_be_created" &>/dev/null ; then
-      true "INFO: User '$user_to_be_created' already exists, skip creation."
-      ## This could in theory lead to race conditions.
-      ## Not needed due to using do_once.
-      #return 0
-   else
-      ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
-      ## '--disabled-password' results in /etc/shadow password field entry '!' (exlamation mark),
-      ## which stands for "password empty, locked".
-
-      adduser --no-create-home --disabled-password --comment "" "$user_to_be_created"
-      true "INFO: User created."
-   fi
-
-   ## NOTE: See also dist-base-files 'debian/dist-base-files.postinst'.
-   ## Set empty password for user "sysmaint".
-   ## Not using as this would set the /etc/shadow password to '' (nothing),
-   ## which stands for "empty password" (not locked).
-   ## Avoiding race conditions.
-   #passwd --delete "$user_to_be_created"
-
-   ## group 'sudo' membership required to use 'sudo'
-   ##
-   ## group 'sudo' membership required to use 'su'
-   ## /usr/share/pam-configs/wheel-security-misc
-   adduser "$user_to_be_created" sudo
-
-   ## Not required because security-misc does that and user-sysmaint-split
-   ## 'Depends: security-misc'.
-   ##
-   ## Duplicating that here to avoid race conditions.
-   ## Might not be required because user-sysmaint-split 'Depends: security-misc'?
-   ## Maybe user-sysmaint-split should not depend on security-misc?
-   ##
-   ## Related to Console Lockdown.
-   ## /usr/share/pam-configs/console-lockdown-security-misc
-   ## /etc/security/access-security-misc.conf
-   #addgroup --system console
-   #addgroup --system console-unrestricted
-
-   ## Make sure this group exists.
-   ## - Might not exist if security-misc is not (yet) installed.
-   ## - Might not exist if dist-base-files is not (yet) installed.
-   addgroup --system ssh
-
-   ## file: debian/security-misc.postinst
-   ## function: sudo_users_check
-   ## Not required because user 'sysmaint' is unconditionally added to group 'sudo'.
-
-   ## security-misc: Console Lockdown.
-   adduser "$user_to_be_created" console
-   ## dist-base-files creates group 'ssh'.
-   adduser "$user_to_be_created" ssh
+   USER_CREATE_USERNAME='sysmaint'
+   add_linux_user_account
+   password_empty_for_user_account
+   USER_CREATE_GROUP_ADD_LIST=( 'sudo' 'ssh' 'console' )
+   add_groups_to_linux_user_account
+   linux_user_account_shell_to_zsh
 
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
 
+## User configuration
 sysmaint_user_creation_and_groups_setup
-zsh_yes_or_no
-true "zsh_enable: $zsh_enable"
-if [ "$zsh_enable" = "yes" ]; then
-   sysmaint_shell_to_zsh
-fi
 
 true "INFO: debhelper beginning here."
 
