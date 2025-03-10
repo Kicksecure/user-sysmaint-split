@@ -15,6 +15,83 @@ true "
 #####################################################################
 "
 
+zsh_yes_or_no() {
+   zsh_enable=""
+   if [ -f "/etc/nozsh" ]; then
+      echo "$0: INFO: No shell change because file /etc/nozsh exists, ok."
+      zsh_enable=no
+      return 0
+   fi  
+   if [ -f "/usr/local/etc/nozsh" ]; then
+      echo "$0: INFO: No shell change because file /usr/local/etc/nozsh exists, ok."
+      zsh_enable=no
+      return 0
+   fi  
+
+   if grep -q 'nozsh' /proc/cmdline; then
+      echo "$0: INFO: No shell change because nozsh in kernel command line, ok."
+      zsh_enable=no
+      return 0
+   fi  
+
+   if ! test -x /usr/bin/zsh ; then
+      echo "$0: INFO: No shell change because /usr/bin/zsh does not exist or is not executable, ok."
+      zsh_enable=no
+      return 0
+   fi  
+
+   true "$0: INFO: /usr/bin/zsh is executable."
+
+   zsh_enable=yes
+}
+
+sysmaint_shell_to_zsh() {
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
+      return 0
+   fi
+   mkdir --parents "/var/lib/user-sysmaint-split/do_once"
+
+   if [ ! "$zsh_enable" = "yes" ]; then
+      return 0
+   fi
+
+   local user_list
+   user_list="$user_to_be_created"
+
+   echo "$0: INFO: For more information, see: https://www.kicksecure.com/shell#default"
+
+   for user_item in $user_list ; do
+      if ! id "$user_item" &>/dev/null ; then
+         echo "$0: INFO: user '$user_item' does not exist. Not setting shell to zsh."
+         continue
+      fi
+
+      ## Use getent to retrieve the user's entry from /etc/passwd
+      user_passwd_entry=$(getent passwd "$user_item")
+
+      ## Extract the shell field (the last field) from the user's entry
+      user_default_shell=$(echo "$user_passwd_entry" | awk -F: '{print $NF}')
+
+      if [ "$user_default_shell" = "/usr/bin/zsh" ]; then
+         touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+         continue
+      fi
+
+      echo "$0: INFO: Setting shell for user '$user_item' to zsh."
+      ## Use timeout to prevent unexplained bug password prompt caused by chsh.
+      if ! timeout --kill-after 5 5 chsh --shell /usr/bin/zsh "$user_item" ; then
+         if [ ! "$derivative_maker" = "true" ] && ! [ -f '/var/lib/dist-base-files/live_build' ]; then
+            echo "$0: ERROR: Command 'chsh --shell /usr/bin/zsh $user_item' failed during the build process."
+            exit 1
+         else
+            echo "$0: ERROR: Command 'chsh --shell /usr/bin/zsh $user_item' failed. This is only a minor issue."
+         fi
+      fi
+
+      touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+   done
+}
+
 sysmaint_user_creation_and_groups_setup() {
    if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
       return 0
@@ -107,6 +184,11 @@ sysmaint_user_creation_and_groups_setup() {
 }
 
 sysmaint_user_creation_and_groups_setup
+zsh_yes_or_no
+true "zsh_enable: $zsh_enable"
+if [ "$zsh_enable" = "yes" ]; then
+   sysmaint_shell_to_zsh
+fi
 
 true "INFO: debhelper beginning here."
 
