@@ -1,3 +1,34 @@
+commit 7280c78923f5889e7baba3f6ac8f18044640516b
+Merge: 0e1bae4 779a483
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Mar 10 02:35:14 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/autologin'
+
+commit 779a483f8c83fd7dfb15f3532a8eb5285115dc05
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Mar 9 20:07:22 2025 -0500
+
+    Set default sysmaint shell to zsh
+
+commit 24186d0b8672c7a89e53fffc241f543de9ce09e5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Mar 7 15:52:09 2025 -0600
+
+    Enable autologin for sysmaint account by default
+
+commit 9141b7e507da7da08285234c214392aa340a6246
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Mar 6 21:32:59 2025 -0600
+
+    Run sdwdate and msgcollector in sysmaint session, use config file for determining whether to enable sysmaint autologin
+
+commit 0e1bae4d1bc2ab49ec0bf51920e4c42b43ea7ebf
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Feb 22 06:04:01 2025 +0000
+
+    bumped changelog version
+
 commit ff1d6488f794b8b1d38cfde02723960d1820d99e
 Merge: 6b32095 7a1e79d
 Author: Patrick Schleizer <adrelanos@whonix.org>
