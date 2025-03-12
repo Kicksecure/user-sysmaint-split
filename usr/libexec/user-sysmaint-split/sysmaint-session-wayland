@@ -44,6 +44,8 @@ background_process_list=(
   '/usr/libexec/msgcollector/msgdispatcher_xdg_autostart'
 )
 
+dbus-update-activation-environment --systemd --all
+
 for background_process in "${background_process_list[@]}"; do
   if [ -e "${background_process}" ]; then
     "${background_process}" &
