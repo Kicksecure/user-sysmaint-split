@@ -9,7 +9,7 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
-echo "$0: INFO: START"
+echo "$0: INFO: START" >&2
 
 error_handler() {
    local last_exit_code="$?"
@@ -26,28 +26,23 @@ trap error_handler ERR
 
 exit_handler() {
    local exit_code="$?"
-   echo "INFO: If installed, rads (Ram Adjusted Desktop Starter) should be starting, ok."
-   echo "INFO: (Because sysmaint-boot.target runs 'Before=rads.service' and 'Wants=rads.service'.)"
+   echo "INFO: If installed, rads (Ram Adjusted Desktop Starter) should be starting, ok." >&2
+   echo "INFO: (Because sysmaint-boot.target runs 'Before=rads.service' and 'Wants=rads.service'.)" >&2
    if [ "$exit_code" = "0" ]; then
-      echo "$0: END: with OK exit code: '$exit_code'"
+      echo "$0: END: with OK exit code: '$exit_code'" >&2
    else
-      echo "$0: END: with ERROR exit code: '$exit_code'"
+      echo "$0: END: with ERROR exit code: '$exit_code'" >&2
    fi
    exit "$exit_code"
 }
 
 trap exit_handler EXIT
 
+user_sysmaint_split_config_dir='/etc/user-sysmaint-split.conf.d'
 kernel_cmdline="$(cat /proc/cmdline)"
 default_display_manager="$(basename "$(cat /etc/X11/default-display-manager)")"
-wayland_enabled='no'
-if [ -f '/var/lib/user-sysmaint-split/wayland-enabled' ]; then
-   wayland_enabled='yes'
-fi
-sysmaint_autologin='n'
-
-echo "INFO: default_display_manager: '$default_display_manager'"
-echo "INFO: wayland_enabled: '$wayland_enabled'"
+sysmaint_session_wayland='no'
+sysmaint_autologin='no'
 
 sysmaint_account_already_locked=no
 if accountctl sysmaint is-pass-locked; then
@@ -55,9 +50,9 @@ if accountctl sysmaint is-pass-locked; then
 fi
 
 lock_sysmaint_account() {
-   echo "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'"
+   echo "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'" >&2
    if [ "$sysmaint_account_already_locked" = "no" ]; then
-      echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)."
+      echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)." >&2
       accountctl sysmaint lock-pass
    fi
 }
@@ -67,18 +62,8 @@ remove_sysmaint_autologin_files() {
    safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 }
 
-detect_sysmaint_autologin() {
-   if grep -q '^sysmaint-autologin=y$' /etc/user-sysmaint-split.conf; then
-      echo "INFO: account 'sysmaint' has autologin enabled."
-      sysmaint_autologin='y'
-   else
-      echo "INFO: account 'sysmaint' does NOT have autologin enabled."
-      sysmaint_autologin='n'
-   fi
-}
-
 write_lightdm_enable_autologin_config() {
-   if [ "${wayland_enabled}" = 'yes' ]; then
+   if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session-wayland" \
@@ -99,7 +84,7 @@ autologin-user=" \
 
 write_lightdm_sysmaint_default_session_config() {
    if [ -d '/home/sysmaint' ]; then
-      if [ "${wayland_enabled}" = 'yes' ]; then
+      if [ "${sysmaint_session_wayland}" = 'yes' ]; then
          echo "[Desktop]
 Session=sysmaint-session-wayland" \
             | sponge -- '/home/sysmaint/.dmrc'
@@ -109,9 +94,9 @@ Session=sysmaint-session" \
             | sponge -- '/home/sysmaint/.dmrc'
       fi
       chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
-      echo "INFO: Created file: '/home/sysmaint/.dmrc'"
+      echo "INFO: Created file: '/home/sysmaint/.dmrc'" >&2
    else
-      echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created."
+      echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
    fi
 }
 
@@ -120,7 +105,7 @@ write_sddm_enable_autologin_config() {
    # instance KDE generates an /etc/sddm.conf.d/kde_settings.conf file, thus
    # to get this file to be loaded last we have to use a name that sorts last
    # in the alphabet without using a number prefix.
-   if [ "${wayland_enabled}" = 'yes' ]; then
+   if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       echo "[Autologin]
 User=sysmaint
 Session=sysmaint-session-wayland.desktop" \
@@ -141,7 +126,7 @@ Session=" \
 }
 
 write_sddm_sysmaint_default_session_config() {
-   if [ "${wayland_enabled}" = 'yes' ]; then
+   if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       echo "[Last]
 User=sysmaint
 Session=/usr/share/wayland-sessions/sysmaint-session-wayland.desktop" \
@@ -152,61 +137,91 @@ User=sysmaint
 Session=/usr/share/xsessions/sysmaint-session.desktop" \
          | sponge -- '/var/lib/sddm/state.conf'
    fi
-   echo "INFO: Created file: '/var/lib/sddm/state.conf'"
+   echo "INFO: Created file: '/var/lib/sddm/state.conf'" >&2
 }
 
 handle_boot() {
    if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
-      echo "INFO: user mode boot detected. (Not sysmaint boot mode.)"
-      echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)"
+      echo "INFO: user mode boot detected. (Not sysmaint boot mode.)" >&2
+      echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
       lock_sysmaint_account
       remove_sysmaint_autologin_files
       exit 0
    fi
 
-   echo "INFO: sysmaint boot mode detected."
-   echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)"
+   echo "INFO: sysmaint boot mode detected." >&2
+   echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)" >&2
 
    ## Unlocking account 'sysmaint'.
    accountctl sysmaint unlock-pass
-   detect_sysmaint_autologin
 
    if [ "${default_display_manager}" = 'lightdm' ]; then
       mkdir -p '/etc/lightdm/lightdm.conf.d'
 
-      if [ "${sysmaint_autologin}" = "y" ]; then
+      if [ "${sysmaint_autologin}" = "yes" ]; then
          write_lightdm_enable_autologin_config
       else
          ## Prevent autologin in this instance, or the normal user account will
          ## end up logged in.
          write_lightdm_disable_autologin_config
       fi
-      echo "INFO: Created file: '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'"
+      echo "INFO: Created file: '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'" >&2
 
       write_lightdm_sysmaint_default_session_config
    elif [ "${default_display_manager}" = 'sddm' ]; then
       mkdir -p '/etc/sddm.conf.d'
 
-      if [ "${sysmaint_autologin}" = "y" ]; then
+      if [ "${sysmaint_autologin}" = "yes" ]; then
          write_sddm_enable_autologin_config
       else
          ## Prevent autologin in this instance, or the normal user account will
          ## end up logged in
          write_sddm_disable_autologin_config
       fi
-      echo "INFO: Created file: '/etc/sddm.conf.d/z-sysmaint-boot.conf'"
+      echo "INFO: Created file: '/etc/sddm.conf.d/z-sysmaint-boot.conf'" >&2
 
       write_sddm_sysmaint_default_session_config
    fi
 }
 
+parse_user_sysmaint_split_config() {
+   local config_file config_file_contents line
+   if [ -d "${user_sysmaint_split_config_dir}" ]; then
+      for config_file in "${user_sysmaint_split_config_dir}"/*; do
+         if [ ! -f "${config_file}" ]; then
+            continue
+         fi
+         while read -r line; do
+            case "${line}" in
+               'sysmaint-autologin=yes')
+                  sysmaint_autologin='yes'
+                  ;;
+               'sysmaint-autologin=no')
+                  sysmaint_autologin='no'
+                  ;;
+               'sysmaint-session-wayland=yes')
+                  sysmaint_session_wayland='yes'
+                  ;;
+               'sysmaint-session-wayland=no')
+                  sysmaint_session_wayland='no'
+                  ;;
+            esac
+         done < "${config_file}"
+      done
+   fi
+   echo "INFO: account 'sysmaint' autologin: '${sysmaint_autologin}'" >&2
+   echo "INFO: Wayland session: '${sysmaint_session_wayland}'" >&2
+}
+
 sysmaint_boot() {
+   parse_user_sysmaint_split_config
    local mode="$1"
    case "${mode}" in
       'handle-boot') handle_boot;;
       'cleanup-autologin') remove_sysmaint_autologin_files;;
+      'query-sysmaint-autologin') echo "${sysmaint_autologin}";;
       *)
-         echo "$0: ERROR: Invalid mode provided.";
+         echo "$0: ERROR: Invalid mode provided."; >&2
          exit 1;;
    esac
 }
