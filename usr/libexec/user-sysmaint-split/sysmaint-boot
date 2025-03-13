@@ -111,6 +111,9 @@ Session=sysmaint-session" \
       echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
    fi
 
+   if [ -f "${lightdm_state_backup_file}" ]; then
+      return
+   fi
    if [ -f "${lightdm_state_file}" ]; then
       safe-rm -rf "${lightdm_state_backup_file}"
       mv "${lightdm_state_file}" "${lightdm_state_backup_file}"
@@ -156,6 +159,9 @@ Session=" \
 }
 
 write_sddm_sysmaint_default_session_config() {
+   if [ -f "${sddm_state_backup_file}" ]; then
+      return
+   fi
    if [ -f "${sddm_state_file}" ]; then
       safe-rm -rf "${sddm_state_backup_file}"
       mv "${sddm_state_file}" "${sddm_state_backup_file}"
