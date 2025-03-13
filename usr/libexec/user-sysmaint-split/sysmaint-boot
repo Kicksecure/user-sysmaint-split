@@ -43,6 +43,10 @@ kernel_cmdline="$(cat /proc/cmdline)"
 default_display_manager="$(basename "$(cat /etc/X11/default-display-manager)")"
 sysmaint_session_wayland='no'
 sysmaint_autologin='no'
+lightdm_state_file='/var/lib/lightdm/.cache/lightdm-gtk-greeter/state'
+lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
+sddm_state_file='/var/lib/sddm/state.conf'
+sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
 
 sysmaint_account_already_locked=no
 if accountctl sysmaint is-pass-locked; then
@@ -57,9 +61,17 @@ lock_sysmaint_account() {
    fi
 }
 
-remove_sysmaint_autologin_files() {
+restore_pre_sysmaint_autologin_config() {
    safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
    safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+   if [ -f "${lightdm_state_backup_file}" ]; then
+      safe-rm -rf "${lightdm_state_file}"
+      mv "${lightdm_state_backup_file}" "${lightdm_state_file}"
+   fi
+   if [ -f "${sddm_state_backup_file}" ]; then
+      safe-rm -rf "${sddm_state_file}"
+      mv "${sddm_state_backup_file}" "${sddm_state_file}"
+   fi
 }
 
 write_lightdm_enable_autologin_config() {
@@ -98,6 +110,24 @@ Session=sysmaint-session" \
    else
       echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
    fi
+
+   if [ -f "${lightdm_state_file}" ]; then
+      safe-rm -rf "${lightdm_state_backup_file}"
+      mv "${lightdm_state_file}" "${lightdm_state_backup_file}"
+   fi
+
+   if [ "${sysmaint_session_wayland}" = 'yes' ]; then
+      echo "[greeter]
+last-user=sysmaint
+last-session=sysmaint-session-wayland" \
+         | sponge -- "${lightdm_state_file}"
+   else
+      echo "[greeter]
+last-user=sysmaint
+last-session=sysmaint-session" \
+         | sponge -- "${lightdm_state_file}"
+   fi
+   echo "INFO: Created file: '${lightdm_state_file}'" >&2
 }
 
 write_sddm_enable_autologin_config() {
@@ -126,16 +156,21 @@ Session=" \
 }
 
 write_sddm_sysmaint_default_session_config() {
+   if [ -f "${sddm_state_file}" ]; then
+      safe-rm -rf "${sddm_state_backup_file}"
+      mv "${sddm_state_file}" "${sddm_state_backup_file}"
+   fi
+
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       echo "[Last]
 User=sysmaint
 Session=/usr/share/wayland-sessions/sysmaint-session-wayland.desktop" \
-         | sponge -- '/var/lib/sddm/state.conf'
+         | sponge -- "${sddm_state_file}"
    else
       echo "[Last]
 User=sysmaint
 Session=/usr/share/xsessions/sysmaint-session.desktop" \
-         | sponge -- '/var/lib/sddm/state.conf'
+         | sponge -- "${sddm_state_file}"
    fi
    echo "INFO: Created file: '/var/lib/sddm/state.conf'" >&2
 }
@@ -145,7 +180,7 @@ handle_boot() {
       echo "INFO: user mode boot detected. (Not sysmaint boot mode.)" >&2
       echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
       lock_sysmaint_account
-      remove_sysmaint_autologin_files
+      restore_pre_sysmaint_autologin_config
       exit 0
    fi
 
@@ -185,7 +220,7 @@ handle_boot() {
 }
 
 parse_user_sysmaint_split_config() {
-   local config_file config_file_contents line
+   local config_file line
    if [ -d "${user_sysmaint_split_config_dir}" ]; then
       for config_file in "${user_sysmaint_split_config_dir}"/*; do
          if [ ! -f "${config_file}" ]; then
@@ -218,10 +253,10 @@ sysmaint_boot() {
    local mode="$1"
    case "${mode}" in
       'handle-boot') handle_boot;;
-      'cleanup-autologin') remove_sysmaint_autologin_files;;
+      'cleanup-autologin') restore_pre_sysmaint_autologin_config;;
       'query-sysmaint-autologin') echo "${sysmaint_autologin}";;
       *)
-         echo "$0: ERROR: Invalid mode provided."; >&2
+         echo "$0: ERROR: Invalid mode provided." >&2
          exit 1;;
    esac
 }
