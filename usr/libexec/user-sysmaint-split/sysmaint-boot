@@ -260,7 +260,10 @@ sysmaint_boot() {
    case "${mode}" in
       'handle-boot') handle_boot;;
       'cleanup-autologin') restore_pre_sysmaint_autologin_config;;
-      'query-sysmaint-autologin') echo "${sysmaint_autologin}";;
+      'query-sysmaint-autologin')
+         trap "" EXIT
+         echo "${sysmaint_autologin}"
+      ;;
       *)
          echo "$0: ERROR: Invalid mode provided." >&2
          exit 1;;
