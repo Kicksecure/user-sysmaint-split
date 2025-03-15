@@ -28,4 +28,4 @@ if [ -f "${sddm_state_backup_file}" ]; then
 fi
 
 echo "INFO: Locking account 'sysmaint' because system is shutting down." >&2
-passwd --lock 'sysmaint'
+passwd --lock -- 'sysmaint'
