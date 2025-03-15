@@ -39,8 +39,8 @@ exit_handler() {
 trap exit_handler EXIT
 
 user_sysmaint_split_config_dir='/etc/user-sysmaint-split.conf.d'
-kernel_cmdline="$(cat /proc/cmdline)"
-default_display_manager="$(basename "$(cat /etc/X11/default-display-manager)")"
+kernel_cmdline="$(cat -- /proc/cmdline)"
+default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")"
 sysmaint_session_wayland='no'
 sysmaint_autologin='no'
 lightdm_state_file='/var/lib/lightdm/.cache/lightdm-gtk-greeter/state'
@@ -62,15 +62,15 @@ lock_sysmaint_account() {
 }
 
 restore_pre_sysmaint_autologin_config() {
-   safe-rm -f '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-   safe-rm -f '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+   safe-rm -f -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+   safe-rm -f -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
    if [ -f "${lightdm_state_backup_file}" ]; then
-      safe-rm -rf "${lightdm_state_file}"
-      mv "${lightdm_state_backup_file}" "${lightdm_state_file}"
+      safe-rm -rf -- "${lightdm_state_file}"
+      mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
    fi
    if [ -f "${sddm_state_backup_file}" ]; then
-      safe-rm -rf "${sddm_state_file}"
-      mv "${sddm_state_backup_file}" "${sddm_state_file}"
+      safe-rm -rf -- "${sddm_state_file}"
+      mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
    fi
 }
 
@@ -105,7 +105,7 @@ Session=sysmaint-session-wayland" \
 Session=sysmaint-session" \
             | sponge -- '/home/sysmaint/.dmrc'
       fi
-      chown sysmaint:sysmaint '/home/sysmaint/.dmrc'
+      chown sysmaint:sysmaint -- '/home/sysmaint/.dmrc'
       echo "INFO: Created file: '/home/sysmaint/.dmrc'" >&2
    else
       echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
@@ -115,7 +115,7 @@ Session=sysmaint-session" \
       return
    fi
    if [ -f "${lightdm_state_file}" ]; then
-      safe-rm -rf "${lightdm_state_backup_file}"
+      safe-rm -rf -- "${lightdm_state_backup_file}"
       mv "${lightdm_state_file}" "${lightdm_state_backup_file}"
    fi
 
@@ -163,8 +163,8 @@ write_sddm_sysmaint_default_session_config() {
       return
    fi
    if [ -f "${sddm_state_file}" ]; then
-      safe-rm -rf "${sddm_state_backup_file}"
-      mv "${sddm_state_file}" "${sddm_state_backup_file}"
+      safe-rm -rf -- "${sddm_state_backup_file}"
+      mv --verbose -- "${sddm_state_file}" "${sddm_state_backup_file}"
    fi
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
@@ -197,7 +197,7 @@ handle_boot() {
    accountctl sysmaint unlock-pass
 
    if [ "${default_display_manager}" = 'lightdm' ]; then
-      mkdir -p '/etc/lightdm/lightdm.conf.d'
+      mkdir -p -- '/etc/lightdm/lightdm.conf.d'
 
       if [ "${sysmaint_autologin}" = "yes" ]; then
          write_lightdm_enable_autologin_config
@@ -210,7 +210,7 @@ handle_boot() {
 
       write_lightdm_sysmaint_default_session_config
    elif [ "${default_display_manager}" = 'sddm' ]; then
-      mkdir -p '/etc/sddm.conf.d'
+      mkdir -p -- '/etc/sddm.conf.d'
 
       if [ "${sysmaint_autologin}" = "yes" ]; then
          write_sddm_enable_autologin_config
