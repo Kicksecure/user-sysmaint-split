@@ -1,3 +1,77 @@
+commit 49b7b2d39d15db13c2efc35f83a5da2977c9d9fb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 06:09:15 2025 -0400
+
+    avoid informational exit_handler in case of query-sysmaint-autologin
+
+commit 2c9b84f4c5b753ca445c751de6afe55b63603360
+Merge: e762ab0 a4ff9a4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 05:46:29 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/user-create'
+
+commit e762ab0d3022c6524802920e4b1b3fcd67d9c51d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 05:40:06 2025 -0400
+
+    end-of-options
+
+commit 95a42006daf1c19f8d16dbb6f3f60be213d5144a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 05:38:47 2025 -0400
+
+    end-of-options
+
+commit 409a5bcf08e2b0cf056169daa3ab25d15d0f25cf
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 05:37:13 2025 -0400
+
+    end-of-options
+
+commit 545e44c737845a4843f1d9ea225000ca5b012539
+Merge: 3a3719f bdfe354
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Mar 15 05:32:11 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/autologin'
+
+commit bdfe3547b013ea931469c92da87a7b018872c2c7
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Mar 13 16:53:58 2025 -0500
+
+    Harden the display manager state config a bit
+
+commit 1532afba1b9ff3f19d3cbd0ec68825df0e3720d2
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 12 21:22:37 2025 -0500
+
+    Pre-select the sysmaint session for login when booting in sysmaint mode
+
+commit 379de02396db3d10ec4e3d6afbb11f970dc9b427
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 12 19:07:09 2025 -0500
+
+    Enhancements to configuration, autologin, postinst logic, output information
+
+commit 91d5fa3ffd8f5cfa38574389c7fe4240d7640c1d
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Mar 11 22:11:50 2025 -0500
+
+    Update user-level systemd and dbus environment variables
+
+commit a4ff9a4f1804a6cc082037098dd7da5c2afbcdaa
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Mar 10 16:23:38 2025 -0500
+
+    Fix minor postinst bug, refactor user account creation logic
+
+commit 3a3719fdacad6a3cec6d253bf754026c1ab46733
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Mar 10 07:43:17 2025 +0000
+
+    bumped changelog version
+
 commit 7280c78923f5889e7baba3f6ac8f18044640516b
 Merge: 0e1bae4 779a483
 Author: Patrick Schleizer <adrelanos@whonix.org>
