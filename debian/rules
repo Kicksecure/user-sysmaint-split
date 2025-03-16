@@ -11,3 +11,9 @@
 
 override_dh_installchangelogs:
 	dh_installchangelogs changelog.upstream upstream
+
+override_dh_installsystemd:
+	## dh_installsystemd's startup logic results in sysmaint-boot being run when
+	## the package is initially installed. This is potentially unsafe. We should
+	## just handle systemd concerns manually.
+	true

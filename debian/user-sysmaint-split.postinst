@@ -15,13 +15,29 @@ true "
 #####################################################################
 "
 
+disable_sysmaint_normal_user_autologin() {
+   ## do_once code intentionally omitted, this needs to be done any time this
+   ## package is installed in case the user removes and reinstalls it
+   /usr/sbin/autologinchange -r -d -- sysmaint
+}
+
 enable_sysmaint_autologin() {
    if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
       return 0
    fi
    mkdir --parents "/var/lib/user-sysmaint-split/do_once"
 
-   /usr/sbin/autologinchange -e sysmaint
+   ## The sysmaint account is technically used by the end user, but it's more
+   ## like a system account in that it is depended on by other software in the
+   ## system and has a specific, limited use case. Thus we create it in the
+   ## preinst script and and configure it here rather than doing this at image
+   ## build time like we do with account 'user'.
+   ##
+   ## Autologin needs to be enabled by default for account 'sysmaint' because
+   ## otherwise it is very difficult to use with lightdm. The user would need
+   ## to know the account name "sysmaint" in advance to be able to log in, and
+   ## with the current design, they won't know that username in advance.
+   /usr/sbin/autologinchange -e -- sysmaint
 
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
@@ -34,13 +50,15 @@ true "INFO: Done with debhelper."
 
 case "$1" in
    configure)
-      ## The sysmaint-boot.service unit isn't being enabled by default, probably
-      ## because it is WantedBy=basic.target. Thus enable it manually here.
       deb-systemd-helper enable sysmaint-boot.service
       deb-systemd-helper enable sysmaint-boot-cleanup.service
 
       ## Install policy-rc.d alternative
       update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/libexec/user-sysmaint-split/policy-rc.d 100
+
+      ## Make sure that if the sysmaint account has normal account autologin
+      ## enabled, it's disabled to avoid security problems
+      disable_sysmaint_normal_user_autologin
 
       ## Install default autologin configuration, but only once
       enable_sysmaint_autologin

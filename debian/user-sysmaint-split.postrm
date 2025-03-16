@@ -15,11 +15,30 @@ true "
 #####################################################################
 "
 
+suggest_sysmaint_account_removal() {
+   echo "$DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME INFO: Uninstalling \
+user-sysmaint-split. AFTER REBOOT, you may want to remove the sysmaint user \
+account by running 'sudo deluser --remove-home sysmaint'. DO NOT run this \
+before rebooting!" >&2
+}
+
 true "INFO: debhelper beginning here."
 
 #DEBHELPER#
 
 true "INFO: Done with debhelper."
+
+case "$1" in
+   remove)
+      suggest_sysmaint_account_removal
+      ;;
+   purge)
+      suggest_sysmaint_account_removal
+      rm -rf /etc/user-sysmaint-split.conf.d
+      rm -rf /var/lib/user-sysmaint-split/do_once/enable_sysmaint_autologin_version_*
+      rm -rf /var/lib/user-sysmaint-split/do_once/sysmaint_user_creation_and_groups_setup_version_*
+      ;;
+esac
 
 if command -v update-grub >/dev/null 2>&1; then
    update-grub || \

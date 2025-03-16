@@ -43,9 +43,11 @@ kernel_cmdline="$(cat -- /proc/cmdline)"
 default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")"
 sysmaint_session_wayland='no'
 sysmaint_autologin='no'
-lightdm_state_file='/var/lib/lightdm/.cache/lightdm-gtk-greeter/state'
+lightdm_state_dir='/var/lib/lightdm/.cache/lightdm-gtk-greeter'
+lightdm_state_file="${lightdm_state_dir}/state"
 lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
-sddm_state_file='/var/lib/sddm/state.conf'
+sddm_state_dir='/var/lib/sddm'
+sddm_state_file="${sddm_state_dir}/state.conf"
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
 
 sysmaint_account_already_locked=no
@@ -116,7 +118,12 @@ Session=sysmaint-session" \
    fi
    if [ -f "${lightdm_state_file}" ]; then
       safe-rm -rf -- "${lightdm_state_backup_file}"
-      mv "${lightdm_state_file}" "${lightdm_state_backup_file}"
+      mv --verbose -- "${lightdm_state_file}" "${lightdm_state_backup_file}"
+   fi
+
+   if ! [ -d "${lightdm_state_dir}" ]; then
+      safe-rm -rf -- "${lightdm_state_dir}"
+      mkdir --verbose  --parents -- "${lightdm_state_dir}" || exit 1
    fi
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
@@ -167,6 +174,11 @@ write_sddm_sysmaint_default_session_config() {
       mv --verbose -- "${sddm_state_file}" "${sddm_state_backup_file}"
    fi
 
+   if ! [ -d "${sddm_state_dir}" ]; then
+      safe-rm -rf -- "${sddm_state_dir}"
+      mkdir --verbose --parents -- "${sddm_state_dir}" || exit 1
+   fi
+
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       echo "[Last]
 User=sysmaint
@@ -197,7 +209,7 @@ handle_boot() {
    accountctl sysmaint unlock-pass
 
    if [ "${default_display_manager}" = 'lightdm' ]; then
-      mkdir -p -- '/etc/lightdm/lightdm.conf.d'
+      mkdir --verbose --parents -- '/etc/lightdm/lightdm.conf.d'
 
       if [ "${sysmaint_autologin}" = "yes" ]; then
          write_lightdm_enable_autologin_config
@@ -210,7 +222,7 @@ handle_boot() {
 
       write_lightdm_sysmaint_default_session_config
    elif [ "${default_display_manager}" = 'sddm' ]; then
-      mkdir -p -- '/etc/sddm.conf.d'
+      mkdir --verbose --parents -- '/etc/sddm.conf.d'
 
       if [ "${sysmaint_autologin}" = "yes" ]; then
          write_sddm_enable_autologin_config
