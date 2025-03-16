@@ -14,16 +14,16 @@ sddm_state_file='/var/lib/sddm/state.conf'
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
 
 echo "INFO: Removing sysmaint autologin files because system is shutting down." >&2
-safe-rm -f -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-safe-rm -f -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+safe-rm -f --verbose -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+safe-rm -f --verbose -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 
 echo "INFO: Restoring display manager state file backups if necessary because system is shutting down." >&2
 if [ -f "${lightdm_state_backup_file}" ]; then
-   safe-rm -rf -- "${lightdm_state_file}"
+   safe-rm -rf --verbose -- "${lightdm_state_file}"
    mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
 fi
 if [ -f "${sddm_state_backup_file}" ]; then
-   safe-rm -rf -- "${sddm_state_file}"
+   safe-rm -rf --verbose -- "${sddm_state_file}"
    mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
 fi
 
