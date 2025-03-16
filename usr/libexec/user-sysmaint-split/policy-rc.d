@@ -3,6 +3,9 @@
 ## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+## Only when booting with 'boot-role=sysmaint' kernel parameter.
+## Otherwise, effectively doing nothing.
+
 ## systemd actions:
 ## - 'stop' and 'force-stop' are always permitted.
 ## - 'restart' is only allowed if the systemd unit is already running (active).
