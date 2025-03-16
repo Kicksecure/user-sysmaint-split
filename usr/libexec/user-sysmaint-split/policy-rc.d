@@ -21,7 +21,7 @@ if [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
     exit 0
   fi
   unit_name="$1"
-  IFS=' ' read -ra -- action_list <<< "$2"
+  IFS=' ' read -r -a action_list <<< "$2"
 
   for action in "${action_list[@]}"; do
     case "${action}" in
