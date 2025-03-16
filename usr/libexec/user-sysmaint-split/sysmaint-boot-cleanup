@@ -20,14 +20,18 @@ safe-rm -f --verbose -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 echo "INFO: Restoring display manager state file backups if necessary because system is shutting down." >&2
 if [ -f "${lightdm_state_backup_file}" ]; then
    safe-rm -rf --verbose -- "${lightdm_state_file}"
-   mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
+   ## Do not error out and exit in case this fails. Set non-zero exit code but continue execution.
+   mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}" || exit_code=2
 fi
 if [ -f "${sddm_state_backup_file}" ]; then
    safe-rm -rf --verbose -- "${sddm_state_file}"
-   mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
+   mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}" || exit_code=3
 fi
 
 echo "INFO: Locking account 'sysmaint' because system is shutting down." >&2
 passwd --lock -- 'sysmaint'
+exit_code=0
 
 echo "INFO: Ok, account 'sysmaint' has been locked." >&2
+
+exit "$exit_code"
