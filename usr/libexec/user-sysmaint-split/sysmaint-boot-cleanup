@@ -29,3 +29,5 @@ fi
 
 echo "INFO: Locking account 'sysmaint' because system is shutting down." >&2
 passwd --lock -- 'sysmaint'
+
+echo "INFO: Ok, account 'sysmaint' has been locked." >&2
