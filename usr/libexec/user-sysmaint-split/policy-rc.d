@@ -34,10 +34,10 @@ for action in "${action_list[@]}"; do
       ## action restart: if...
       if [ "${action}" = 'restart' ]; then
         if [ "$(systemctl is-active -- "${unit_name}")" != 'active' ]; then
-          true "INFO: action restart: If the systemd unit is NOT already running (active), deny (re)start."
+          true "INFO: action restart: The systemd unit is NOT already running (active), deny (re)start."
           exit 101
         fi
-        true "INFO: action restart: If the systemd unit IS already running (active), permit (re)start."
+        true "INFO: action restart: The systemd unit IS already running (active), permit (re)start."
       fi
       ;;
     *)
