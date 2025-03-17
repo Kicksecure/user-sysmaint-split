@@ -1,3 +1,40 @@
+commit 9c76125417ba046ebdaa96f6ecd877b72fa61ead
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Mar 17 05:12:23 2025 -0400
+
+    verbose
+
+commit 46cdfbd251c99712a7d6a8f2eb575aa9c65ec2f1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Mar 17 05:10:41 2025 -0400
+
+    safe-rm
+
+commit bacdef438429d1e8c506c1ca89a27f449bc0c6a1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Mar 17 05:10:20 2025 -0400
+
+    end-of-options
+
+commit 09fb6c167427e0f27d07ccccb19e3805da72d751
+Merge: 2d709b8 d583442
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Mar 17 05:08:18 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/autologin'
+
+commit d583442c25933a49aba63e3553115d15193c29ef
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Mar 16 13:45:26 2025 -0500
+
+    Bugfixes
+
+commit 2d709b8286f6efda878dcd2e0f4bf5c53dcf5933
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Mar 16 11:25:47 2025 +0000
+
+    bumped changelog version
+
 commit ed285246dca7ea8c307dcd3d8372ca3ac1dbf6e2
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Mar 16 07:10:24 2025 -0400
