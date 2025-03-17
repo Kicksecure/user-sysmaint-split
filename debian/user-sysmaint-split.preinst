@@ -7,6 +7,7 @@ if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
    source /usr/libexec/helper-scripts/pre.bsh
 fi
 source /usr/libexec/helper-scripts/user_create.bsh
+source /usr/libexec/helper-scripts/accountctl.sh
 
 set -e
 
@@ -28,6 +29,7 @@ sysmaint_user_creation_and_groups_setup() {
    USER_CREATE_GROUP_ADD_LIST=( 'sudo' 'ssh' 'console' )
    add_groups_to_linux_user_account
    linux_user_account_shell_to_zsh
+   lock_pass sysmaint
 
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
