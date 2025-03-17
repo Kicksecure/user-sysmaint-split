@@ -34,9 +34,9 @@ case "$1" in
       ;;
    purge)
       suggest_sysmaint_account_removal
-      rm -rf /etc/user-sysmaint-split.conf.d
-      rm -rf /var/lib/user-sysmaint-split/do_once/enable_sysmaint_autologin_version_*
-      rm -rf /var/lib/user-sysmaint-split/do_once/sysmaint_user_creation_and_groups_setup_version_*
+      rm -rf -- /etc/user-sysmaint-split.conf.d
+      rm -rf -- /var/lib/user-sysmaint-split/do_once/enable_sysmaint_autologin_version_*
+      rm -rf -- /var/lib/user-sysmaint-split/do_once/sysmaint_user_creation_and_groups_setup_version_*
       ;;
 esac
 
