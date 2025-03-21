@@ -1,11 +1,46 @@
 ## Copyright (C) 2018 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-# Display manager startup is handled by sysmaint-boot.service.
+## Display manager startup is handled by sysmaint-boot.service.
 
 [Unit]
 Description=Sysmaint user session
-Requires=basic.target systemd-user-sessions.service
-Wants=network.target NetworkManager.service tor@default.service rads.service ssh.service privleapd.service sdwdate.service
+DefaultDependencies=no
+
+## Core dependencies
+## basic.target provides a basic functional system.
+Requires=basic.target
+## systemd-user-sessions allows users to log in.
+Requires=systemd-user-sessions.service
+
+## Normal dependencies
+## sysinit gives us all essential system services.
+Wants=sysinit.target
+## Networking and Tor is needed to run system updates.
+Wants=network.target
+Wants=NetworkManager.service
+Wants=tor@default.service
+## SSH is needed for server administration.
+Wants=ssh.service
+## sdwdate and privleapd are required for systemcheck to work.
+Wants=sdwdate.service
+Wants=privleapd.service
+## rads is needed to launch the sysmaint desktop session.
+Wants=rads.service
+
+## Qubes-specific dependencies
+## getty is required for the Qubes debug console to work.
+Wants=getty.target
+## qrexec is required for many Qubes features, and also is mandatory to
+## prevent the VM from being powered off after 60 seconds
+Wants=qubes-qrexec-agent.service
+## qubes-gui-agent lets us open graphical programs like the sysmaint panel
+Wants=qubes-gui-agent.service
+## qubes-whonix-sysinit provides essential Qubes-specific system services.
+Wants=qubes-whonix-sysinit.service
+## Proxy tooling is required for software updates.
+Wants=qubes-updates-proxy-forwarder.socket
+Wants=qubes-whonix-torified-updates-proxy-check.service
+
 Before=rads.service ssh.service
 After=basic.target network.target systemd-user-sessions.service

@@ -235,6 +235,15 @@ handle_boot() {
 
       write_sddm_sysmaint_default_session_config
    fi
+
+   ## Qubes handling.
+   if [ ! -f /usr/share/qubes/marker-vm ]; then
+      return
+   fi
+   echo "INFO: Qubes OS detected. Installing volatile qrexec overrides and QubesDB config for sysmaint account." >&2
+   cp /usr/share/user-sysmaint-split/qubes/qubes-rpc/* /run/qubes-rpc/
+   cp /usr/share/user-sysmaint-split/qubes/rpc-config/* /run/qubes/rpc-config/
+   qubesdb-write /default-user sysmaint
 }
 
 parse_user_sysmaint_split_config() {
