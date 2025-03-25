@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo 'qubes.TemplateSearch qrexec action is prohibited in PERSISTENT mode SYSMAINT.'

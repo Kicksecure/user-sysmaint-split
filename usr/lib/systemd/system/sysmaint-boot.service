@@ -8,6 +8,10 @@ Before=sysmaint-boot.target
 Before=getty.target
 Before=graphical.target
 Before=rads.service
+Before=sysinit.target
+Wants=local-fs.target
+After=local-fs.target
+DefaultDependencies=no
 
 [Service]
 Type=oneshot
