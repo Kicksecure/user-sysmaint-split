@@ -18,7 +18,9 @@ true "
 disable_sysmaint_normal_user_autologin() {
    ## do_once code intentionally omitted, this needs to be done any time this
    ## package is installed in case the user removes and reinstalls it
-   /usr/sbin/autologinchange -r -d -- sysmaint
+   if [ ! -f /usr/share/qubes/marker-vm ]; then
+      /usr/sbin/autologinchange -r -d -- sysmaint 2>/dev/null
+   fi
 }
 
 enable_sysmaint_autologin() {
@@ -37,7 +39,9 @@ enable_sysmaint_autologin() {
    ## otherwise it is very difficult to use with lightdm. The user would need
    ## to know the account name "sysmaint" in advance to be able to log in, and
    ## with the current design, they won't know that username in advance.
-   /usr/sbin/autologinchange -e -- sysmaint
+   if [ ! -f /usr/share/qubes/marker-vm ]; then
+      /usr/sbin/autologinchange -e -- sysmaint 2>/dev/null
+   fi
 
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
