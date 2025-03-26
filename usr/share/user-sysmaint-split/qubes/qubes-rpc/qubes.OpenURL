@@ -1,3 +1,0 @@
-#!/bin/bash
-
-echo 'qubes.OpenURL qrexec action is prohibited in PERSISTENT mode SYSMAINT.'
