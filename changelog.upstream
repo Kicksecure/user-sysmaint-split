@@ -1,3 +1,58 @@
+commit 5d219ef675ed20d8dc190f0d340db5fa5eedfe18
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 05:06:12 2025 -0400
+
+    comment
+
+commit e536fa5447fb51ae3a4572a50b38049a5bad783d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 05:03:56 2025 -0400
+
+    future-proof for later Qubes versions
+
+commit f7e783bf3ed983b42b7cec8314135ca478a5a970
+Merge: 16c1b0a 89cdc20
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 04:51:04 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/better-qrexec-overrides'
+
+commit 89cdc200c8e5fafe6393d3102db1939d9aad37e9
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Mar 25 20:31:31 2025 -0500
+
+    Skip autologinchange calls on Qubes OS, don't show unnecessary info during installation and upgrades
+
+commit 027efac39c2713d82ae0edd6bab7d4c30805d9b6
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Mar 25 19:50:20 2025 -0500
+
+    Try to prevent a race between sysmaint-boot and qubes-gui-agent
+
+commit 6d7d37f58addc0c81ff666e5e3783662370c85c8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Mar 25 19:46:30 2025 -0500
+
+    Add sysmaint user to the qubes group under Qubes OS
+
+commit ea8ab0da577a6a93099debaf945d6a14dd961664
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Mar 25 19:24:33 2025 -0500
+
+    Improve sysmaint qrexec overrides mechanism
+
+commit 929364a78e23bca5934e55db279b7ab2194e1d87
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Mar 25 17:36:30 2025 -0500
+
+    Only request boot mode features on Qubes R4.3
+
+commit 16c1b0ae0cdf058e86b5f6b0f5f7c5d429a7829d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Mar 25 13:33:06 2025 +0000
+
+    bumped changelog version
+
 commit 9be6fa553baf3e81e5bf4e80bad327bd8531304c
 Merge: da72a56 8078848
 Author: Patrick Schleizer <adrelanos@whonix.org>
