@@ -9,6 +9,7 @@ Before=getty.target
 Before=graphical.target
 Before=rads.service
 Before=sysinit.target
+Before=qubes-gui-agent.service
 Wants=local-fs.target
 After=local-fs.target
 DefaultDependencies=no

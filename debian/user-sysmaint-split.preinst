@@ -27,6 +27,9 @@ sysmaint_user_creation_and_groups_setup() {
    add_linux_user_account
    password_empty_for_user_account
    USER_CREATE_GROUP_ADD_LIST=( 'sudo' 'ssh' 'console' )
+   if [ -f /usr/share/qubes/marker-vm ]; then
+      USER_CREATE_GROUP_ADD_LIST+=( 'qubes' )
+   fi
    add_groups_to_linux_user_account
    linux_user_account_shell_to_zsh
    lock_pass sysmaint
