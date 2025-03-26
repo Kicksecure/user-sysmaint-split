@@ -36,8 +36,10 @@ Wants=getty.target
 Wants=qubes-qrexec-agent.service
 ## qubes-gui-agent lets us open graphical programs like the sysmaint panel
 Wants=qubes-gui-agent.service
-## qubes-whonix-sysinit provides essential Qubes-specific system services.
+## qubes-sysinit and qubes-whonix-sysinit provide essential Qubes-specific
+## system services.
 Wants=qubes-whonix-sysinit.service
+Wants=qubes-sysinit.service
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
 Wants=qubes-whonix-torified-updates-proxy-check.service
