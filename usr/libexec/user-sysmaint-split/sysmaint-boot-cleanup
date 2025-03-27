@@ -12,6 +12,14 @@ lightdm_state_file='/var/lib/lightdm/.cache/lightdm-gtk-greeter/state'
 lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
 sddm_state_file='/var/lib/sddm/state.conf'
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
+xscreensaver_config_file_list=(
+   '/etc/X11/app-defaults/XScreenSaver'
+   '/usr/lib/X11/app-defaults/XScreenSaver'
+)
+xscreensaver_backup_config_file_list=(
+   '/etc/X11/app-defaults/XScreenSaver.sysmaint-boot'
+   '/usr/lib/X11/app-defaults/XScreenSaver.sysmaint-boot'
+)
 
 echo "INFO: Removing sysmaint autologin files because system is shutting down." >&2
 safe-rm -f --verbose -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
@@ -27,6 +35,14 @@ if [ -f "${sddm_state_backup_file}" ]; then
    safe-rm -rf --verbose -- "${sddm_state_file}"
    mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}" || exit_code=3
 fi
+for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
+   xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
+   xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"
+   if [ -f "${xscreensaver_backup_config_file}" ]; then
+      safe-rm -rf -- "${xscreensaver_config_file}"
+      mv --verbose -- "${xscreensaver_backup_config_file}" "${xscreensaver_config_file}"
+   fi
+done
 
 echo "INFO: Locking account 'sysmaint' because system is shutting down." >&2
 passwd --lock -- 'sysmaint'

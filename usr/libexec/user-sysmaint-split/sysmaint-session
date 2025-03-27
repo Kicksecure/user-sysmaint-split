@@ -42,17 +42,26 @@ done
 background_process_list=(
   '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1'
   '/usr/libexec/msgcollector/msgdispatcher_xdg_autostart'
+  '/usr/share/xscreensaver/xscreensaver-wrapper.sh'
+)
+background_process_args_list=(
+  ''
+  ''
+  '-no-splash'
 )
 
 dbus-update-activation-environment --systemd --all
 
-for background_process in "${background_process_list[@]}"; do
-  if [ -e "${background_process}" ]; then
-    "${background_process}" &
-  fi
-done
-
 "${selected_window_manager}" &
 # Needed to prevent window ordering problems
 sleep 1;
-"${selected_sysmaint_app}"
+"${selected_sysmaint_app}" &
+for (( i = 0; i < ${#background_process_list[@]}; i++ )); do
+  background_process="${background_process_list[i]}"
+  background_process_args="${background_process_args_list[i]}"
+  if [ -e "${background_process}" ]; then
+    "${background_process}" $background_process_args &
+  fi
+done
+
+sleep infinity
