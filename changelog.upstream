@@ -1,3 +1,28 @@
+commit 6c0cc40282486474b4a7bdf155db9161d99530f6
+Merge: 299aba1 7385f2a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Mar 27 03:25:20 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/fix-qubes-systemd'
+
+commit 7385f2a1e8821dea56c492ed10bf72d4f79fcd3b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 23:42:53 2025 -0500
+
+    Rename the desktop name for sysmaint-session-wayland
+
+commit 8ff9bdb324123d277824549a8d17fb5f7ce9c3b8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Mar 26 18:30:44 2025 -0500
+
+    Fix Qubes OS systemd dependencies
+
+commit 299aba13b38f3f387db9eb77444e34b3c2bc00ac
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Mar 26 09:18:22 2025 +0000
+
+    bumped changelog version
+
 commit 5d219ef675ed20d8dc190f0d340db5fa5eedfe18
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Mar 26 05:06:12 2025 -0400
