@@ -4,7 +4,7 @@
 ## See the file COPYING for copying conditions.
 
 if [ "$(id -un)" = 'sysmaint' ] \
-   && [ "$XDG_CURRENT_DESKTOP" != 'sysmaint-session' ] \
+   && ! echo 'sysmaint-session' | grep -q '^sysmaint-session' \
    && [ ! -f '/usr/share/qubes/marker-vm' ]; then
    TERMINAL_WRAPPER_NO_COMMAND_ECHO='true'
    export TERMINAL_WRAPPER_NO_COMMAND_ECHO
