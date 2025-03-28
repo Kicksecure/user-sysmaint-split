@@ -1,3 +1,22 @@
+commit d61425ae0f4efe132da6fd2481f5eaf0ab86d627
+Merge: 6ca889f 008daeb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Mar 28 09:06:31 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/screenlock'
+
+commit 008daeb6d0ca8d105c9d41a73bb41c146f2c1df1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Mar 27 16:40:36 2025 -0500
+
+    Fix screen locking button, prohibit fast user switching in PERSISTENT mode SYSMAINT
+
+commit 6ca889f1adb3366762f9715858072f0e953c2b55
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Mar 27 08:44:22 2025 +0000
+
+    bumped changelog version
+
 commit 6c0cc40282486474b4a7bdf155db9161d99530f6
 Merge: 299aba1 7385f2a
 Author: Patrick Schleizer <adrelanos@whonix.org>
