@@ -49,6 +49,14 @@ lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
 sddm_state_dir='/var/lib/sddm'
 sddm_state_file="${sddm_state_dir}/state.conf"
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
+xscreensaver_config_file_list=(
+   '/etc/X11/app-defaults/XScreenSaver'
+   '/usr/lib/X11/app-defaults/XScreenSaver'
+)
+xscreensaver_backup_config_file_list=(
+   '/etc/X11/app-defaults/XScreenSaver.sysmaint-boot'
+   '/usr/lib/X11/app-defaults/XScreenSaver.sysmaint-boot'
+)
 
 sysmaint_account_already_locked=no
 if accountctl sysmaint is-pass-locked; then
@@ -74,6 +82,19 @@ restore_pre_sysmaint_autologin_config() {
       safe-rm -rf -- "${sddm_state_file}"
       mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
    fi
+}
+
+restore_pre_sysmaint_xscreensaver_config() {
+   local i
+
+   for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
+      xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
+      xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"
+      if [ -f "${xscreensaver_backup_config_file}" ]; then
+         safe-rm -rf -- "${xscreensaver_config_file}"
+         mv --verbose -- "${xscreensaver_backup_config_file}" "${xscreensaver_config_file}"
+      fi
+   done
 }
 
 write_lightdm_enable_autologin_config() {
@@ -193,12 +214,33 @@ Session=/usr/share/xsessions/sysmaint-session.desktop" \
    echo "INFO: Created file: '/var/lib/sddm/state.conf'" >&2
 }
 
+write_xscreensaver_derived_config() {
+   local i
+
+   for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
+      xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
+      xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"
+      if [ -f "${xscreensaver_backup_config_file}" ]; then
+         continue
+      fi
+      if [ -f "${xscreensaver_config_file}" ]; then
+         safe-rm -rf -- "${xscreensaver_backup_config_file}"
+         cp --verbose -- "${xscreensaver_config_file}" "${xscreensaver_backup_config_file}"
+
+         # Remove the newLoginCommand config from XScreenSaver's configuration.
+         # This prevents fast user switching.
+         sed -i '/newLoginCommand/d' "${xscreensaver_config_file}"
+      fi
+   done
+}
+
 handle_boot() {
    if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
       echo "INFO: user mode boot detected. (Not sysmaint boot mode.)" >&2
       echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
       lock_sysmaint_account
       restore_pre_sysmaint_autologin_config
+      restore_pre_sysmaint_xscreensaver_config
       exit 0
    fi
 
@@ -235,6 +277,8 @@ handle_boot() {
 
       write_sddm_sysmaint_default_session_config
    fi
+
+   write_xscreensaver_derived_config
 
    ## Qubes handling.
    if [ ! -f /usr/share/qubes/marker-vm ]; then
