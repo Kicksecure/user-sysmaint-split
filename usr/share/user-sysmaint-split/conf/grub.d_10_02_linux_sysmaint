@@ -14,15 +14,16 @@ GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
 unset GRUB_DEVICE_UUID
 
 : "${session_type:="PERSISTENT"}"
+: "${session_detail:="(For system maintenance tasks.)"}"
 
 if [ -e '/usr/share/kicksecure/marker' ]; then
-   GRUB_DISTRIBUTOR="Kicksecure $session_type mode SYSMAINT (For system maintenance tasks.)"
+   GRUB_DISTRIBUTOR="Kicksecure $session_type mode SYSMAINT $session_detail"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Workstation $session_type mode SYSMAINT (For system maintenance tasks.)"
+   GRUB_DISTRIBUTOR="Whonix-Workstation $session_type mode SYSMAINT $session_detail"
 elif [ -e '/usr/share/anon-gw-base-files/gateway' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Gateway $session_type mode SYSMAINT (For system maintenance tasks.)"
+   GRUB_DISTRIBUTOR="Whonix-Gateway $session_type mode SYSMAINT $session_detail"
 else
-   GRUB_DISTRIBUTOR="PERSISTENT mode $session_type (For system maintenance tasks.)"
+   GRUB_DISTRIBUTOR="PERSISTENT mode $session_type $session_detail"
 fi
 
 GRUB_DISABLE_RECOVERY="true"
