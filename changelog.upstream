@@ -1,3 +1,33 @@
+commit ceb9c0259be348257a3b5e9ae54093460d5b894c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 04:38:00 2025 -0400
+
+    add environment variable session_type (PERSISTENT or LIVE)
+
+commit 3a0903d01b6c1670ba87531c9888a37fa7063df0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 04:31:43 2025 -0400
+
+    only one TM
+
+commit fbabdd758be742d73c7c88ef871106d804fb8976
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 04:30:10 2025 -0400
+
+    only one TM
+
+commit 743750fed9f791ab29940999359c5595055287b7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 04:27:25 2025 -0400
+
+    only one TM
+
+commit c75e1097d14c4a1b8dde0661d78412fbdab74453
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Mar 28 14:50:50 2025 +0000
+
+    bumped changelog version
+
 commit d61425ae0f4efe132da6fd2481f5eaf0ab86d627
 Merge: 6ca889f 008daeb
 Author: Patrick Schleizer <adrelanos@whonix.org>
