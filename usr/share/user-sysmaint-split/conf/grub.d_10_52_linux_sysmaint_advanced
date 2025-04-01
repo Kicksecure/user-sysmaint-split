@@ -16,9 +16,9 @@ unset GRUB_DEVICE_UUID
 if [ -e '/usr/share/kicksecure/marker' ]; then
    GRUB_DISTRIBUTOR="Kicksecure PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Workstation (TM) PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
+   GRUB_DISTRIBUTOR="Whonix-Workstation PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
 elif [ -e '/usr/share/anon-gw-base-files/gateway' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Gateway (TM) PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
+   GRUB_DISTRIBUTOR="Whonix-Gateway PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
 else
    GRUB_DISTRIBUTOR="PERSISTENT mode SYSMAINT (For system maintenance tasks.)"
 fi
