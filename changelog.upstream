@@ -1,3 +1,15 @@
+commit 3ad711067be69eaf4cdc3e36d2ee1f59b3bb6b9e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 10:10:46 2025 -0400
+
+    better boot menu entry naming
+
+commit c358320cbcd13aeee9e8b13d400aa6faf2df5e6d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 11:15:03 2025 +0000
+
+    bumped changelog version
+
 commit 2c12d163ebb1c1f8e161ef0dda643442ca101970
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Apr 1 07:13:38 2025 -0400
