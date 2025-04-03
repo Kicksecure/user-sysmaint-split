@@ -10,8 +10,10 @@ true "user-sysmaint-split $0: START"
 set -e
 set -o allexport
 
-GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
-unset GRUB_DEVICE_UUID
+if [ -n "${GRUB_DEVICE_UUID}" ]; then
+  GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
+  unset GRUB_DEVICE_UUID
+fi
 
 : "${session_type:="PERSISTENT"}"
 : "${session_detail:="(For system maintenance tasks.)"}"

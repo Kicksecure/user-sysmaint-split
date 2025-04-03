@@ -57,6 +57,12 @@ xscreensaver_backup_config_file_list=(
    '/etc/X11/app-defaults/XScreenSaver.sysmaint-boot'
    '/usr/lib/X11/app-defaults/XScreenSaver.sysmaint-boot'
 )
+sysmaint_lightdm_conf_file='/etc/lightdm/lightdm.conf.d/zzz-sysmaint-boot.conf'
+sysmaint_sddm_conf_file='/etc/sddm.conf.d/zzz-sysmaint-boot.conf'
+old_sysmaint_conf_file_list=(
+  '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+  '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+)
 
 sysmaint_account_already_locked=no
 if accountctl sysmaint is-pass-locked; then
@@ -72,8 +78,9 @@ lock_sysmaint_account() {
 }
 
 restore_pre_sysmaint_autologin_config() {
-   safe-rm -f -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-   safe-rm -f -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+   safe-rm -f -- "${sysmaint_lightdm_conf_file}"
+   safe-rm -f -- "${sysmaint_sddm_conf_file}"
+   safe-rm -f -- "${old_sysmaint_conf_file_list[@]}"
    if [ -f "${lightdm_state_backup_file}" ]; then
       safe-rm -rf -- "${lightdm_state_file}"
       mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
@@ -102,19 +109,19 @@ write_lightdm_enable_autologin_config() {
       echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session-wayland" \
-         | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+         | sponge -- "${sysmaint_lightdm_conf_file}"
    else
       echo "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
-         | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+         | sponge -- "${sysmaint_lightdm_conf_file}"
    fi
 }
 
 write_lightdm_disable_autologin_config() {
    echo "[Seat:*]
 autologin-user=" \
-      | sponge -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+      | sponge -- "${sysmaint_lightdm_conf_file}"
 }
 
 write_lightdm_sysmaint_default_session_config() {
@@ -170,12 +177,12 @@ write_sddm_enable_autologin_config() {
       echo "[Autologin]
 User=sysmaint
 Session=sysmaint-session-wayland.desktop" \
-         | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+         | sponge -- "${sysmaint_sddm_conf_file}"
    else
       echo "[Autologin]
 User=sysmaint
 Session=sysmaint-session.desktop" \
-         | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+         | sponge -- "${sysmaint_sddm_conf_file}"
    fi
 }
 
@@ -183,7 +190,7 @@ write_sddm_disable_autologin_config() {
    echo "[Autologin]
 User=
 Session=" \
-      | sponge -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+      | sponge -- "${sysmaint_sddm_conf_file}"
 }
 
 write_sddm_sysmaint_default_session_config() {
@@ -260,7 +267,7 @@ handle_boot() {
          ## end up logged in.
          write_lightdm_disable_autologin_config
       fi
-      echo "INFO: Created file: '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'" >&2
+      echo "INFO: Created file: '${sysmaint_lightdm_conf_file}'" >&2
 
       write_lightdm_sysmaint_default_session_config
    elif [ "${default_display_manager}" = 'sddm' ]; then
@@ -273,7 +280,7 @@ handle_boot() {
          ## end up logged in
          write_sddm_disable_autologin_config
       fi
-      echo "INFO: Created file: '/etc/sddm.conf.d/z-sysmaint-boot.conf'" >&2
+      echo "INFO: Created file: '${sysmaint_sddm_conf_file}'" >&2
 
       write_sddm_sysmaint_default_session_config
    fi

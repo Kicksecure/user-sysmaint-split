@@ -10,8 +10,10 @@ true "user-sysmaint-split $0: START"
 set -e
 set -o allexport
 
-GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
-unset GRUB_DEVICE_UUID
+if [ -n "${GRUB_DEVICE_UUID}" ]; then
+  GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
+  unset GRUB_DEVICE_UUID
+fi
 
 if [ -e '/usr/share/kicksecure/marker' ]; then
    GRUB_DISTRIBUTOR="Kicksecure REMOVE user-sysmaint-split"

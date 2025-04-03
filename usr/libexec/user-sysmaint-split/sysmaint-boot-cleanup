@@ -20,10 +20,17 @@ xscreensaver_backup_config_file_list=(
    '/etc/X11/app-defaults/XScreenSaver.sysmaint-boot'
    '/usr/lib/X11/app-defaults/XScreenSaver.sysmaint-boot'
 )
+sysmaint_lightdm_conf_file='/etc/lightdm/lightdm.conf.d/zzz-sysmaint-boot.conf'
+sysmaint_sddm_conf_file='/etc/sddm.conf.d/zzz-sysmaint-boot.conf'
+old_sysmaint_conf_file_list=(
+  '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
+  '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+)
 
 echo "INFO: Removing sysmaint autologin files because system is shutting down." >&2
-safe-rm -f --verbose -- '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
-safe-rm -f --verbose -- '/etc/sddm.conf.d/z-sysmaint-boot.conf'
+safe-rm -f --verbose -- "${sysmaint_lightdm_conf_file}"
+safe-rm -f --verbose -- "${sysmaint_sddm_conf_file}"
+safe-rm -f -- "${old_sysmaint_conf_file_list[@]}"
 
 echo "INFO: Restoring display manager state file backups if necessary because system is shutting down." >&2
 if [ -f "${lightdm_state_backup_file}" ]; then
