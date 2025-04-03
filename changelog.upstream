@@ -1,3 +1,28 @@
+commit 0fdee1eb56744ce6874ad5f1495450bb6d2a1d6b
+Merge: 60148b3 46a72d1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 3 12:37:09 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/live-sysmaint'
+
+commit 46a72d139e10479dfdec55dcbdf9818bea1eceef
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 2 18:25:06 2025 -0500
+
+    Prevent custom display manager configuration from breaking sysmaint boot
+
+commit 2acfaf5f9bd45c9c5094a62599fdf2b28846773c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 2 17:48:00 2025 -0500
+
+    Avoid ending up with GRUB_DEVICE being set to an invalid path
+
+commit 60148b3771f1073610aababe5a63e8443fd6dc8f
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 1 14:15:15 2025 +0000
+
+    bumped changelog version
+
 commit 3ad711067be69eaf4cdc3e36d2ee1f59b3bb6b9e
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Apr 1 10:10:46 2025 -0400
