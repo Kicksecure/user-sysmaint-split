@@ -137,7 +137,6 @@ Session=sysmaint-session-wayland" \
 Session=sysmaint-session" \
             | $sudo_to_sysmaint -- sponge -- '/home/sysmaint/.dmrc'
       fi
-      chown sysmaint:sysmaint -- '/home/sysmaint/.dmrc'
       printf "%s\n" "INFO: Created file: '/home/sysmaint/.dmrc'" >&2
    else
       printf "%s\n" "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
