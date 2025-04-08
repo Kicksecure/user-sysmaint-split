@@ -153,7 +153,7 @@ Session=sysmaint-session" \
 
    if ! [ -d "${lightdm_state_dir}" ]; then
       safe-rm -rf -- "${lightdm_state_dir}"
-      mkdir --verbose  --parents -- "${lightdm_state_dir}" || exit 1
+      mkdir --verbose --parents -- "${lightdm_state_dir}" || exit 1
    fi
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
