@@ -64,6 +64,7 @@ old_sysmaint_conf_file_list=(
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 )
 account_specific_config_marker_dir='/home/sysmaint/.sysmaint-boot/account-specific-config-markers'
+sudo_to_sysmaint="sudo --non-interactive -u sysmaint"
 
 sysmaint_account_already_locked=no
 if accountctl sysmaint is-pass-locked; then
@@ -252,7 +253,7 @@ terminal_tint_config() {
 
   mkdir --verbose --parents -- "${terminal_config_dir}"
   chown --recursive sysmaint:sysmaint -- "${terminal_config_dir}"
-  sudo --non-interactive -u sysmaint -- touch -- "${terminal_config_file}"
+  $sudo_to_sysmaint -- touch -- "${terminal_config_file}"
   local terminal_config_file_contents
   terminal_config_file_contents="$(sed '/^ColorBackground=/d' "${terminal_config_file}")"
   # shellcheck disable=SC2076
@@ -268,7 +269,7 @@ terminal_tint_config() {
 ${color_background_str}"
   fi
 
-  sudo --non-interactive -u sysmaint -- sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
+  $sudo_to_sysmaint -- sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
 }
 
 write_sysmaint_account_specific_config_once() {
