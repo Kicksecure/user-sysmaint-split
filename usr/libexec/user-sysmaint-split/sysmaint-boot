@@ -236,9 +236,10 @@ write_xscreensaver_derived_config() {
          safe-rm -rf -- "${xscreensaver_backup_config_file}"
          cp --verbose -- "${xscreensaver_config_file}" "${xscreensaver_backup_config_file}"
 
-         # Remove the newLoginCommand config from XScreenSaver's configuration.
-         # This prevents fast user switching.
          sed -i '/newLoginCommand/d' "${xscreensaver_config_file}"
+         printf "%s\n" "INFO: Removed newLoginCommand from XScreenSaver configuration file '${xscreensaver_config_file}'.
+This prevents fast user switching. This is by design. See:
+https://www.kicksecure.com/wiki/Sysmaint#Fast_User_Switching" >&2
       fi
    done
 }
