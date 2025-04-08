@@ -269,6 +269,7 @@ ${color_background_str}"
   fi
 
   $sudo_to_sysmaint -- sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
+  printf "%s\n" "INFO: Created file: '${terminal_config_file}'" >&2
 }
 
 write_sysmaint_account_specific_config_once() {
