@@ -251,8 +251,7 @@ terminal_tint_config() {
   terminal_config_file="${terminal_config_dir}/terminalrc"
   color_background_str='ColorBackground=#41b40e740e74'
 
-  mkdir --verbose --parents -- "${terminal_config_dir}"
-  chown --recursive sysmaint:sysmaint -- "${terminal_config_dir}"
+  $sudo_to_sysmaint -- mkdir --verbose --parents -- "${terminal_config_dir}"
   $sudo_to_sysmaint -- touch -- "${terminal_config_file}"
   local terminal_config_file_contents
   terminal_config_file_contents="$(sed '/^ColorBackground=/d' "${terminal_config_file}")"
@@ -273,7 +272,7 @@ ${color_background_str}"
 }
 
 write_sysmaint_account_specific_config_once() {
-  mkdir --verbose --parents -- "${account_specific_config_marker_dir}"
+  $sudo_to_sysmaint -- mkdir --verbose --parents -- "${account_specific_config_marker_dir}"
   ## TODO: We may add more configuration functions to this loop. Remove the
   ## shellcheck override for SC2043 when and if that happens. The override for
   ## SC2041 should NOT be removed, we are intentionally looping over the names
@@ -283,10 +282,9 @@ write_sysmaint_account_specific_config_once() {
   for config_write_fn in 'terminal_tint_config'; do
     if [ ! -e "${account_specific_config_marker_dir}/${config_write_fn}" ]; then
       "${config_write_fn}"
-      touch -- "${account_specific_config_marker_dir}/${config_write_fn}"
+      $sudo_to_sysmaint -- touch -- "${account_specific_config_marker_dir}/${config_write_fn}"
     fi
   done
-  chown --recursive sysmaint:sysmaint -- "${account_specific_config_marker_dir}"
 }
 
 handle_boot() {
