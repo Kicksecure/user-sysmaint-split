@@ -251,7 +251,7 @@ terminal_tint_config() {
   color_background_str='ColorBackground=#41b40e740e74'
 
   mkdir --verbose --parents -- "${terminal_config_dir}"
-  sudo -u sysmaint -- touch -- "${terminal_config_file}"
+  sudo --non-interactive -u sysmaint -- touch -- "${terminal_config_file}"
   local terminal_config_file_contents
   terminal_config_file_contents="$(sed '/^ColorBackground=/d' "${terminal_config_file}")"
   # shellcheck disable=SC2076
@@ -267,7 +267,7 @@ terminal_tint_config() {
 ${color_background_str}"
   fi
 
-  sudo -u sysmaint -- sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
+  sudo --non-interactive -u sysmaint -- sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
 }
 
 write_sysmaint_account_specific_config_once() {
