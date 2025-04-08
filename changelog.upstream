@@ -1,3 +1,118 @@
+commit ee2b1ef2a50456673d2a8cb3cbd25320c2e0207a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:56:51 2025 -0400
+
+    remove unnecessary chown
+
+commit b119d9da450443790028dba822b51f02e211352f
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:54:34 2025 -0400
+
+    use $sudo_to_sysmaint
+
+commit a80527cf4e93db5a69678a5f265a235329e10fc8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:51:33 2025 -0400
+
+    output
+
+commit 36d8f7a15ee8205aa3bcb001290df83bb4f9c518
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:47:52 2025 -0400
+
+    output
+
+commit 53bcfdc42009d4ba09f32cad82ba5e42bb54c2d0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:44:10 2025 -0400
+
+    minor
+
+commit 0fa803aa8c06735e2194c224cac92a4018ef3406
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:43:34 2025 -0400
+
+    minor
+
+commit b38c64238c23bc2708cdf494899bcd4d6a50585a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:42:52 2025 -0400
+
+    --verbose
+
+commit 7d8885d418a4a0cb718358a9beaa64b452e4cae7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:42:33 2025 -0400
+
+    end-of-options
+
+commit 6e892143c00f21fef3ad983c53ca9caa0f131fe0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:41:51 2025 -0400
+
+    end-of-options
+
+commit 7f41021369e1dab89948d30bbd16c691f4068b7e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:41:11 2025 -0400
+
+    end-of-options
+
+commit 7198110b46a7d3bd1e00ba0c82d41893f6b46c62
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:40:02 2025 -0400
+
+    printf
+
+commit c321649b26392cccb3f028ed165e48587b6ed00b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:34:23 2025 -0400
+
+    perform all actions inside sysmaint home folder using sudo -u sysmaint so chown is not needed and actions are atomic
+
+commit 882d7f060a0419c5302c1cd7d0911493403a738a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:31:00 2025 -0400
+
+    refactoring
+
+commit 499e6466b6999d69a0622271b5e859127b6ada30
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:29:55 2025 -0400
+
+    permissions
+
+commit ceef687d3e1ec323fbd1a20382cfc511e2eaf82b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:25:54 2025 -0400
+
+    sudo --non-interactive
+
+commit f157d4e815b3143c2fa795ff98a61f7acc6f00fd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:24:55 2025 -0400
+
+    end-of-options
+
+commit 896c1c346a312f379d9147a0e8873dc7754a2aef
+Merge: 515c940 a040d2c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 8 08:22:37 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/terminal-tint'
+
+commit a040d2c62cb2dcb940508c17f0bb2007dc5a51d4
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Apr 6 21:25:24 2025 -0500
+
+    Add one-time sysmaint-account-specific configuration framework, tint sysmaint terminal red
+
+commit 515c9405a60d4f9b7e9342443eca6e7dd859a0c3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 3 17:01:41 2025 +0000
+
+    bumped changelog version
+
 commit 0fdee1eb56744ce6874ad5f1495450bb6d2a1d6b
 Merge: 60148b3 46a72d1
 Author: Patrick Schleizer <adrelanos@whonix.org>
