@@ -63,6 +63,7 @@ old_sysmaint_conf_file_list=(
   '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 )
+account_specific_config_marker_dir='/home/sysmaint/.sysmaint-boot/account-specific-config-markers'
 
 sysmaint_account_already_locked=no
 if accountctl sysmaint is-pass-locked; then
@@ -241,7 +242,58 @@ write_xscreensaver_derived_config() {
    done
 }
 
+terminal_tint_config() {
+  local terminal_config_dir
+  local terminal_config_file
+  local color_background_str
+  terminal_config_dir='/home/sysmaint/.config/xfce4/terminal'
+  terminal_config_file="${terminal_config_dir}/terminalrc"
+  color_background_str='ColorBackground=#41b40e740e74'
+
+  mkdir --verbose --parents -- "${terminal_config_dir}"
+  sudo -u sysmaint touch "${terminal_config_file}"
+  local terminal_config_file_contents
+  terminal_config_file_contents="$(sed '/^ColorBackground=/d' "${terminal_config_file}")"
+  # shellcheck disable=SC2076
+  if [[ "${terminal_config_file_contents}" =~ '[Configuration]' ]]; then
+    ## The ColorBackground key must be under the [Configuration] header in the
+    ## file, but we don't know where that header is. To work around this, we
+    ## find the header, then replace it with itself, a newline, and the
+    ## ColorBackground config line.
+    terminal_config_file_contents="${terminal_config_file_contents/'[Configuration]'/'[Configuration]'$'\n'"${color_background_str}"}"
+  else
+    ## If we don't have a [Configuration] header at all yet, make one.
+    terminal_config_file_contents+="[Configuration]
+${color_background_str}"
+  fi
+
+  sudo -u sysmaint sponge "${terminal_config_file}" <<< "${terminal_config_file_contents}"
+}
+
+write_sysmaint_account_specific_config_once() {
+  mkdir --verbose --parents -- "${account_specific_config_marker_dir}"
+  ## TODO: We may add more configuration functions to this loop. Remove the
+  ## shellcheck override for SC2043 when and if that happens. The override for
+  ## SC2041 should NOT be removed, we are intentionally looping over the names
+  ## of the specified functions, not calling the functions immediately.
+  # shellcheck disable=SC2043
+  # shellcheck disable=SC2041
+  for config_write_fn in 'terminal_tint_config'; do
+    if [ ! -e "${account_specific_config_marker_dir}/${config_write_fn}" ]; then
+      "${config_write_fn}"
+      touch "${account_specific_config_marker_dir}/${config_write_fn}"
+    fi
+  done
+}
+
 handle_boot() {
+   if ! accountctl sysmaint is-user ; then
+      echo "$0: ERROR: Account 'sysmaint' does not exist. Cleaning up system-wide sysmaint config and exiting." >&2
+      restore_pre_sysmaint_autologin_config
+      restore_pre_sysmaint_xscreensaver_config
+      exit 1
+   fi
+
    if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
       echo "INFO: user mode boot detected. (Not sysmaint boot mode.)" >&2
       echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
@@ -286,6 +338,8 @@ handle_boot() {
    fi
 
    write_xscreensaver_derived_config
+
+   write_sysmaint_account_specific_config_once
 
    ## Qubes handling.
    if [ ! -f /usr/share/qubes/marker-vm ]; then
