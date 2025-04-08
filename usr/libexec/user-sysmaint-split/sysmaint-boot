@@ -354,7 +354,7 @@ handle_boot() {
       rpc_block_template="#!/bin/bash
 
 printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode SYSMAINT.'"
-      printf "%s\n" "${rpc_block_template}" | sponge "${rpc_block_path}"
+      printf "%s\n" "${rpc_block_template}" | sponge -- "${rpc_block_path}"
       chmod +x "${rpc_block_path}"
    done < /usr/share/user-sysmaint-split/qubes-rpc-blocks
 
@@ -372,7 +372,7 @@ printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode
          cp "${orig_rpc_config_path}" "${rpc_config_path}"
          sed -i '/^force-user=/d' "${rpc_config_path}"
       fi
-      printf "%s\n" "force-user='sysmaint'" | sponge -a "${rpc_config_path}"
+      printf "%s\n" "force-user='sysmaint'" | sponge -a -- "${rpc_config_path}"
    done < /usr/share/user-sysmaint-split/qubes-rpc-overrides
 
    qubesdb-write /default-user sysmaint
