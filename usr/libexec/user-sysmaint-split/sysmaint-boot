@@ -251,6 +251,7 @@ terminal_tint_config() {
   color_background_str='ColorBackground=#41b40e740e74'
 
   mkdir --verbose --parents -- "${terminal_config_dir}"
+  chown --recursive sysmaint:sysmaint -- "${terminal_config_dir}"
   sudo --non-interactive -u sysmaint -- touch -- "${terminal_config_file}"
   local terminal_config_file_contents
   terminal_config_file_contents="$(sed '/^ColorBackground=/d' "${terminal_config_file}")"
@@ -284,6 +285,7 @@ write_sysmaint_account_specific_config_once() {
       touch -- "${account_specific_config_marker_dir}/${config_write_fn}"
     fi
   done
+  chown --recursive sysmaint:sysmaint -- "${account_specific_config_marker_dir}"
 }
 
 handle_boot() {
