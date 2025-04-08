@@ -9,11 +9,11 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
-echo "$0: INFO: START" >&2
+printf "%s\n" "$0: INFO: START" >&2
 
 error_handler() {
    local last_exit_code="$?"
-   echo "\
+   printf "%s\n" "\
 ###
 $0: ERROR:
 BASH_COMMAND: '$BASH_COMMAND'
@@ -26,12 +26,12 @@ trap error_handler ERR
 
 exit_handler() {
    local exit_code="$?"
-   echo "INFO: If installed, rads (Ram Adjusted Desktop Starter) should be starting, ok." >&2
-   echo "INFO: (Because sysmaint-boot.target runs 'Before=rads.service' and 'Wants=rads.service'.)" >&2
+   printf "%s\n" "INFO: If installed, rads (Ram Adjusted Desktop Starter) should be starting, ok." >&2
+   printf "%s\n" "INFO: (Because sysmaint-boot.target runs 'Before=rads.service' and 'Wants=rads.service'.)" >&2
    if [ "$exit_code" = "0" ]; then
-      echo "$0: END: with OK exit code: '$exit_code'" >&2
+      printf "%s\n" "$0: END: with OK exit code: '$exit_code'" >&2
    else
-      echo "$0: END: with ERROR exit code: '$exit_code'" >&2
+      printf "%s\n" "$0: END: with ERROR exit code: '$exit_code'" >&2
    fi
    exit "$exit_code"
 }
@@ -72,9 +72,9 @@ if accountctl sysmaint is-pass-locked; then
 fi
 
 lock_sysmaint_account() {
-   echo "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'" >&2
+   printf "%s\n" "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'" >&2
    if [ "$sysmaint_account_already_locked" = "no" ]; then
-      echo "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)." >&2
+      printf "%s\n" "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)." >&2
       accountctl sysmaint lock-pass
    fi
 }
@@ -108,12 +108,12 @@ restore_pre_sysmaint_xscreensaver_config() {
 
 write_lightdm_enable_autologin_config() {
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
-      echo "[Seat:*]
+      printf "%s\n" "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session-wayland" \
          | sponge -- "${sysmaint_lightdm_conf_file}"
    else
-      echo "[Seat:*]
+      printf "%s\n" "[Seat:*]
 autologin-user=sysmaint
 autologin-session=sysmaint-session" \
          | sponge -- "${sysmaint_lightdm_conf_file}"
@@ -121,7 +121,7 @@ autologin-session=sysmaint-session" \
 }
 
 write_lightdm_disable_autologin_config() {
-   echo "[Seat:*]
+   printf "%s\n" "[Seat:*]
 autologin-user=" \
       | sponge -- "${sysmaint_lightdm_conf_file}"
 }
@@ -129,18 +129,18 @@ autologin-user=" \
 write_lightdm_sysmaint_default_session_config() {
    if [ -d '/home/sysmaint' ]; then
       if [ "${sysmaint_session_wayland}" = 'yes' ]; then
-         echo "[Desktop]
+         printf "%s\n" "[Desktop]
 Session=sysmaint-session-wayland" \
             | sponge -- '/home/sysmaint/.dmrc'
       else
-         echo "[Desktop]
+         printf "%s\n" "[Desktop]
 Session=sysmaint-session" \
             | sponge -- '/home/sysmaint/.dmrc'
       fi
       chown sysmaint:sysmaint -- '/home/sysmaint/.dmrc'
-      echo "INFO: Created file: '/home/sysmaint/.dmrc'" >&2
+      printf "%s\n" "INFO: Created file: '/home/sysmaint/.dmrc'" >&2
    else
-      echo "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
+      printf "%s\n" "WARNING: Folder '/home/sysmaint' does not exist. Therefore, file '/home/sysmaint/.dmrc' has not been created." >&2
    fi
 
    if [ -f "${lightdm_state_backup_file}" ]; then
@@ -157,17 +157,17 @@ Session=sysmaint-session" \
    fi
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
-      echo "[greeter]
+      printf "%s\n" "[greeter]
 last-user=sysmaint
 last-session=sysmaint-session-wayland" \
          | sponge -- "${lightdm_state_file}"
    else
-      echo "[greeter]
+      printf "%s\n" "[greeter]
 last-user=sysmaint
 last-session=sysmaint-session" \
          | sponge -- "${lightdm_state_file}"
    fi
-   echo "INFO: Created file: '${lightdm_state_file}'" >&2
+   printf "%s\n" "INFO: Created file: '${lightdm_state_file}'" >&2
 }
 
 write_sddm_enable_autologin_config() {
@@ -176,12 +176,12 @@ write_sddm_enable_autologin_config() {
    # to get this file to be loaded last we have to use a name that sorts last
    # in the alphabet without using a number prefix.
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
-      echo "[Autologin]
+      printf "%s\n" "[Autologin]
 User=sysmaint
 Session=sysmaint-session-wayland.desktop" \
          | sponge -- "${sysmaint_sddm_conf_file}"
    else
-      echo "[Autologin]
+      printf "%s\n" "[Autologin]
 User=sysmaint
 Session=sysmaint-session.desktop" \
          | sponge -- "${sysmaint_sddm_conf_file}"
@@ -189,7 +189,7 @@ Session=sysmaint-session.desktop" \
 }
 
 write_sddm_disable_autologin_config() {
-   echo "[Autologin]
+   printf "%s\n" "[Autologin]
 User=
 Session=" \
       | sponge -- "${sysmaint_sddm_conf_file}"
@@ -210,17 +210,17 @@ write_sddm_sysmaint_default_session_config() {
    fi
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
-      echo "[Last]
+      printf "%s\n" "[Last]
 User=sysmaint
 Session=/usr/share/wayland-sessions/sysmaint-session-wayland.desktop" \
          | sponge -- "${sddm_state_file}"
    else
-      echo "[Last]
+      printf "%s\n" "[Last]
 User=sysmaint
 Session=/usr/share/xsessions/sysmaint-session.desktop" \
          | sponge -- "${sddm_state_file}"
    fi
-   echo "INFO: Created file: '/var/lib/sddm/state.conf'" >&2
+   printf "%s\n" "INFO: Created file: '/var/lib/sddm/state.conf'" >&2
 }
 
 write_xscreensaver_derived_config() {
@@ -289,23 +289,23 @@ write_sysmaint_account_specific_config_once() {
 
 handle_boot() {
    if ! accountctl sysmaint is-user ; then
-      echo "$0: ERROR: Account 'sysmaint' does not exist. Cleaning up system-wide sysmaint config and exiting." >&2
+      printf "%s\n" "$0: ERROR: Account 'sysmaint' does not exist. Cleaning up system-wide sysmaint config and exiting." >&2
       restore_pre_sysmaint_autologin_config
       restore_pre_sysmaint_xscreensaver_config
       exit 1
    fi
 
    if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
-      echo "INFO: user mode boot detected. (Not sysmaint boot mode.)" >&2
-      echo "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
+      printf "%s\n" "INFO: user mode boot detected. (Not sysmaint boot mode.)" >&2
+      printf "%s\n" "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
       lock_sysmaint_account
       restore_pre_sysmaint_autologin_config
       restore_pre_sysmaint_xscreensaver_config
       exit 0
    fi
 
-   echo "INFO: sysmaint boot mode detected." >&2
-   echo "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)" >&2
+   printf "%s\n" "INFO: sysmaint boot mode detected." >&2
+   printf "%s\n" "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)" >&2
 
    ## Unlocking account 'sysmaint'.
    accountctl sysmaint unlock-pass
@@ -320,7 +320,7 @@ handle_boot() {
          ## end up logged in.
          write_lightdm_disable_autologin_config
       fi
-      echo "INFO: Created file: '${sysmaint_lightdm_conf_file}'" >&2
+      printf "%s\n" "INFO: Created file: '${sysmaint_lightdm_conf_file}'" >&2
 
       write_lightdm_sysmaint_default_session_config
    elif [ "${default_display_manager}" = 'sddm' ]; then
@@ -333,7 +333,7 @@ handle_boot() {
          ## end up logged in
          write_sddm_disable_autologin_config
       fi
-      echo "INFO: Created file: '${sysmaint_sddm_conf_file}'" >&2
+      printf "%s\n" "INFO: Created file: '${sysmaint_sddm_conf_file}'" >&2
 
       write_sddm_sysmaint_default_session_config
    fi
@@ -347,14 +347,14 @@ handle_boot() {
       return
    fi
 
-   echo "INFO: Qubes OS detected. Installing volatile qrexec overrides and QubesDB config for sysmaint account." >&2
+   printf "%s\n" "INFO: Qubes OS detected. Installing volatile qrexec overrides and QubesDB config for sysmaint account." >&2
 
    while read -r rpc_config_file; do
       rpc_block_path="/run/qubes-rpc/${rpc_config_file}"
       rpc_block_template="#!/bin/bash
 
-echo '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode SYSMAINT.'"
-      echo "${rpc_block_template}" | sponge "${rpc_block_path}"
+printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode SYSMAINT.'"
+      printf "%s\n" "${rpc_block_template}" | sponge "${rpc_block_path}"
       chmod +x "${rpc_block_path}"
    done < /usr/share/user-sysmaint-split/qubes-rpc-blocks
 
@@ -372,7 +372,7 @@ echo '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode SYSMAINT
          cp "${orig_rpc_config_path}" "${rpc_config_path}"
          sed -i '/^force-user=/d' "${rpc_config_path}"
       fi
-      echo "force-user='sysmaint'" | sponge -a "${rpc_config_path}"
+      printf "%s\n" "force-user='sysmaint'" | sponge -a "${rpc_config_path}"
    done < /usr/share/user-sysmaint-split/qubes-rpc-overrides
 
    qubesdb-write /default-user sysmaint
@@ -403,8 +403,8 @@ parse_user_sysmaint_split_config() {
          done < "${config_file}"
       done
    fi
-   echo "INFO: account 'sysmaint' autologin: '${sysmaint_autologin}'" >&2
-   echo "INFO: Wayland session: '${sysmaint_session_wayland}'" >&2
+   printf "%s\n" "INFO: account 'sysmaint' autologin: '${sysmaint_autologin}'" >&2
+   printf "%s\n" "INFO: Wayland session: '${sysmaint_session_wayland}'" >&2
 }
 
 sysmaint_boot() {
@@ -415,10 +415,10 @@ sysmaint_boot() {
       'cleanup-autologin') restore_pre_sysmaint_autologin_config;;
       'query-sysmaint-autologin')
          trap "" EXIT
-         echo "${sysmaint_autologin}"
+         printf "%s\n" "${sysmaint_autologin}"
       ;;
       *)
-         echo "$0: ERROR: Invalid mode provided." >&2
+         printf "%s\n" "$0: ERROR: Invalid mode provided." >&2
          exit 1;;
    esac
 }
