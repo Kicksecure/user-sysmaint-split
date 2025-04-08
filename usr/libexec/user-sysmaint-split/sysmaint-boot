@@ -419,7 +419,8 @@ sysmaint_boot() {
       ;;
       *)
          printf "%s\n" "$0: ERROR: Invalid mode provided." >&2
-         exit 1;;
+         exit 1
+      ;;
    esac
 }
 
