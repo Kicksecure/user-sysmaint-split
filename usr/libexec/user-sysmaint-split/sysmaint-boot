@@ -131,11 +131,11 @@ write_lightdm_sysmaint_default_session_config() {
       if [ "${sysmaint_session_wayland}" = 'yes' ]; then
          printf "%s\n" "[Desktop]
 Session=sysmaint-session-wayland" \
-            | sponge -- '/home/sysmaint/.dmrc'
+            | $sudo_to_sysmaint -- sponge -- '/home/sysmaint/.dmrc'
       else
          printf "%s\n" "[Desktop]
 Session=sysmaint-session" \
-            | sponge -- '/home/sysmaint/.dmrc'
+            | $sudo_to_sysmaint -- sponge -- '/home/sysmaint/.dmrc'
       fi
       chown sysmaint:sysmaint -- '/home/sysmaint/.dmrc'
       printf "%s\n" "INFO: Created file: '/home/sysmaint/.dmrc'" >&2
