@@ -369,7 +369,7 @@ printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode
       fi
 
       if [ -n "${orig_rpc_config_path}" ]; then
-         cp -- "${orig_rpc_config_path}" "${rpc_config_path}"
+         cp --verbose -- "${orig_rpc_config_path}" "${rpc_config_path}"
          sed -i '/^force-user=/d' "${rpc_config_path}"
       fi
       printf "%s\n" "force-user='sysmaint'" | sponge -a -- "${rpc_config_path}"
