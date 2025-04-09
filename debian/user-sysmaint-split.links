@@ -1,7 +1,7 @@
-/usr/share/user-sysmaint-split/conf/grub.d_10_02_linux_sysmaint /etc/grub.d/10_02_linux_sysmaint
-/usr/share/user-sysmaint-split/conf/grub.d_10_52_linux_sysmaint_advanced /etc/grub.d/10_52_linux_sysmaint_advanced
-/usr/share/user-sysmaint-split/conf/grub.d_10_03_linux_remove_sysmaint /etc/grub.d/10_03_linux_remove_sysmaint
-/usr/share/user-sysmaint-split/conf/grub.d_10_53_linux_remove_sysmaint_advanced /etc/grub.d/10_53_linux_remove_sysmaint_advanced
+/usr/share/user-sysmaint-split/conf/grub.d_10_10_linux_sysmaint /etc/grub.d/10_10_linux_sysmaint
+/usr/share/user-sysmaint-split/conf/grub.d_10_55_linux_sysmaint_advanced /etc/grub.d/10_55_linux_sysmaint_advanced
+/usr/share/user-sysmaint-split/conf/grub.d_10_30_linux_remove_sysmaint /etc/grub.d/10_30_linux_remove_sysmaint
+/usr/share/user-sysmaint-split/conf/grub.d_10_65_linux_remove_sysmaint_advanced /etc/grub.d/10_65_linux_remove_sysmaint_advanced
 /usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh /etc/profile.d/20_sysmaint_warn.sh
 /usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh /etc/zprofile.d/20-sysmaint-warn.zsh
 /usr/share/user-sysmaint-split/conf/X11_Xsession.d_15_sysmaint_no_desktop /etc/X11/Xsession.d/15_sysmaint_no_desktop
