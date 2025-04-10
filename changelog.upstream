@@ -1,3 +1,34 @@
+commit 17f0fd7cdbd8b2287c09958e31d3eefb3a32ba29
+Merge: b981eab 1d2f4c9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 10 05:34:29 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/services'
+
+commit 1d2f4c9e7b7aae42ba9912a7c2d850774696e6e6
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 9 23:14:47 2025 -0500
+
+    Improve user service launching, add updatecheck to service list
+
+commit 3a50dca808114038ccb737309ea9f7d005784540
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 9 21:23:20 2025 -0500
+
+    Mass-change "PERSISTENCE mode USERNAME" to "PERSISTENCE Mode - USERNAME Session"
+
+commit a187ccf0081f5a1ef64e72ecce3680e6909c5cf1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 9 20:41:25 2025 -0500
+
+    Fix exiting the sysmaint session when one accidentally logs into a sysmaint session with a non-sysmaint account, fix boot mode wording
+
+commit b981eabb9878bc333c6e266b7a6629030b679b4a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 9 16:15:27 2025 +0000
+
+    bumped changelog version
+
 commit 56c78df68cf675cf1cde1e8d92f835cdb753411e
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Apr 9 12:14:48 2025 -0400
