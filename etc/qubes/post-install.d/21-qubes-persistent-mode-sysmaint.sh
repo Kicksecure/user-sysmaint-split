@@ -9,6 +9,6 @@
 qubes_version="$(cat /usr/share/qubes/marker-vm | grep -v '^#')"
 if printf "%s\n" "${qubes_version}" | grep -q -e '^4.3' -e '^4.4' -e '^4.5' -e '^4.6' ; then
    qvm-features-request boot-mode.kernelopts.sysmaint='boot-role=sysmaint systemd.unit=sysmaint-boot.target'
-   qvm-features-request boot-mode.name.sysmaint='PERSISTENT mode SYSMAINT'
+   qvm-features-request boot-mode.name.sysmaint='PERSISTENT Mode - SYSMAINT Session'
    qvm-features-request boot-mode.active='sysmaint'
 fi
