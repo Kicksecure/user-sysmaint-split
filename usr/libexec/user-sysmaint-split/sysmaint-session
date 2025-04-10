@@ -56,6 +56,7 @@ dbus-update-activation-environment --systemd --all
 # Needed to prevent window ordering problems
 sleep 1;
 "${selected_sysmaint_app}" &
+sysmaint_app_pid="$!"
 for (( i = 0; i < ${#background_process_list[@]}; i++ )); do
   background_process="${background_process_list[i]}"
   background_process_args="${background_process_args_list[i]}"
@@ -64,4 +65,4 @@ for (( i = 0; i < ${#background_process_list[@]}; i++ )); do
   fi
 done
 
-sleep infinity
+wait "${sysmaint_app_pid}"
