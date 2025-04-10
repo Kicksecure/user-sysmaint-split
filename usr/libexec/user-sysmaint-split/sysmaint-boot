@@ -354,7 +354,7 @@ handle_boot() {
       rpc_block_path="/run/qubes-rpc/${rpc_config_file}"
       rpc_block_template="#!/bin/bash
 
-printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT mode - SYSMAINT session.'"
+printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT Mode - SYSMAINT Session.'"
       printf "%s\n" "${rpc_block_template}" | sponge -- "${rpc_block_path}"
       chmod +x -- "${rpc_block_path}"
    done < /usr/share/user-sysmaint-split/qubes-rpc-blocks
