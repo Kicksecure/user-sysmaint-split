@@ -1,0 +1,68 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+terminal_tint_config() {
+  local terminal_config_dir
+  local terminal_config_file
+  local color_background_str
+  terminal_config_dir='/home/sysmaint/.config/xfce4/terminal'
+  terminal_config_file="${terminal_config_dir}/terminalrc"
+  color_background_str='ColorBackground=#41b40e740e74'
+
+  mkdir --verbose --parents -- "${terminal_config_dir}"
+  touch -- "${terminal_config_file}"
+  local terminal_config_file_contents
+  terminal_config_file_contents="$(sed '/^ColorBackground=/d' "${terminal_config_file}")"
+  # shellcheck disable=SC2076
+  if [[ "${terminal_config_file_contents}" =~ '[Configuration]' ]]; then
+    ## The ColorBackground key must be under the [Configuration] header in the
+    ## file, but we don't know where that header is. To work around this, we
+    ## find the header, then replace it with itself, a newline, and the
+    ## ColorBackground config line.
+    terminal_config_file_contents="${terminal_config_file_contents/'[Configuration]'/'[Configuration]'$'\n'"${color_background_str}"}"
+  else
+    ## If we don't have a [Configuration] header at all yet, make one.
+    terminal_config_file_contents+="[Configuration]
+${color_background_str}"
+  fi
+
+  sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
+  printf "%s\n" "INFO: Created file: '${terminal_config_file}'" >&2
+}
+
+write_sysmaint_account_specific_config_once() {
+  account_specific_config_marker_dir='/home/sysmaint/.sysmaint-boot/account-specific-config-markers'
+  mkdir --verbose --parents -- "${account_specific_config_marker_dir}"
+  ## TODO: We may add more configuration functions to this loop. Remove the
+  ## shellcheck override for SC2043 when and if that happens. The override for
+  ## SC2041 should NOT be removed, we are intentionally looping over the names
+  ## of the specified functions, not calling the functions immediately.
+  # shellcheck disable=SC2043
+  # shellcheck disable=SC2041
+  for config_write_fn in 'terminal_tint_config'; do
+    if [ ! -e "${account_specific_config_marker_dir}/${config_write_fn}" ]; then
+      "${config_write_fn}"
+      touch -- "${account_specific_config_marker_dir}/${config_write_fn}"
+    fi
+  done
+}
+
+start_user_background_services() {
+  user_service_list=(
+     'polkit-gnome-authentication-agent-1'
+     'msgdispatcher'
+     'xscreensaver'
+     'updatecheck'
+  )
+
+  # Run background processes. These services are usually run as a non-root user
+  # by way of /etc/xdg/autostart. Running everything in /etc/xdg/autostart would
+  # be bad here because sysmaint's graphical session is intentionally running as
+  # few services as possible to keep attack surface low. Instead, just run the
+  # services we need, if they exist.
+  for (( i = 0; i < "${#user_service_list[@]}"; i++ )); do
+     gio launch "/etc/xdg/autostart/${user_service_list[i]}.desktop" &
+  done
+}

@@ -3,6 +3,9 @@
 ## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+# shellcheck source=./sysmaint-session-shared
+source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
+
 window_manager_list=(
    '/usr/bin/labwc'
    # Add other window managers here later
@@ -29,12 +32,7 @@ done
 
 dbus-update-activation-environment --systemd --all
 
-user_service_list=(
-   'polkit-gnome-authentication-agent-1'
-   'msgdispatcher'
-   'xscreensaver'
-   'updatecheck'
-)
+write_sysmaint_account_specific_config_once
 
 "${selected_window_manager}" &
 # Needed to prevent window ordering problems
@@ -43,13 +41,6 @@ export WAYLAND_DISPLAY=wayland-0
 "${selected_sysmaint_app}" &
 sysmaint_app_pid="$!"
 
-# Run background processes. These services are usually run as a non-root user
-# by way of /etc/xdg/autostart. Running everything in /etc/xdg/autostart would
-# be bad here because sysmaint's graphical session is intentionally running as
-# few services as possible to keep attack surface low. Instead, just run the
-# services we need, if they exist.
-for (( i = 0; i < "${#user_service_list[@]}"; i++ )); do
-   gio launch "/etc/xdg/autostart/${user_service_list[i]}.desktop" &
-done
+start_user_background_services
 
 wait "${sysmaint_app_pid}"
