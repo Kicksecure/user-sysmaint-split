@@ -1,3 +1,22 @@
+commit cced46f0a87f86e3cd570697aa4fbe6f3f0b15d9
+Merge: 3206c55 29fba77
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 17:51:33 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/sysmaint-config'
+
+commit 29fba77b19822597511846c6c33e3ad5ae4d485f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Apr 16 00:17:13 2025 -0500
+
+    Fix sysmaint account-specific config writer framework, refactor duplicated code in sysmaint-session scripts
+
+commit 3206c5519f6bf88a7da0597808513fcd5f04f745
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Apr 10 11:40:07 2025 +0000
+
+    bumped changelog version
+
 commit 17f0fd7cdbd8b2287c09958e31d3eefb3a32ba29
 Merge: b981eab 1d2f4c9
 Author: Patrick Schleizer <adrelanos@whonix.org>
