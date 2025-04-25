@@ -1,3 +1,27 @@
+commit 469c135800ad425a657a5097c0c1afaac6cfae14
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 10:17:30 2025 -0400
+
+    allow more services in sysmaint-boot.target
+
+commit 287fe50019e5a1052c43e0c2c910b392d31bf16a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 09:06:45 2025 -0400
+
+    minor
+
+commit c58dd76f1a96fe9023a0ad5ab1aafd253f425617
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 09:06:00 2025 -0400
+
+    Wants=tor.service
+
+commit e886cba3414d53591b6e1387474669fee455745d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 09:55:44 2025 +0000
+
+    bumped changelog version
+
 commit 131789a2d3f12ea7c74fa27860a92cc3590ffd5f
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Apr 25 05:29:44 2025 -0400
