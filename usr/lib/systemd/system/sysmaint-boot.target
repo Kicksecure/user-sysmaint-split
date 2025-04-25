@@ -19,7 +19,9 @@ Wants=sysinit.target
 ## Networking and Tor is needed to run system updates.
 Wants=network.target
 Wants=NetworkManager.service
+Wants=tor.service
 Wants=tor@default.service
+
 ## SSH is needed for server administration.
 Wants=ssh.service
 ## sdwdate and privleapd are required for systemcheck to work.
