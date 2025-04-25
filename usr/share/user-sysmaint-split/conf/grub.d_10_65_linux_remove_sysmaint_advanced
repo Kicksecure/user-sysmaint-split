@@ -16,13 +16,13 @@ if [ -n "${GRUB_DEVICE_UUID}" ]; then
 fi
 
 if [ -e '/usr/share/kicksecure/marker' ]; then
-   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split (Enable unrestricted admin mode.)"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
-   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split (Enable unrestricted admin mode.)"
 elif [ -e '/usr/share/anon-gw-base-files/gateway' ]; then
-   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split (Enable unrestricted admin mode.)"
 else
-   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split (Enable unrestricted admin mode.)"
 fi
 
 GRUB_DISABLE_RECOVERY="true"
