@@ -16,6 +16,7 @@ Requires=systemd-user-sessions.service
 ## Normal dependencies
 ## sysinit gives us all essential system services.
 Wants=sysinit.target
+
 ## Networking and Tor is needed to run system updates.
 Wants=network.target
 Wants=NetworkManager.service
@@ -24,24 +25,30 @@ Wants=tor@default.service
 
 ## SSH is needed for server administration.
 Wants=ssh.service
+
 ## sdwdate and privleapd are required for systemcheck to work.
 Wants=sdwdate.service
 Wants=privleapd.service
+
 ## rads is needed to launch the sysmaint desktop session.
 Wants=rads.service
 
 ## Qubes-specific dependencies
 ## getty is required for the Qubes debug console to work.
 Wants=getty.target
+
 ## qrexec is required for many Qubes features, and also is mandatory to
 ## prevent the VM from being powered off after 60 seconds
 Wants=qubes-qrexec-agent.service
+
 ## qubes-gui-agent lets us open graphical programs like the sysmaint panel
 Wants=qubes-gui-agent.service
+
 ## qubes-sysinit and qubes-whonix-sysinit provide essential Qubes-specific
 ## system services.
 Wants=qubes-whonix-sysinit.service
 Wants=qubes-sysinit.service
+
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
 Wants=qubes-whonix-torified-updates-proxy-check.service
