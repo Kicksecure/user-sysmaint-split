@@ -18,24 +18,53 @@ Requires=systemd-user-sessions.service
 Wants=sysinit.target
 
 ## Networking and Tor is needed to run system updates.
+## NetworkManager
 Wants=network.target
 Wants=NetworkManager.service
+## ifupdown
+Wants=ifupdown-pre.service
+Wants=networking.service
+## systemd-networkd
+Wants=systemd-networkd.service
+## Tor
 Wants=tor.service
 Wants=tor@default.service
+
+## VPN
+Wants=openvpn.service
+Wants=wg-quick@wg0.service
+Wants=mullvad-daemon.service
 
 ## SSH is needed for server administration.
 Wants=ssh.service
 
 ## sdwdate and privleapd are required for systemcheck to work.
 Wants=sdwdate.service
+Wants=sdwdate-gui-shutdown-notify.service
+Wants=sdwdate-pre.service
+Wants=sdwdate-start-anondate-set-file-watcher.service
+Wants=bootclockrandomization.service
+Wants=timesanitycheck.service
 Wants=privleapd.service
 
 ## rads is needed to launch the sysmaint desktop session.
 Wants=rads.service
+Wants=rads-block-display-manger.service
 
 ## Qubes-specific dependencies
 ## getty is required for the Qubes debug console to work.
 Wants=getty.target
+
+## Basics.
+Wants=console-setup.service
+Wants=panic-on-oops.service
+Wants=dist-skel-first-boot.service
+Wants=udisks2.service
+Wants=upower.service
+Wants=virtualbox-guest-utils.service
+Wants=systemd-fsckd.socket
+Wants=sysfsutils.service
+Wants=swap-file-creator.service
 
 ## qrexec is required for many Qubes features, and also is mandatory to
 ## prevent the VM from being powered off after 60 seconds
@@ -52,6 +81,12 @@ Wants=qubes-sysinit.service
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
 Wants=qubes-whonix-torified-updates-proxy-check.service
+
+#Wants=tb-updater-dispvm.service
+#Wants=tb-updater-first-boot.service
+
+## Whonix
+Wants=whonix-firewall-restarter.service
 
 Before=rads.service ssh.service
 After=basic.target network.target systemd-user-sessions.service
