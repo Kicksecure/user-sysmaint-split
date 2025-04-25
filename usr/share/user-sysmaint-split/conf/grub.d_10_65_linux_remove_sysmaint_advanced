@@ -16,11 +16,11 @@ if [ -n "${GRUB_DEVICE_UUID}" ]; then
 fi
 
 if [ -e '/usr/share/kicksecure/marker' ]; then
-   GRUB_DISTRIBUTOR="Kicksecure REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Workstation REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
 elif [ -e '/usr/share/anon-gw-base-files/gateway' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Gateway REMOVE user-sysmaint-split"
+   GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
 else
    GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split"
 fi

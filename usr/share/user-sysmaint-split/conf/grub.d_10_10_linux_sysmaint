@@ -18,15 +18,15 @@ fi
 : "${session_type:="PERSISTENT"}"
 : "${session_detail:="(For system maintenance tasks.)"}"
 
-grub_distributor_appendix="- $session_type Mode - SYSMAINT Session $session_detail"
+grub_distributor_appendix="$session_type Mode - SYSMAINT Session $session_detail"
 if [ -e '/usr/share/kicksecure/marker' ]; then
-   GRUB_DISTRIBUTOR="Kicksecure $grub_distributor_appendix"
+   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Workstation $grub_distributor_appendix"
+   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
 elif [ -e '/usr/share/anon-gw-base-files/gateway' ]; then
-   GRUB_DISTRIBUTOR="Whonix-Gateway $grub_distributor_appendix"
+   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
 else
-   GRUB_DISTRIBUTOR="derivative $grub_distributor_appendix"
+   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
 fi
 
 GRUB_DISABLE_RECOVERY="true"
