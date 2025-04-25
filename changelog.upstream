@@ -1,3 +1,22 @@
+commit 5a138ba55d08525574afd536ea962028baa70334
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 04:06:22 2025 -0400
+
+    improve boot menu entry:
+    REMOVE user-sysmaint-split (Enable unrestricted admin mode.)
+
+commit bb09b3300cc18964334e74122a55663863a0a9c1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Apr 25 04:04:16 2025 -0400
+
+    simplify boot menu names
+
+commit de10f21583df55adbe70ba127cd332d140a29d7d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 16 22:52:16 2025 +0000
+
+    bumped changelog version
+
 commit cced46f0a87f86e3cd570697aa4fbe6f3f0b15d9
 Merge: 3206c55 29fba77
 Author: Patrick Schleizer <adrelanos@whonix.org>
