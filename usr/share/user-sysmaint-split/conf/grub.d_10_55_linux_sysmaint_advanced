@@ -15,10 +15,10 @@ if [ -n "${GRUB_DEVICE_UUID}" ]; then
   unset GRUB_DEVICE_UUID
 fi
 
-: "${session_type:="PERSISTENT"}"
+: "${persistence_type:="PERSISTENT"}"
 : "${session_detail:="system maintenance"}"
 
-grub_distributor_appendix="$session_type Mode | SYSMAINT Session | $session_detail"
+grub_distributor_appendix="$persistence_type Mode | SYSMAINT Session | $session_detail"
 if [ -e '/usr/share/kicksecure/marker' ]; then
    GRUB_DISTRIBUTOR="$grub_distributor_appendix"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
