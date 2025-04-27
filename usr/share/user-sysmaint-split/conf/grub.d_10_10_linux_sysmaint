@@ -16,7 +16,7 @@ if [ -n "${GRUB_DEVICE_UUID}" ]; then
 fi
 
 : "${session_type:="PERSISTENT"}"
-: "${session_detail:="For system maintenance tasks"}"
+: "${session_detail:="system maintenance tasks"}"
 
 grub_distributor_appendix="$session_type Mode | SYSMAINT Session | $session_detail"
 if [ -e '/usr/share/kicksecure/marker' ]; then
