@@ -360,12 +360,19 @@ parse_user_sysmaint_split_config() {
    printf "%s\n" "INFO: Wayland session: '${sysmaint_session_wayland}'" >&2
 }
 
+remove_sysmaint_qubes() {
+   printf "%s\n" "INFO: Qubes unrestricted mode detected. Removing user-sysmaint-split."
+   printf "%s\n" "INFO: (kernel parameter 'remove-sysmaint-qubes' is present, ok.)"
+   dummy-dependency --yes --purge user-sysmaint-split
+}
+
 sysmaint_boot() {
    parse_user_sysmaint_split_config
    local mode="$1"
    case "${mode}" in
       'handle-boot') handle_boot;;
       'cleanup-autologin') restore_pre_sysmaint_autologin_config;;
+      'remove-sysmaint-qubes') remove_sysmaint_qubes;;
       'query-sysmaint-autologin')
          trap "" EXIT
          printf "%s\n" "${sysmaint_autologin}"

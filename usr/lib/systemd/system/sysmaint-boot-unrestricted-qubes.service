@@ -1,0 +1,17 @@
+## Copyright (C) 2018 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+[Unit]
+Description=Enables unrestricted admin mode under Qubes OS
+Wants=sysmaint-boot.target
+After=sysmaint-boot.target
+ConditionPathExists=/usr/share/qubes/marker-vm
+ConditionKernelCommandLine=remove-sysmaint-qubes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-boot remove-sysmaint-qubes
+
+[Install]
+WantedBy=basic.target
