@@ -5,4 +5,3 @@
 /usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh /etc/profile.d/20_sysmaint_warn.sh
 /usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh /etc/zprofile.d/20-sysmaint-warn.zsh
 /usr/share/user-sysmaint-split/conf/X11_Xsession.d_15_sysmaint_no_desktop /etc/X11/Xsession.d/15_sysmaint_no_desktop
-/usr/share/user-sysmaint-split/conf/default_grub.d_50_persistent_mode_entry.cfg /etc/default/grub.d/50_persistent_mode_entry.cfg

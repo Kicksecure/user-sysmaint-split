@@ -3,11 +3,9 @@
 
 ## The whole point of the package.
 user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target basic.target [usr/lib/systemd/system/sysmaint-boot.service]
+user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target basic.target [usr/lib/systemd/system/sysmaint-boot-unrestricted-qubes.service]
 user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target final.target [usr/lib/systemd/system/sysmaint-boot-cleanup.service]
 
 ## The script is checking which interpreter is run, has code paths for 'sh' versus 'bash' / 'zsh'.
 user-sysmaint-split: bash-term-in-posix-shell '$BASH_VERSION' [usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh:13]
 user-sysmaint-split: bash-term-in-posix-shell 'echo -e' [usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh:14]
-
-## Configuration file. Does not need to be executable.
-user-sysmaint-split: executable-not-elf-or-script [usr/share/user-sysmaint-split/conf/default_grub.d_50_persistent_mode_entry.cfg]
