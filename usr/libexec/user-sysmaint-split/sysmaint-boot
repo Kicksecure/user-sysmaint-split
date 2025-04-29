@@ -251,7 +251,7 @@ handle_boot() {
    fi
 
    if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
-      printf "%s\n" "INFO: USER Session boot detected. (Not sysmaint boot mode.)" >&2
+      printf "%s\n" "INFO: USER Session boot detected." >&2
       printf "%s\n" "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
       lock_sysmaint_account
       restore_pre_sysmaint_autologin_config
