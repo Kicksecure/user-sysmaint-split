@@ -1,3 +1,34 @@
+commit 4eb8c59ab9ee37cc9f590b023af39dc7345354c3
+Merge: d81199c fb7ba60
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Apr 28 23:40:49 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/sysmaint-config'
+
+commit fb7ba604420ac7ec1051ff03fec9fcc0354b5d11
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Apr 28 19:38:41 2025 -0500
+
+    Disable sysmaint-related systemd units when uninstalled
+
+commit 0801ca50f8d7b64e3aa9ed06f60de7cad4dd35a3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Apr 28 18:49:47 2025 -0500
+
+    Remove obsolete config file, silence a Lintian gripe
+
+commit eab54b942ec92b86c96968b56672dff27ce1fc18
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Apr 27 16:53:24 2025 -0500
+
+    Add unrestricted admin mode for Qubes
+
+commit d81199c512ec4f14008e4d470608623408ead871
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Apr 27 20:20:20 2025 +0000
+
+    bumped changelog version
+
 commit 8b3732580187cad4b5c5ddf14b1f06a2d937a611
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Apr 27 13:05:37 2025 -0400
