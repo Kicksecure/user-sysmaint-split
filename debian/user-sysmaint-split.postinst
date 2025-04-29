@@ -56,6 +56,7 @@ case "$1" in
    configure)
       deb-systemd-helper enable sysmaint-boot.service
       deb-systemd-helper enable sysmaint-boot-cleanup.service
+      deb-systemd-helper enable sysmaint-boot-unrestricted-qubes.service
 
       ## Install policy-rc.d alternative
       update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/libexec/user-sysmaint-split/policy-rc.d 100
