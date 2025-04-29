@@ -15,6 +15,11 @@ if [ "$1" = 'remove' ]; then
    true "INFO: Fixing autologin if needed."
    /usr/libexec/user-sysmaint-split/sysmaint-boot cleanup-autologin
    true "INFO: Done fixing autologin if needed."
+   true "INFO: Disabling sysmaint-related systemd services."
+   deb-systemd-helper disable sysmaint-boot.service
+   deb-systemd-helper disable sysmaint-boot-cleanup.service
+   deb-systemd-helper disable sysmaint-boot-unrestricted-qubes.service
+   true "INFO: Done disabling sysmaint-related systemd services."
 fi
 
 true "INFO: debhelper beginning here."
