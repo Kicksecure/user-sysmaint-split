@@ -66,6 +66,9 @@ Wants=systemd-fsckd.socket
 Wants=sysfsutils.service
 Wants=swap-file-creator.service
 
+## KVM
+Wants=spice-vdagentd.service
+
 ## qrexec is required for many Qubes features, and also is mandatory to
 ## prevent the VM from being powered off after 60 seconds
 Wants=qubes-qrexec-agent.service
