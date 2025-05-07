@@ -1,3 +1,40 @@
+commit 5b5435e9fdd2ae71bdd18e9c74760a009f7af749
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 7 00:26:15 2025 -0400
+
+    refactoring
+
+commit 94cfc98f4f7136c1d85c7ed3de3c2c6ee798d6ec
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 7 00:25:13 2025 -0400
+
+    allow spice-vdagentd.service systemd unit in sysmaint session by default
+
+commit 5fe8b907316115df496756feb03c21b57807094f
+Merge: d1ff6b5 e5e8cbc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 7 00:04:58 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/mouse-integration'
+
+commit e5e8cbc88926223afdde78c136a82dd9d017b426
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue May 6 19:43:26 2025 -0500
+
+    Launch spice-vdagent in sysmaint mode to enable mouse integration under KVM
+
+commit acb78920f8827938137d23845034dfd07811e490
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu May 1 17:14:27 2025 -0500
+
+    Fix systemcheck under Whonix by enabling onion-grater in sysmaint sessions
+
+commit d1ff6b5c7171aa829924bb2c71319ab0ba0bca72
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Apr 29 08:17:42 2025 +0000
+
+    bumped changelog version
+
 commit 3332b07e36bac8a4b4e9a52c0bc1ffa544e8c6c7
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Apr 29 03:52:11 2025 -0400
