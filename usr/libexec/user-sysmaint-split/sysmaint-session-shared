@@ -55,6 +55,7 @@ start_user_background_services() {
      'msgdispatcher'
      'xscreensaver'
      'updatecheck'
+     'spice-vdagent'
   )
 
   # Run background processes. These services are usually run as a non-root user
@@ -63,6 +64,9 @@ start_user_background_services() {
   # few services as possible to keep attack surface low. Instead, just run the
   # services we need, if they exist.
   for (( i = 0; i < "${#user_service_list[@]}"; i++ )); do
-     gio launch "/etc/xdg/autostart/${user_service_list[i]}.desktop" &
+     service_desktop_file="/etc/xdg/autostart/${user_service_list[i]}.desktop"
+     if [ -f "${service_desktop_file}" ]; then
+        gio launch "${service_desktop_file}" &
+     fi
   done
 }

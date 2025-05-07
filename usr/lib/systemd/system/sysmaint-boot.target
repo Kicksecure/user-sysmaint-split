@@ -87,6 +87,7 @@ Wants=qubes-whonix-torified-updates-proxy-check.service
 
 ## Whonix
 Wants=whonix-firewall-restarter.service
+Wants=onion-grater.service
 
 Before=rads.service ssh.service
 After=basic.target network.target systemd-user-sessions.service
