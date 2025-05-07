@@ -61,10 +61,12 @@ Wants=panic-on-oops.service
 Wants=dist-skel-first-boot.service
 Wants=udisks2.service
 Wants=upower.service
-Wants=virtualbox-guest-utils.service
 Wants=systemd-fsckd.socket
 Wants=sysfsutils.service
 Wants=swap-file-creator.service
+
+## VirtualBox
+Wants=virtualbox-guest-utils.service
 
 ## KVM
 Wants=spice-vdagentd.service
