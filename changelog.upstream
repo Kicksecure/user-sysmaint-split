@@ -1,3 +1,22 @@
+commit e0a97fe9128eafe921d1f3ca06ebd7e2a1cb5e3e
+Merge: 3e711ad a4dfabb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri May 9 07:40:22 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/systray'
+
+commit a4dfabb6f8f28a4baee8706eb4a651c0f9a34c91
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu May 8 17:54:04 2025 -0500
+
+    Add system tray with nm-applet and sdwdate-gui running in it
+
+commit 3e711ad594618273f4756db73af0a91f6ce0e3d9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 7 05:04:07 2025 +0000
+
+    bumped changelog version
+
 commit 5b5435e9fdd2ae71bdd18e9c74760a009f7af749
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 7 00:26:15 2025 -0400
