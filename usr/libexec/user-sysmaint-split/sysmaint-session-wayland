@@ -19,8 +19,8 @@ for window_manager in "${window_manager_list[@]}"; do
 done
 
 sysmaint_app_list=(
-  '/usr/bin/sysmaint-panel'
-  '/usr/bin/x-terminal-emulator'
+   '/usr/bin/sysmaint-panel'
+   '/usr/bin/x-terminal-emulator'
 )
 selected_sysmaint_app=''
 for sysmaint_app in "${sysmaint_app_list[@]}"; do
@@ -30,6 +30,30 @@ for sysmaint_app in "${sysmaint_app_list[@]}"; do
    fi
 done
 
+system_tray_list=(
+   # No supported system tray at the moment
+)
+system_tray_arg_list=(
+   # No supported system tray at the moment
+)
+
+for (( idx = 0; idx < ${#system_tray_list[@]}; idx++ )); do
+   if [ -e "${system_tray_list[idx]}" ]; then
+      selected_system_tray="${system_tray_list[idx]}"
+      selected_system_tray_args="${system_tray_arg_list[idx]}"
+      break
+   fi
+done
+
+if [ -z "${selected_window_manager}" ]; then
+   printf "%s\n" "$0: ERROR: Could not find a supported window manager!" >&2
+   exit 1;
+fi
+if [ -z "${selected_sysmaint_app}" ]; then
+   printf "%s\n" "$0: ERROR: Could not find a supported sysmaint app!" >&2
+   exit 1;
+fi
+
 dbus-update-activation-environment --systemd --all
 
 write_sysmaint_account_specific_config_once
@@ -38,6 +62,10 @@ write_sysmaint_account_specific_config_once
 # Needed to prevent window ordering problems
 sleep 1;
 export WAYLAND_DISPLAY=wayland-0
+if [ -n "${selected_system_tray}" ]; then
+   # shellcheck disable=SC2086
+   "${selected_system_tray}" ${selected_system_tray_args} &
+fi
 "${selected_sysmaint_app}" &
 sysmaint_app_pid="$!"
 

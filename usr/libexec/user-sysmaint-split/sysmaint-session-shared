@@ -54,6 +54,8 @@ start_user_background_services() {
      'polkit-gnome-authentication-agent-1'
      'msgdispatcher'
      'xscreensaver'
+     'nm-applet'
+     'sdwdate-gui'
      'updatecheck'
      'spice-vdagent'
   )
