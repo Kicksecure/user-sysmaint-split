@@ -1,3 +1,46 @@
+commit 0d9969ba06d101c32dd5f5cba8961b4ec0081ce1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 18:27:11 2025 -0400
+
+    minor
+
+commit 84322ac4347e90bc1d6a25aac57514395771e73b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 18:19:08 2025 -0400
+
+    end-of-options
+
+commit 6a6837b2987bd249845b90cd3983e8ae3d8c342a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 16:48:54 2025 -0400
+
+    fix: do not error out if file /etc/X11/default-display-manager does not exist
+
+commit 172fa3fcb3590f4aecf4984fa291ec8d07098aef
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 16:39:57 2025 -0400
+
+    end-of-options
+
+commit 359af2823d39d006b1768082b42ffa72efec0feb
+Merge: 946415b 7418129
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 16:38:01 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/login-fix'
+
+commit 74181294da690a258892e4cbe71b7db8d91c7c9b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun May 11 15:01:36 2025 -0500
+
+    Fix sysmaint session getting picked as the default session for non-sysmaint accounts
+
+commit 946415b27139f19dca1615d1736ab11886c81dc6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 14:39:54 2025 +0000
+
+    bumped changelog version
+
 commit ad8859407b03504ef716caa2c229322645939a14
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun May 11 10:26:19 2025 -0400
