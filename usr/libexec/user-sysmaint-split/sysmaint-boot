@@ -40,7 +40,7 @@ trap exit_handler EXIT
 
 user_sysmaint_split_config_dir='/etc/user-sysmaint-split.conf.d'
 kernel_cmdline="$(cat -- /proc/cmdline)"
-default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")"
+default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")" || true
 sysmaint_session_wayland='no'
 sysmaint_autologin='no'
 lightdm_home_dir='/var/lib/lightdm'
