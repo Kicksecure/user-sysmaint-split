@@ -133,7 +133,7 @@ Wants=whonix-firewall.service
 Wants=onion-grater.service
 Wants=kloak.service
 
-## Qubes
+## Qubes-Whonix
 Wants=qubes-whonix-network.service
 Wants=qubes-whonix-qubes-updates-proxy-enable-maybe.service
 Wants=qubes-whonix-torified-updates-proxy-check.service
