@@ -43,7 +43,7 @@ if [ -f "${lightdm_state_backup_file}" ]; then
         exit_code=2
         break
       }
-      if [ ! -f "${lightdm_state_file}" ] || [ -z "$(cat "${lightdm_state_file}")" ]; then
+      if [ ! -f "${lightdm_state_file}" ] || [ -z "$(cat -- "${lightdm_state_file}")" ]; then
          safe-rm -rf -- "${lightdm_state_file}"
       fi
    done
@@ -56,7 +56,7 @@ if [ -f "${sddm_state_backup_file}" ]; then
          exit_code=3
          break
       }
-      if [ ! -f "${sddm_state_file}" ] || [ -z "$(cat "${sddm_state_file}")" ]; then
+      if [ ! -f "${sddm_state_file}" ] || [ -z "$(cat -- "${sddm_state_file}")" ]; then
          safe-rm -rf -- "${sddm_state_file}"
       fi
    done
