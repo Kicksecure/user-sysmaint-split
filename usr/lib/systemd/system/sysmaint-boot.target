@@ -72,9 +72,11 @@ Wants=orca-kill-at-shutdown.service
 Wants=legacy-dist.service
 Wants=mnt-shared-vbox.service
 Wants=mnt-shared-kvm.service
-Wants=libvirt-dist-install.service
-Wants=libvirt-dist-set-live-to-readonly.service
-Wants=libvirt-dist-set-persistent-mode-to-read-write.service
+
+## Users should not be using VMs in Whonix-Host while booted in sysmaint mode.
+#Wants=libvirt-dist-install.service
+#Wants=libvirt-dist-set-live-to-readonly.service
+#Wants=libvirt-dist-set-persistent-mode-to-read-write.service
 
 ## Do not.
 ## Not needed. Already has: 'WantedBy=sysmaint-boot.target'
@@ -85,11 +87,10 @@ Wants=libvirt-dist-set-persistent-mode-to-read-write.service
 ## Wants=sysmaint-boot-unrestricted-qubes.service
 ## Wants=check-unrestricted-admin.service
 
-## TODO: ?
-#sysinit-post.target
+## Enables remount-secure, possibly other system setup tasks.
+Wants=sysinit-post.target
 
 ## security-misc
-## TODO: Versus systemd presets?
 #Wants=hide-hardware-info.service
 #Wants=permission-hardener.service
 #Wants=harden-module-loading.service
@@ -121,7 +122,6 @@ Wants=qubes-sysinit.service
 
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
-Wants=qubes-whonix-torified-updates-proxy-check.service
 
 #Wants=tb-updater-dispvm.service
 #Wants=tb-updater-first-boot.service
@@ -138,7 +138,7 @@ Wants=qubes-whonix-network.service
 Wants=qubes-whonix-qubes-updates-proxy-enable-maybe.service
 Wants=qubes-whonix-torified-updates-proxy-check.service
 Wants=qubes-whonix-redirect-9050.socket
-Wants=qubes-whonix-remote-support.service
+#Wants=qubes-whonix-remote-support.service
 Wants=qubes-whonix-sysinit.service
 Wants=qubes-whonix-redirect-9050.service
 Wants=qubes-whonix-postinit.service
