@@ -46,6 +46,8 @@ Wants=sdwdate-start-anondate-set-file-watcher.service
 Wants=bootclockrandomization.service
 Wants=timesanitycheck.service
 Wants=privleapd.service
+## Do NOT:
+## Wants=leapctl@.service
 
 ## rads is needed to launch the sysmaint desktop session.
 Wants=rads.service
@@ -64,6 +66,40 @@ Wants=upower.service
 Wants=systemd-fsckd.socket
 Wants=sysfsutils.service
 Wants=swap-file-creator.service
+Wants=live-mode-apparmor.service
+Wants=livecheck-lsblk.service
+Wants=orca-kill-at-shutdown.service
+Wants=legacy-dist.service
+Wants=mnt-shared-vbox.service
+Wants=mnt-shared-kvm.service
+Wants=libvirt-dist-install.service
+Wants=libvirt-dist-set-live-to-readonly.service
+Wants=libvirt-dist-set-persistent-mode-to-read-write.service
+
+## Do not.
+## Not needed. Already has: 'WantedBy=sysmaint-boot.target'
+## Wants=repository-dist-initializer.service
+##
+## Do not.
+## Not needed. Already has: 'WantedBy=basic.target'
+## Wants=sysmaint-boot-unrestricted-qubes.service
+## Wants=check-unrestricted-admin.service
+
+## TODO: ?
+#sysinit-post.target
+
+## security-misc
+## TODO: Versus systemd presets?
+#Wants=hide-hardware-info.service
+#Wants=permission-hardener.service
+#Wants=harden-module-loading.service
+
+## security-misc
+Wants=remove-system-map.service
+
+## Useful during USER session.
+## Not so useful in SYSMAINT session as it breaks pkexec.
+#Wants=proc-hidepid.service
 
 ## VirtualBox
 Wants=virtualbox-guest-utils.service
@@ -91,8 +127,21 @@ Wants=qubes-whonix-torified-updates-proxy-check.service
 #Wants=tb-updater-first-boot.service
 
 ## Whonix
+Wants=anon-gw-anonymizer-config.service
 Wants=whonix-firewall-restarter.service
+Wants=whonix-firewall.service
 Wants=onion-grater.service
+Wants=kloak.service
+
+## Qubes
+Wants=qubes-whonix-network.service
+Wants=qubes-whonix-qubes-updates-proxy-enable-maybe.service
+Wants=qubes-whonix-torified-updates-proxy-check.service
+Wants=qubes-whonix-redirect-9050.socket
+Wants=qubes-whonix-remote-support.service
+Wants=qubes-whonix-sysinit.service
+Wants=qubes-whonix-redirect-9050.service
+Wants=qubes-whonix-postinit.service
 
 ## ram-wipe
 Wants=ram-wipe-kexec-prepare.service
