@@ -1,3 +1,21 @@
+commit ad8859407b03504ef716caa2c229322645939a14
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 10:26:19 2025 -0400
+
+    allow more services in sysmaint-boot.target
+
+commit 8b90ca78c08953d71e201fbf5e440864133c14a6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 09:57:57 2025 -0400
+
+    unbreak ram-wipe second pass in sysmaint mode
+
+commit 4fb825d0e318b357bea081cc7a07c1bf00b0d300
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri May 9 11:47:48 2025 +0000
+
+    bumped changelog version
+
 commit e0a97fe9128eafe921d1f3ca06ebd7e2a1cb5e3e
 Merge: 3e711ad a4dfabb
 Author: Patrick Schleizer <adrelanos@whonix.org>
