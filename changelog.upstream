@@ -1,3 +1,22 @@
+commit 395dceaab94e992c506c41feda0200dc79927f0c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 18:34:15 2025 -0400
+
+    comment
+
+commit 49d35e4056e53b5fe406484861c2cd4c66fdc376
+Merge: b1bbbf6 fc6b992
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 18:33:27 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/sysmaint-boot-wants'
+
+commit b1bbbf6d631266a6f8beb99ce5dd6fb05be8f065
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 22:29:51 2025 +0000
+
+    bumped changelog version
+
 commit 0d9969ba06d101c32dd5f5cba8961b4ec0081ce1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun May 11 18:27:11 2025 -0400
@@ -9,6 +28,12 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun May 11 18:19:08 2025 -0400
 
     end-of-options
+
+commit fc6b9928d66c3e8e8da9f5d599aa315295b2be36
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun May 11 16:35:37 2025 -0500
+
+    Review, update sysmaint-boot.target Wants= dependencies
 
 commit 6a6837b2987bd249845b90cd3983e8ae3d8c342a
 Author: Patrick Schleizer <adrelanos@whonix.org>
