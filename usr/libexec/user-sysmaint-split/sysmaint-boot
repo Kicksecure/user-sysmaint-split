@@ -43,9 +43,12 @@ kernel_cmdline="$(cat -- /proc/cmdline)"
 default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")"
 sysmaint_session_wayland='no'
 sysmaint_autologin='no'
+lightdm_home_dir='/var/lib/lightdm'
 lightdm_state_dir='/var/lib/lightdm/.cache/lightdm-gtk-greeter'
 lightdm_state_file="${lightdm_state_dir}/state"
 lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
+## no need for an sddm_home_dir variable as sddm_state_dir is also sddm's home
+## dir
 sddm_state_dir='/var/lib/sddm'
 sddm_state_file="${sddm_state_dir}/state.conf"
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
@@ -85,10 +88,16 @@ restore_pre_sysmaint_autologin_config() {
    if [ -f "${lightdm_state_backup_file}" ]; then
       safe-rm -rf -- "${lightdm_state_file}"
       mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
+      if [ ! -f "${lightdm_state_file}" ] || [ -z "$(cat "${lightdm_state_file}")" ]; then
+        safe-rm -rf -- "${lightdm_state_file}"
+      fi
    fi
    if [ -f "${sddm_state_backup_file}" ]; then
       safe-rm -rf -- "${sddm_state_file}"
       mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
+      if [ ! -f "${sddm_state_file}" ] || [ -z "$(cat "${sddm_state_file}")" ]; then
+        safe-rm -rf -- "${sddm_state_file}"
+      fi
    fi
 }
 
@@ -144,15 +153,25 @@ Session=sysmaint-session" \
    if [ -f "${lightdm_state_backup_file}" ]; then
       return
    fi
-   if [ -f "${lightdm_state_file}" ]; then
-      safe-rm -rf -- "${lightdm_state_backup_file}"
-      mv --verbose -- "${lightdm_state_file}" "${lightdm_state_backup_file}"
-   fi
 
    if ! [ -d "${lightdm_state_dir}" ]; then
       safe-rm -rf -- "${lightdm_state_dir}"
       mkdir --verbose --parents -- "${lightdm_state_dir}" || exit 1
+      if accountctl lightdm is-user && accountctl lightdm is-group; then
+        ## Not using 'chown -R' here since some of the files under
+        ## $lightdm_home_dir may legitimately need to be owned by root:root.
+        chown -- lightdm:lightdm "${lightdm_home_dir}"
+        chown -- lightdm:lightdm "${lightdm_home_dir}/.cache"
+        chown -- lightdm:lightdm "${lightdm_state_dir}"
+      fi
    fi
+
+   ## Ensure the state file exists; if it doesn't, we'll make an empty one
+   ## here. The undo logic will later detect that this file is empty and
+   ## delete it if necessary.
+   touch "${lightdm_state_file}"
+   safe-rm -rf -- "${lightdm_state_backup_file}"
+   mv --verbose -- "${lightdm_state_file}" "${lightdm_state_backup_file}"
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       printf "%s\n" "[greeter]
@@ -197,15 +216,21 @@ write_sddm_sysmaint_default_session_config() {
    if [ -f "${sddm_state_backup_file}" ]; then
       return
    fi
-   if [ -f "${sddm_state_file}" ]; then
-      safe-rm -rf -- "${sddm_state_backup_file}"
-      mv --verbose -- "${sddm_state_file}" "${sddm_state_backup_file}"
-   fi
 
    if ! [ -d "${sddm_state_dir}" ]; then
       safe-rm -rf -- "${sddm_state_dir}"
       mkdir --verbose --parents -- "${sddm_state_dir}" || exit 1
+      if accountctl sddm is-user && accountctl sddm is-group; then
+         chown -- sddm:sddm "${sddm_state_dir}"
+      fi
    fi
+
+   ## Ensure the state file exists; if it doesn't, we'll make an empty one
+   ## here. The undo logic will later detect that this file is empty and
+   ## delete it if necessary.
+   touch "${sddm_state_file}"
+   safe-rm -rf -- "${sddm_state_backup_file}"
+   mv --verbose -- "${sddm_state_file}" "${sddm_state_backup_file}"
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
       printf "%s\n" "[Last]
