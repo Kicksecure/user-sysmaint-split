@@ -169,7 +169,7 @@ Session=sysmaint-session" \
    ## Ensure the state file exists; if it doesn't, we'll make an empty one
    ## here. The undo logic will later detect that this file is empty and
    ## delete it if necessary.
-   touch "${lightdm_state_file}"
+   touch -- "${lightdm_state_file}"
    safe-rm -rf -- "${lightdm_state_backup_file}"
    mv --verbose -- "${lightdm_state_file}" "${lightdm_state_backup_file}"
 
@@ -228,7 +228,7 @@ write_sddm_sysmaint_default_session_config() {
    ## Ensure the state file exists; if it doesn't, we'll make an empty one
    ## here. The undo logic will later detect that this file is empty and
    ## delete it if necessary.
-   touch "${sddm_state_file}"
+   touch -- "${sddm_state_file}"
    safe-rm -rf -- "${sddm_state_backup_file}"
    mv --verbose -- "${sddm_state_file}" "${sddm_state_backup_file}"
 
