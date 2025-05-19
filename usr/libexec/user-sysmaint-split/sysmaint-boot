@@ -325,7 +325,7 @@ handle_boot() {
       return
    fi
 
-   printf "%s\n" "INFO: Qubes OS detected. Installing volatile qrexec overrides and QubesDB config for sysmaint account." >&2
+   printf "%s\n" "INFO: Qubes OS detected. Installing volatile qrexec blacklist." >&2
 
    while read -r rpc_config_file; do
       rpc_block_path="/run/qubes-rpc/${rpc_config_file}"
@@ -335,25 +335,6 @@ printf '%s\n' '${rpc_config_file} qrexec action is prohibited in PERSISTENT Mode
       printf "%s\n" "${rpc_block_template}" | sponge -- "${rpc_block_path}"
       chmod +x -- "${rpc_block_path}"
    done < /usr/share/user-sysmaint-split/qubes-rpc-blocks
-
-   while read -r rpc_config_file; do
-      rpc_config_path="/run/qubes/rpc-config/${rpc_config_file}"
-      orig_rpc_config_path="/usr/local/etc/qubes/rpc-config/${rpc_config_file}"
-      if [ ! -f "${orig_rpc_config_path}" ]; then
-         orig_rpc_config_path="/etc/qubes/rpc-config/${rpc_config_file}"
-         if [ ! -f "${orig_rpc_config_path}" ]; then
-            orig_rpc_config_path=""
-         fi
-      fi
-
-      if [ -n "${orig_rpc_config_path}" ]; then
-         cp --verbose -- "${orig_rpc_config_path}" "${rpc_config_path}"
-         sed -i '/^force-user=/d' "${rpc_config_path}"
-      fi
-      printf "%s\n" "force-user='sysmaint'" | sponge -a -- "${rpc_config_path}"
-   done < /usr/share/user-sysmaint-split/qubes-rpc-overrides
-
-   qubesdb-write /default-user sysmaint
 }
 
 parse_user_sysmaint_split_config() {
