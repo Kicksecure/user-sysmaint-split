@@ -1,3 +1,22 @@
+commit a66f6929af582b985323f9069b56c3aa0937a72e
+Merge: 7a77e71 6af824a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue May 20 07:33:36 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/default-user'
+
+commit 6af824a21f8b75226ecf7c5e2583bd4b622bffd2
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun May 18 21:12:13 2025 -0500
+
+    Don't override qrexec default user anymore
+
+commit 7a77e713f795ee57fbd235d11d03bc1bea99dfdb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun May 11 22:35:42 2025 +0000
+
+    bumped changelog version
+
 commit 395dceaab94e992c506c41feda0200dc79927f0c
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun May 11 18:34:15 2025 -0400
