@@ -4,7 +4,7 @@
 ## See the file COPYING for copying conditions.
 
 ## 'source' is a bashism.
-. /usr/libexec/helper-scripts/get_colors.sh >/dev/null 2>/dev/null
+. /usr/libexec/helper-scripts/get_colors.sh || true >/dev/null 2>/dev/null
 
 if [ "$(id -un 2>&1)" = 'sysmaint' ]; then
    msg="[${green}INFO${nocolor}] You are using the sysmaint account. This account has sudoers capabilities. Proceed with caution. See also: https://www.kicksecure.com/wiki/Sysmaint"
