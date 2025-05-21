@@ -1,3 +1,47 @@
+commit 98bc72b45ccbb168bcf5d5e45466b2e5fef9e901
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 09:53:24 2025 -0400
+
+    improve /etc/profile.d scripts error handling
+
+commit d2f2d819d8e834f590644b4e742be6ab295b1c64
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 09:21:44 2025 -0400
+
+    improve /etc/profile.d scripts error handling
+
+commit a30ababb14350076963b2bb8059a2ff1fab58956
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 09:10:12 2025 -0400
+
+    fix: show /etc/profile.d sysmaint account notification only if tty has been detected
+    
+    This is to avoid confusing non-login scripts with terminal output.
+
+commit 70147191f4e0cc0cd4a0c7de6cf8ea8bd8af495c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 09:09:09 2025 -0400
+
+    improve /etc/profile.d scripts error handling
+
+commit 684d9156e8fc63e47126cd31a3544cf9a63c4275
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 08:52:31 2025 -0400
+
+    improve /etc/profile.d scripts error handling
+
+commit 6097e82a2b5f7e24a09bc1f38f5723b207d5873a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 08:41:48 2025 -0400
+
+    fix
+
+commit 43af04e1c42abccea16dcf227b0c948bbf255958
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue May 20 11:41:12 2025 +0000
+
+    bumped changelog version
+
 commit a66f6929af582b985323f9069b56c3aa0937a72e
 Merge: 7a77e71 6af824a
 Author: Patrick Schleizer <adrelanos@whonix.org>
