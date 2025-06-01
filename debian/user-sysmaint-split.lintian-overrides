@@ -1,0 +1,9 @@
+## We need to invoke systemctl directly to synchronize unit state for units
+## that may or may not need to run in sysmaint sessions.
+user-sysmaint-split: maintainer-script-calls-systemctl
+
+## Yes, we are using unusual WantedBy targets here, intentionally.
+user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target
+
+## We do shell detection, so this is safe.
+user-sysmaint-split: bash-term-in-posix-shell *usr/share/user-sysmaint-split/conf/profile.d_20_sysmaint_warn.sh*

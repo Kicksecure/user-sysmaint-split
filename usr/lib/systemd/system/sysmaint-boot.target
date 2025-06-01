@@ -30,14 +30,6 @@ Wants=systemd-networkd.service
 Wants=tor.service
 Wants=tor@default.service
 
-## VPN
-Wants=openvpn.service
-Wants=wg-quick@wg0.service
-Wants=mullvad-daemon.service
-
-## SSH is needed for server administration.
-Wants=ssh.service
-
 ## sdwdate and privleapd are required for systemcheck to work.
 Wants=sdwdate.service
 Wants=sdwdate-gui-shutdown-notify.service
@@ -146,5 +138,5 @@ Wants=qubes-whonix-postinit.service
 ## ram-wipe
 Wants=ram-wipe-kexec-prepare.service
 
-Before=rads.service ssh.service
+Before=rads.service
 After=basic.target network.target systemd-user-sessions.service
