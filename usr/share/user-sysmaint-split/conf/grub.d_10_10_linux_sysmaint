@@ -10,6 +10,8 @@ true "user-sysmaint-split $0: START"
 set -e
 set -o allexport
 
+make_boot_entry='true'
+
 if [ -n "${GRUB_DEVICE_UUID}" ]; then
   GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
   unset GRUB_DEVICE_UUID
