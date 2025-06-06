@@ -88,14 +88,14 @@ restore_pre_sysmaint_autologin_config() {
    if [ -f "${lightdm_state_backup_file}" ]; then
       safe-rm -rf -- "${lightdm_state_file}"
       mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
-      if [ ! -f "${lightdm_state_file}" ] || [ -z "$(cat -- "${lightdm_state_file}")" ]; then
+      if [ ! -f "${lightdm_state_file}" ] || ! [ -s "${lightdm_state_file}" ]; then
         safe-rm -rf -- "${lightdm_state_file}"
       fi
    fi
    if [ -f "${sddm_state_backup_file}" ]; then
       safe-rm -rf -- "${sddm_state_file}"
       mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
-      if [ ! -f "${sddm_state_file}" ] || [ -z "$(cat -- "${sddm_state_file}")" ]; then
+      if [ ! -f "${sddm_state_file}" ] || ! [ -s "${sddm_state_file}" ]; then
         safe-rm -rf -- "${sddm_state_file}"
       fi
    fi
