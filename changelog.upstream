@@ -1,3 +1,40 @@
+commit 90575374de6d8295f0843b1104baa3acc17b7284
+Merge: f5d9ffc 2055c2e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jun 6 15:09:57 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/boot-menu'
+
+commit 2055c2ee4460a9e4fd3e8fbc1af6ece49d0f24ee
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Jun 5 17:54:01 2025 -0500
+
+    Make compatible with new boot menu scripts
+
+commit 2efc9283739a6094cd832be9447ad484d4b98dda
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jun 3 18:27:40 2025 -0500
+
+    Check for empty state files without using cat and a subshell
+
+commit 23d5840e1bcfbb7fc0581fc828b397468eff7807
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jun 1 20:03:42 2025 -0500
+
+    Add livecheck user service
+
+commit ccbd9b9a28ebc7676360cf02889a89aac7ce30e7
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jun 1 00:38:54 2025 -0500
+
+    Add optional systemd unit mechanism, add ufw and firewalld config
+
+commit f5d9ffc8b9cc10a90c59dba2ab70cb141cfab419
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 14:35:06 2025 +0000
+
+    bumped changelog version
+
 commit fcc0bf41a453aa075200b2f50cff5eafcab3aaaa
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 21 10:34:51 2025 -0400
