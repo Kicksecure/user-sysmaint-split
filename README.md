@@ -1,10 +1,10 @@
 # Role-Based Boot Modes - user versus sysmaint #
 
-Adds a GRUB boot menu entry "PERSISTENT mode SYSMAINT
-(For system maintenance tasks.)"
+Adds a GRUB boot menu entry:
+"PERSISTENT Mode | SYSMAINT Session | system maintenance tasks"
 
-Makes Privilege Escalation Tools (such as sudo, su,
-pkexec) inaccessible to limited user accounts such as user "user".
+Makes Privilege Escalation Tools (such as 'sudo', 'su', 'pkexec')
+inaccessible to limited user accounts such as account "user".
 
 Adds kernel parameter "boot-role=sysmaint" and
 "systemd.unit=sysmaint-boot.target".
