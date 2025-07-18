@@ -115,6 +115,14 @@ Wants=qubes-sysinit.service
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
 
+## qubes-mount-dirs.service is required to format the user disk on QubesOS
+## StandaloneVMs.
+Wants=qubes-mount-dirs.service
+
+## qubes-mist-post.service is required to prevent apt from trying to use an
+## updates proxy if a StandaloneVM is initially booted in sysmaint mode.
+Wants=qubes-misc-post.service
+
 #Wants=tb-updater-dispvm.service
 #Wants=tb-updater-first-boot.service
 
