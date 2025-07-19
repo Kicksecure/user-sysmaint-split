@@ -1,3 +1,35 @@
+commit 2fd4d7cbb97cdabc02615915977193d21fd327a7
+Merge: 461f5e6 dfb7f12
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 19 02:25:48 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/qubes-standalone'
+
+commit 461f5e6f8a665e91dfdea16ed036e98c2d95f9f4
+Merge: 008e558 ef1e173
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 19 02:25:20 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/systray'
+
+commit dfb7f12bf6e75f6924645c9da3f8515bbcd0516b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Jul 18 16:55:53 2025 -0500
+
+    Fix sysmaint mode compatibility with Qubes StandaloneVMs
+
+commit ef1e1734c44165f0f9a4a3348a5bc7a39d578522
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jun 30 18:31:55 2025 -0500
+
+    Add xfce4-power-manager to user service list
+
+commit 008e558a2da973cd1b760521f561e74104984306
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jun 14 12:01:47 2025 +0000
+
+    bumped changelog version
+
 commit 97d302227187d2744a3727a638f375c6b0b3f404
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Jun 14 07:59:27 2025 -0400
