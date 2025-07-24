@@ -1,3 +1,22 @@
+commit ed4c267ebdb2444b14e0159dbc477f094efa971c
+Merge: 011fd49 c86bf23
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jul 24 02:17:40 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/systemcheck-warn-fix'
+
+commit c86bf23e79f77c432fb23859b1832d605606b3cf
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Jul 23 19:48:46 2025 -0500
+
+    Indentation fix, silence stderr from accountctl when necessary
+
+commit 011fd49d84f692836d0557a1cab834bdbd88782a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 19 09:48:17 2025 +0000
+
+    bumped changelog version
+
 commit 2fd4d7cbb97cdabc02615915977193d21fd327a7
 Merge: 461f5e6 dfb7f12
 Author: Patrick Schleizer <adrelanos@whonix.org>
