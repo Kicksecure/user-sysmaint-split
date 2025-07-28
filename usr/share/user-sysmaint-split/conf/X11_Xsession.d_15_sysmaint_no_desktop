@@ -4,7 +4,7 @@
 ## See the file COPYING for copying conditions.
 
 if [ "$(id -un)" = 'sysmaint' ] \
-   && ! echo 'sysmaint-session' | grep -q '^sysmaint-session' \
+   && ! printf '%s\n' 'sysmaint-session' | grep -- '^sysmaint-session' >/dev/null 2>/dev/null \
    && [ ! -f '/usr/share/qubes/marker-vm' ]; then
    TERMINAL_WRAPPER_NO_COMMAND_ECHO='true'
    export TERMINAL_WRAPPER_NO_COMMAND_ECHO
@@ -15,6 +15,6 @@ if [ "$(id -un)" = 'sysmaint' ] \
    /usr/libexec/helper-scripts/terminal-wrapper 'echo' '-e' \
       'You are attempting to log into the sysmaint user without using' \
       '\nthe sysmaint graphical session. This is potentially dangerous and' \
-      '\nhas been disabled for safety.';
-   exit 1;
+      '\nhas been disabled for safety.'
+   exit 1
 fi

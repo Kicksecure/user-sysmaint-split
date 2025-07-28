@@ -46,6 +46,37 @@ enable_sysmaint_autologin() {
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
 
+configure_sysmaint_services() {
+   if [ ! -x "$(command -v systemctl)" ]; then
+      true "INFO: systemctl command unavailable."
+      return 0
+   fi
+
+   ## The following services should be enabled in sysmaint sessions if and
+   ## only if the user has enabled them for use in user sessions as well. If
+   ## the services are disabled, they shouldn't be started in sysmaint
+   ## sessions.
+   local service_list
+   service_list=(
+     'firewalld.service'
+     'mullvad-daemon.service'
+     'openvpn.service'
+     'ssh.service'
+     'ufw.service'
+     'wg-quick@wg0.service'
+   )
+
+   local service_item
+   for service_item in "${service_list[@]}"; do
+      if systemctl is-enabled "${service_item}" >/dev/null 2>/dev/null; then
+         ## The service is enabled, but may have had `sysmaint-boot.target`
+         ## added to its WantedBy configuration. Re-enable it to synchronize
+         ## its state.
+         systemctl enable "${service_item}" || true
+      fi
+   done
+}
+
 true "INFO: debhelper beginning here."
 
 #DEBHELPER#
@@ -67,6 +98,9 @@ case "$1" in
 
       ## Install default autologin configuration, but only once
       enable_sysmaint_autologin
+
+      ## Configure services
+      configure_sysmaint_services
       ;;
    *)
       ;;

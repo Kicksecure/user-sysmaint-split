@@ -58,6 +58,8 @@ start_user_background_services() {
      'sdwdate-gui'
      'updatecheck'
      'spice-vdagent'
+     'livecheck'
+     'xfce4-power-manager'
   )
 
   # Run background processes. These services are usually run as a non-root user

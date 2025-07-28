@@ -30,14 +30,6 @@ Wants=systemd-networkd.service
 Wants=tor.service
 Wants=tor@default.service
 
-## VPN
-Wants=openvpn.service
-Wants=wg-quick@wg0.service
-Wants=mullvad-daemon.service
-
-## SSH is needed for server administration.
-Wants=ssh.service
-
 ## sdwdate and privleapd are required for systemcheck to work.
 Wants=sdwdate.service
 Wants=sdwdate-gui-shutdown-notify.service
@@ -72,9 +64,11 @@ Wants=orca-kill-at-shutdown.service
 Wants=legacy-dist.service
 Wants=mnt-shared-vbox.service
 Wants=mnt-shared-kvm.service
-Wants=libvirt-dist-install.service
-Wants=libvirt-dist-set-live-to-readonly.service
-Wants=libvirt-dist-set-persistent-mode-to-read-write.service
+
+## Users should not be using VMs in Whonix-Host while booted in sysmaint mode.
+#Wants=libvirt-dist-install.service
+#Wants=libvirt-dist-set-live-to-readonly.service
+#Wants=libvirt-dist-set-persistent-mode-to-read-write.service
 
 ## Do not.
 ## Not needed. Already has: 'WantedBy=sysmaint-boot.target'
@@ -85,11 +79,10 @@ Wants=libvirt-dist-set-persistent-mode-to-read-write.service
 ## Wants=sysmaint-boot-unrestricted-qubes.service
 ## Wants=check-unrestricted-admin.service
 
-## TODO: ?
-#sysinit-post.target
+## Enables remount-secure, possibly other system setup tasks.
+Wants=sysinit-post.target
 
 ## security-misc
-## TODO: Versus systemd presets?
 #Wants=hide-hardware-info.service
 #Wants=permission-hardener.service
 #Wants=harden-module-loading.service
@@ -121,7 +114,14 @@ Wants=qubes-sysinit.service
 
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
-Wants=qubes-whonix-torified-updates-proxy-check.service
+
+## qubes-mount-dirs.service is required to format the user disk on QubesOS
+## StandaloneVMs.
+Wants=qubes-mount-dirs.service
+
+## qubes-mist-post.service is required to prevent apt from trying to use an
+## updates proxy if a StandaloneVM is initially booted in sysmaint mode.
+Wants=qubes-misc-post.service
 
 #Wants=tb-updater-dispvm.service
 #Wants=tb-updater-first-boot.service
@@ -133,12 +133,12 @@ Wants=whonix-firewall.service
 Wants=onion-grater.service
 Wants=kloak.service
 
-## Qubes
+## Qubes-Whonix
 Wants=qubes-whonix-network.service
 Wants=qubes-whonix-qubes-updates-proxy-enable-maybe.service
 Wants=qubes-whonix-torified-updates-proxy-check.service
 Wants=qubes-whonix-redirect-9050.socket
-Wants=qubes-whonix-remote-support.service
+#Wants=qubes-whonix-remote-support.service
 Wants=qubes-whonix-sysinit.service
 Wants=qubes-whonix-redirect-9050.service
 Wants=qubes-whonix-postinit.service
@@ -149,5 +149,5 @@ Wants=ram-wipe-kexec-prepare.service
 ## Emergency shutdown
 Wants=force-poweroff-on-boot-media-removal.service
 
-Before=rads.service ssh.service
+Before=rads.service
 After=basic.target network.target systemd-user-sessions.service

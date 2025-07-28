@@ -19,6 +19,9 @@ if [ "$1" = 'remove' ]; then
    deb-systemd-helper disable sysmaint-boot.service
    deb-systemd-helper disable sysmaint-boot-cleanup.service
    deb-systemd-helper disable sysmaint-boot-unrestricted-qubes.service
+   deb-systemd-helper purge sysmaint-boot.service
+   deb-systemd-helper purge sysmaint-boot-cleanup.service
+   deb-systemd-helper purge sysmaint-boot-unrestricted-qubes.service
    true "INFO: Done disabling sysmaint-related systemd services."
 fi
 

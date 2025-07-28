@@ -35,12 +35,31 @@ safe-rm -f -- "${old_sysmaint_conf_file_list[@]}"
 echo "INFO: Restoring display manager state file backups if necessary because system is shutting down." >&2
 if [ -f "${lightdm_state_backup_file}" ]; then
    safe-rm -rf --verbose -- "${lightdm_state_file}"
-   ## Do not error out and exit in case this fails. Set non-zero exit code but continue execution.
-   mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}" || exit_code=2
+   ## Dummy "loop" to allow skipping code if a command errors out.
+   # shellcheck disable=SC2043
+   for _ in 1; do
+      ## Do not error out and exit in case this fails. Set non-zero exit code but continue execution.
+      mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}" || {
+        exit_code=2
+        break
+      }
+      if [ ! -f "${lightdm_state_file}" ] || ! [ -s "${lightdm_state_file}" ]; then
+         safe-rm -rf -- "${lightdm_state_file}"
+      fi
+   done
 fi
 if [ -f "${sddm_state_backup_file}" ]; then
    safe-rm -rf --verbose -- "${sddm_state_file}"
-   mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}" || exit_code=3
+   # shellcheck disable=SC2043
+   for _ in 1; do
+      mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}" || {
+         exit_code=3
+         break
+      }
+      if [ ! -f "${sddm_state_file}" ] || ! [ -s "${sddm_state_file}" ]; then
+         safe-rm -rf -- "${sddm_state_file}"
+      fi
+   done
 fi
 for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
    xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
