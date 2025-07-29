@@ -147,7 +147,7 @@ Wants=qubes-whonix-postinit.service
 Wants=ram-wipe-kexec-prepare.service
 
 ## Emergency shutdown
-Wants=force-poweroff-on-boot-media-removal.service
+Wants=emerg-shutdown.service
 
 Before=rads.service
 After=basic.target network.target systemd-user-sessions.service
