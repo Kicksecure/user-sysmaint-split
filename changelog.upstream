@@ -1,3 +1,35 @@
+commit 76b920677f031b9a3479f33ca5cf097488ea5c2b
+Merge: d0fa61c a970b2c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 3 07:31:47 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/emerg-shutdown'
+
+commit a970b2cc6ccaa3fb55db4cf54735d801866ca364
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jul 29 21:11:50 2025 -0500
+
+    If ensure-shutdown is enabled, enable it for sysmaint mode also
+
+commit d420efd7f5f3ea6acb72c0af76f63038f1d92ab8
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jul 28 20:47:17 2025 -0500
+
+    Rename emerg-shutdown service
+
+commit 24552695dbe4ee008ab15966c5c21373c564249d
+Merge: 86bdcf4 d0fa61c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jul 28 18:46:38 2025 -0500
+
+    Merge branch 'master' into arraybolt3/emerg-shutdown
+
+commit d0fa61cb7e511b8047c7d3174b877da62e3263d0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jul 24 06:46:18 2025 +0000
+
+    bumped changelog version
+
 commit ed4c267ebdb2444b14e0159dbc477f094efa971c
 Merge: 011fd49 c86bf23
 Author: Patrick Schleizer <adrelanos@whonix.org>
@@ -235,6 +267,13 @@ Date:   Sun May 11 15:01:36 2025 -0500
 
     Fix sysmaint session getting picked as the default session for non-sysmaint accounts
 
+commit 86bdcf46f33fb7632c9e6d1f23f131735f443361
+Merge: 0219a10 946415b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun May 11 12:55:58 2025 -0500
+
+    Merge branch 'master' into arraybolt3/emerg-shutdown
+
 commit 946415b27139f19dca1615d1736ab11886c81dc6
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun May 11 14:39:54 2025 +0000
@@ -252,6 +291,12 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun May 11 09:57:57 2025 -0400
 
     unbreak ram-wipe second pass in sysmaint mode
+
+commit 0219a1010ea3903ae88f5e8744c0f3b5f0dc7a9a
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri May 9 18:49:46 2025 -0500
+
+    Enable emergency shutdown in sysmaint mode
 
 commit 4fb825d0e318b357bea081cc7a07c1bf00b0d300
 Author: Patrick Schleizer <adrelanos@whonix.org>
