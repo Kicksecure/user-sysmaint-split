@@ -58,6 +58,8 @@ configure_sysmaint_services() {
    ## sessions.
    local service_list
    service_list=(
+     'ensure-shutdown.service'
+     'ensure-shutdown-trigger.service'
      'firewalld.service'
      'mullvad-daemon.service'
      'openvpn.service'
