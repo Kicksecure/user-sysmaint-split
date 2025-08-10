@@ -146,8 +146,5 @@ Wants=qubes-whonix-postinit.service
 ## ram-wipe
 Wants=ram-wipe-kexec-prepare.service
 
-## Emergency shutdown
-Wants=emerg-shutdown.service
-
 Before=rads.service
 After=basic.target network.target systemd-user-sessions.service
