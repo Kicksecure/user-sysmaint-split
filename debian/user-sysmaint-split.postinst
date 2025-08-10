@@ -60,6 +60,7 @@ configure_sysmaint_services() {
    service_list=(
      'ensure-shutdown.service'
      'ensure-shutdown-trigger.service'
+     'emerg-shutdown.service'
      'firewalld.service'
      'mullvad-daemon.service'
      'openvpn.service'
