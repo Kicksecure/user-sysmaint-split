@@ -1,3 +1,22 @@
+commit 15016f67674016566819be7b26e09e9e6e3edb12
+Merge: b2d3000 75ae2f5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 10 02:26:59 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/emerg-shutdown'
+
+commit 75ae2f5ff717b127c71a57af6ec157cd7831b6ab
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Aug 9 23:34:02 2025 -0500
+
+    Make emerg-shutdown in sysmaint sessions optional
+
+commit b2d3000f3b0ebc54c1aadaf60c45f4b7199d16a6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Aug 4 09:27:36 2025 +0000
+
+    bumped changelog version
+
 commit b259295c7767e21a22265c525ca67a648d003ed3
 Merge: e5b587c 37f49e6
 Author: Patrick Schleizer <adrelanos@whonix.org>
