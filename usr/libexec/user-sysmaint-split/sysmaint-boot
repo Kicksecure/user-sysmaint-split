@@ -40,7 +40,12 @@ trap exit_handler EXIT
 
 user_sysmaint_split_config_dir='/etc/user-sysmaint-split.conf.d'
 kernel_cmdline="$(cat -- /proc/cmdline)"
-default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")" || true
+## greetd is the only supported Wayland greeter, use it if it exists
+if [ -f /usr/lib/systemd/system/greetd.service ]; then
+   default_display_manager='greetd'
+else
+   default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")" || true
+fi
 sysmaint_session_wayland='no'
 sysmaint_autologin='no'
 lightdm_home_dir='/var/lib/lightdm'
@@ -52,6 +57,10 @@ lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
 sddm_state_dir='/var/lib/sddm'
 sddm_state_file="${sddm_state_dir}/state.conf"
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
+greetd_conf_dir='/etc/greetd/config.toml.d'
+greetd_master_conf_file='/etc/greetd/config.toml'
+wlgreet_conf_dir='/etc/greetd/wlgreet.toml.d'
+wlgreet_master_conf_file='/etc/greetd/wlgreet.toml'
 xscreensaver_config_file_list=(
    '/etc/X11/app-defaults/XScreenSaver'
    '/usr/lib/X11/app-defaults/XScreenSaver'
@@ -62,6 +71,8 @@ xscreensaver_backup_config_file_list=(
 )
 sysmaint_lightdm_conf_file='/etc/lightdm/lightdm.conf.d/zzz-sysmaint-boot.conf'
 sysmaint_sddm_conf_file='/etc/sddm.conf.d/zzz-sysmaint-boot.conf'
+sysmaint_greetd_conf_file='/etc/greetd/config.toml.d/50_sysmaint-boot.conf'
+sysmaint_wlgreet_conf_file='/etc/greetd/wlgreet.toml.d/50_sysmaint-boot.conf'
 old_sysmaint_conf_file_list=(
   '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
@@ -85,6 +96,8 @@ restore_pre_sysmaint_autologin_config() {
    safe-rm -f -- "${sysmaint_lightdm_conf_file}"
    safe-rm -f -- "${sysmaint_sddm_conf_file}"
    safe-rm -f -- "${old_sysmaint_conf_file_list[@]}"
+   safe-rm -f -- "${sysmaint_greetd_conf_file}"
+   safe-rm -f -- "${sysmaint_wlgreet_conf_file}"
    if [ -f "${lightdm_state_backup_file}" ]; then
       safe-rm -rf -- "${lightdm_state_file}"
       mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
@@ -99,6 +112,7 @@ restore_pre_sysmaint_autologin_config() {
         safe-rm -rf -- "${sddm_state_file}"
       fi
    fi
+   rebuild_greetd_config
 }
 
 restore_pre_sysmaint_xscreensaver_config() {
@@ -248,6 +262,39 @@ Session=/usr/share/xsessions/sysmaint-session.desktop" \
    printf "%s\n" "INFO: Created file: '/var/lib/sddm/state.conf'" >&2
 }
 
+write_greetd_enable_autologin_config() {
+   printf "%s\n" "[initial_session]
+command = \"/usr/libexec/user-sysmaint-split/sysmaint-session-wayland\"
+user = \"sysmaint\"" \
+      | sponge -- "${sysmaint_greetd_conf_file}"
+}
+
+write_greetd_disable_autologin_config() {
+   printf "%s\n" "[initial_session]
+command =
+user =" \
+      | sponge -- "${sysmaint_greetd_conf_file}"
+}
+
+write_greetd_sysmaint_default_session_config() {
+   ## Thanks in part to wlgreet's simplicity, we don't have to fight with
+   ## backup state files here.
+   printf "%s\n" "command = \"/usr/libexec/desktop-config-dist/start-lxqt-session\"" \
+      | sponge -- "${sysmaint_wlgreet_conf_file}"
+}
+
+rebuild_greetd_config() {
+   ## greetd doesn't actually support config drop directories, we use
+   ## build-config-file from helper-scripts to "fake" support. Thus we need
+   ## to rebuild the real configuration files once this is done.
+   if [ -d "${greetd_conf_dir}" ]; then
+      build-config-file "${greetd_conf_dir}" "${greetd_master_conf_file}"
+   fi
+   if [ -d "${wlgreet_conf_dir}" ]; then
+      build-config-file "${wlgreet_conf_dir}" "${wlgreet_master_conf_file}"
+   fi
+}
+
 write_xscreensaver_derived_config() {
    local i
 
@@ -318,6 +365,22 @@ handle_boot() {
       printf "%s\n" "INFO: Created file: '${sysmaint_sddm_conf_file}'" >&2
 
       write_sddm_sysmaint_default_session_config
+   elif [ "${default_display_manager}" = 'greetd' ]; then
+      mkdir --verbose --parents -- '/etc/greetd/config.toml.d'
+      mkdir --verbose --parents -- '/etc/greetd/wlgreet.toml.d'
+
+      if [ "${sysmaint_autologin}" = "yes" ]; then
+         write_greetd_enable_autologin_config
+      else
+         ## Prevent autologin in this instance, or the normal user account will
+         ## end up logged in
+         write_greetd_disable_autologin_config
+      fi
+      printf "%s\n" "INFO: Created file: '${sysmaint_greetd_conf_file}'" >&2
+
+      write_greetd_sysmaint_default_session_config
+
+      rebuild_greetd_config
    fi
 
    write_xscreensaver_derived_config

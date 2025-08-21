@@ -3,7 +3,7 @@
 ## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-terminal_tint_config() {
+terminal_tint_config_xfce() {
   local terminal_config_dir
   local terminal_config_file
   local color_background_str
@@ -32,6 +32,35 @@ ${color_background_str}"
   printf "%s\n" "INFO: Created file: '${terminal_config_file}'" >&2
 }
 
+terminal_tint_config_lxqt() {
+  local terminal_config_dir
+  local terminal_config_file
+  local color_background_str
+  terminal_config_dir='/home/sysmaint/.config/qterminal.org'
+  terminal_config_file="${terminal_config_dir}/qterminal.ini"
+  color_background_str='colorScheme=KicksecureRoot'
+
+  mkdir --verbose --parents -- "${terminal_config_dir}"
+  touch -- "${terminal_config_file}"
+  local terminal_config_file_contents
+  terminal_config_file_contents="$(sed '/^colorScheme=/d' "${terminal_config_file}")"
+  # shellcheck disable=SC2076
+  if [[ "${terminal_config_file_contents}" =~ '[General]' ]]; then
+    ## The colorScheme key must be under the [General] header in the
+    ## file, but we don't know where that header is. To work around this, we
+    ## find the header, then replace it with itself, a newline, and the
+    ## ColorBackground config line.
+    terminal_config_file_contents="${terminal_config_file_contents/'[General]'/'[General]'$'\n'"${color_background_str}"}"
+  else
+    ## If we don't have a [General] header at all yet, make one.
+    terminal_config_file_contents+="[General]
+${color_background_str}"
+  fi
+
+  sponge -- "${terminal_config_file}" <<< "${terminal_config_file_contents}"
+  printf "%s\n" "INFO: Created file: '${terminal_config_file}'" >&2
+}
+
 write_sysmaint_account_specific_config_once() {
   account_specific_config_marker_dir='/home/sysmaint/.sysmaint-boot/account-specific-config-markers'
   mkdir --verbose --parents -- "${account_specific_config_marker_dir}"
@@ -41,7 +70,9 @@ write_sysmaint_account_specific_config_once() {
   ## of the specified functions, not calling the functions immediately.
   # shellcheck disable=SC2043
   # shellcheck disable=SC2041
-  for config_write_fn in 'terminal_tint_config'; do
+  for config_write_fn in \
+    'terminal_tint_config_xfce' \
+    'terminal_tint_config_lxqt'; do
     if [ ! -e "${account_specific_config_marker_dir}/${config_write_fn}" ]; then
       "${config_write_fn}"
       touch -- "${account_specific_config_marker_dir}/${config_write_fn}"
@@ -51,15 +82,15 @@ write_sysmaint_account_specific_config_once() {
 
 start_user_background_services() {
   user_service_list=(
-     'polkit-mate-authentication-agent-1'
+     'lxqt-policykit-agent'
      'msgdispatcher'
      'xscreensaver'
      'nm-applet'
-     'sdwdate-gui'
+     'sdwdate-gui-client'
+     'sdwdate-gui-server'
      'updatecheck'
      'spice-vdagent'
      'livecheck'
-     'xfce4-power-manager'
   )
 
   # Run background processes. These services are usually run as a non-root user
