@@ -12,13 +12,6 @@ set -o allexport
 
 make_boot_entry='true'
 
-if /usr/libexec/helper-scripts/package_installed_check.bsh initramfs-tools; then
-  if [ -n "${GRUB_DEVICE_UUID}" ]; then
-    GRUB_DEVICE="/dev/disk/by-uuid/${GRUB_DEVICE_UUID}"
-    unset GRUB_DEVICE_UUID
-  fi
-fi
-
 if [ -e '/usr/share/kicksecure/marker' ]; then
    GRUB_DISTRIBUTOR="REMOVE user-sysmaint-split | enable unrestricted admin mode"
 elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
