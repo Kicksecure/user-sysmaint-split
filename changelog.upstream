@@ -1,3 +1,41 @@
+commit 8adb98740774d32a373c574b5f1c96c54d6862ad
+Merge: accd677 a942037
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 20 10:12:28 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit accd6779bf02dc8a5487c784116311f5dc93133a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 20 06:57:32 2025 -0400
+
+    bumped Standards-Version
+
+commit 56bd3e29d5c662b02c1f169af8f1d510fa51410b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 20 06:25:38 2025 -0400
+
+    readme
+
+commit a94203791ddab06ed2cf6f2d201029d291687cef
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Aug 16 21:47:18 2025 -0500
+
+    Don't unset GRUB_DEVICE_UUID unless using initramfs-tools
+
+commit 7c9f05d554a133808999bb670c335dd7e664b330
+Merge: c5e41b5 7d28fb5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Aug 10 14:10:36 2025 -0500
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit 7d28fb507a1b2ea62ac6418a1c45f816d49010aa
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 10 06:34:55 2025 +0000
+
+    bumped changelog version
+
 commit 15016f67674016566819be7b26e09e9e6e3edb12
 Merge: b2d3000 75ae2f5
 Author: Patrick Schleizer <adrelanos@whonix.org>
@@ -5,11 +43,24 @@ Date:   Sun Aug 10 02:26:59 2025 -0400
 
     Merge remote-tracking branch 'ArrayBolt3/arraybolt3/emerg-shutdown'
 
+commit c5e41b59ee396706511bfe563e2b60d44daf20fc
+Merge: 2e2da89 75ae2f5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Aug 9 23:34:15 2025 -0500
+
+    Merge branch 'arraybolt3/emerg-shutdown' into arraybolt3/trixie
+
 commit 75ae2f5ff717b127c71a57af6ec157cd7831b6ab
 Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
 Date:   Sat Aug 9 23:34:02 2025 -0500
 
     Make emerg-shutdown in sysmaint sessions optional
+
+commit 2e2da8968a1822ace13e2d4142ecd5324251ff8c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Aug 5 22:58:11 2025 -0500
+
+    Port to Trixie.
 
 commit b2d3000f3b0ebc54c1aadaf60c45f4b7199d16a6
 Author: Patrick Schleizer <adrelanos@whonix.org>
