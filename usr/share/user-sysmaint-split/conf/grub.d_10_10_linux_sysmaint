@@ -5,7 +5,8 @@
 
 #set -x
 
-source /usr/libexec/helper-scripts/package_installed_check
+## 'source' is a bashism.
+. /usr/libexec/helper-scripts/package_installed_check
 
 true "user-sysmaint-split $0: START"
 
