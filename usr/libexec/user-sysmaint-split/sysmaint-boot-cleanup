@@ -12,6 +12,10 @@ lightdm_state_file='/var/lib/lightdm/.cache/lightdm-gtk-greeter/state'
 lightdm_state_backup_file="${lightdm_state_file}.sysmaint-boot"
 sddm_state_file='/var/lib/sddm/state.conf'
 sddm_state_backup_file="${sddm_state_file}.sysmaint-boot"
+greetd_conf_dir='/etc/greetd/config.toml.d'
+greetd_master_conf_file='/etc/greetd/config.toml'
+wlgreet_conf_dir='/etc/greetd/wlgreet.toml.d'
+wlgreet_master_conf_file='/etc/greetd/wlgreet.toml'
 xscreensaver_config_file_list=(
    '/etc/X11/app-defaults/XScreenSaver'
    '/usr/lib/X11/app-defaults/XScreenSaver'
@@ -22,6 +26,8 @@ xscreensaver_backup_config_file_list=(
 )
 sysmaint_lightdm_conf_file='/etc/lightdm/lightdm.conf.d/zzz-sysmaint-boot.conf'
 sysmaint_sddm_conf_file='/etc/sddm.conf.d/zzz-sysmaint-boot.conf'
+sysmaint_greetd_conf_file='/etc/greetd/config.toml.d/50_sysmaint-boot.conf'
+sysmaint_wlgreet_conf_file='/etc/greetd/wlgreet.toml.d/50_sysmaint-boot.conf'
 old_sysmaint_conf_file_list=(
   '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
@@ -31,6 +37,8 @@ echo "INFO: Removing sysmaint autologin files because system is shutting down." 
 safe-rm -f --verbose -- "${sysmaint_lightdm_conf_file}"
 safe-rm -f --verbose -- "${sysmaint_sddm_conf_file}"
 safe-rm -f -- "${old_sysmaint_conf_file_list[@]}"
+safe-rm -f -- "${sysmaint_greetd_conf_file}"
+safe-rm -f -- "${sysmaint_wlgreet_conf_file}"
 
 echo "INFO: Restoring display manager state file backups if necessary because system is shutting down." >&2
 if [ -f "${lightdm_state_backup_file}" ]; then
@@ -61,6 +69,16 @@ if [ -f "${sddm_state_backup_file}" ]; then
       fi
    done
 fi
+
+echo "INFO: Rebuilding greetd config if necessary because system is shutting down." >&2
+if [ -d "${greetd_conf_dir}" ]; then
+   build-config-file "${greetd_conf_dir}" "${greetd_master_conf_file}"
+fi
+if [ -d "${wlgreet_conf_dir}" ]; then
+   build-config-file "${wlgreet_conf_dir}" "${wlgreet_master_conf_file}"
+fi
+
+echo "INFO: Restoring xscreensaver config backups if necessary because system is shutting down." >&2
 for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
    xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
    xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"

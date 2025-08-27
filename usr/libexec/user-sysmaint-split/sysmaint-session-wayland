@@ -6,6 +6,12 @@
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
+if [ "$PROFILE_SCRIPTS_WERE_SOURCED" != 'yes' ]; then
+   source /etc/profile ## this pulls in /etc/profile.d as well
+fi
+
+export XDG_CURRENT_DESKTOP='sysmaint-session-wayland'
+
 window_manager_list=(
    '/usr/bin/labwc'
    # Add other window managers here later
@@ -31,10 +37,10 @@ for sysmaint_app in "${sysmaint_app_list[@]}"; do
 done
 
 system_tray_list=(
-   # No supported system tray at the moment
+   '/usr/bin/waybar'
 )
 system_tray_arg_list=(
-   # No supported system tray at the moment
+   ''
 )
 
 for (( idx = 0; idx < ${#system_tray_list[@]}; idx++ )); do
@@ -59,7 +65,7 @@ dbus-update-activation-environment --systemd --all
 write_sysmaint_account_specific_config_once
 
 "${selected_window_manager}" &
-# Needed to prevent window ordering problems
+## Needed to prevent window ordering problems
 sleep 1;
 export WAYLAND_DISPLAY=wayland-0
 if [ -n "${selected_system_tray}" ]; then
