@@ -1,3 +1,23 @@
+commit 08690ee88cd4fc80404d4a0e16f91ca7b1e69479
+Merge: 6f7e73b d7c444f
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 27 13:05:18 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit d7c444fc96d439327a5444b68bc9c4d7cfb9231a
+Merge: a6d9aca 6f7e73b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Aug 26 19:23:11 2025 -0500
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit 6f7e73bb6cd92f113d0dc0ac1bd8688a9c746b22
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Aug 26 09:26:44 2025 +0000
+
+    bumped changelog version
+
 commit efa3d4bd845fde23883e49826f9a8836b8db8f36
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Aug 26 05:26:33 2025 -0400
@@ -9,6 +29,25 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Aug 26 09:22:04 2025 +0000
 
     bumped changelog version
+
+commit a6d9aca71a218afe0cba04037a13b5297e3e551c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Aug 23 22:52:55 2025 -0500
+
+    Remove initramfs-tools support
+
+commit 04266f8d4debe6c853f6997ded6a03973591d19b
+Merge: 111e621 8adb987
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Aug 21 20:23:01 2025 -0500
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit 111e621b94053b74dfd5895b1b28698fadfef713
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Aug 21 18:54:47 2025 -0500
+
+    Flesh out Wayland support
 
 commit 8adb98740774d32a373c574b5f1c96c54d6862ad
 Merge: accd677 a942037
@@ -28,6 +67,12 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Aug 20 06:25:38 2025 -0400
 
     readme
+
+commit f32d688cb7aad47543a84e9f1ae2dfb993015e24
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Aug 17 19:46:46 2025 -0500
+
+    Don't source Bash scripts in POSIX sh grub.d scripts
 
 commit a94203791ddab06ed2cf6f2d201029d291687cef
 Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
