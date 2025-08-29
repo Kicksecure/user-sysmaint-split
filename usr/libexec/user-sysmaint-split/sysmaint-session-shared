@@ -91,6 +91,7 @@ start_user_background_services() {
      'updatecheck'
      'spice-vdagent'
      'livecheck'
+     'lxqt-notifications'
   )
 
   # Run background processes. These services are usually run as a non-root user
