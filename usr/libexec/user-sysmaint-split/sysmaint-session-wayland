@@ -77,4 +77,11 @@ sysmaint_app_pid="$!"
 
 start_user_background_services
 
+## Audio may start muted by default. Waybar provides no good way to unmute it,
+## so let's unmute it for the user. If they want to mute the speakers, they
+## can set the volume to 0%.
+if command -v pactl &>/dev/null; then
+   pactl set-sink-mute @DEFAULT_SINK@ false || true
+fi
+
 wait "${sysmaint_app_pid}"

@@ -82,7 +82,7 @@ write_sysmaint_account_specific_config_once() {
 
 start_user_background_services() {
   user_service_list=(
-     'lxqt-policykit-agent'
+     'polkit-mate-authentication-agent-1'
      'msgdispatcher'
      'xscreensaver'
      'nm-applet'
@@ -91,6 +91,7 @@ start_user_background_services() {
      'updatecheck'
      'spice-vdagent'
      'livecheck'
+     'lxqt-notifications'
   )
 
   # Run background processes. These services are usually run as a non-root user
