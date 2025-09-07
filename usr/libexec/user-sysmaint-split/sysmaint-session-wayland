@@ -11,6 +11,7 @@ if [ "$PROFILE_SCRIPTS_WERE_SOURCED" != 'yes' ]; then
 fi
 
 export XDG_CURRENT_DESKTOP='sysmaint-session-wayland'
+export QT_QPA_PLATFORMTHEME='lxqt'
 
 window_manager_list=(
    '/usr/bin/labwc'
