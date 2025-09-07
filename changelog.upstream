@@ -1,3 +1,22 @@
+commit e216f77468d22bd570c3607d374a3294f65ce941
+Merge: cb20b08 78c9280
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Sep 7 03:16:24 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 78c9280704a2b3eceb91899b015da840de471767
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Sep 6 22:31:45 2025 -0500
+
+    Fix sysmaint session Qt theming
+
+commit cb20b08d4b5381a949d874427ca8602a79761cf6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 2 15:31:32 2025 +0000
+
+    bumped changelog version
+
 commit 460d787ca915c4cf36836e7ff859b6a664f9bf3f
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Aug 30 14:20:43 2025 +0000
