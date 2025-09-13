@@ -1,3 +1,15 @@
+commit d147cfec43679f09605fcc13ace1dbe38c7ade66
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Sep 13 01:37:18 2025 -0400
+
+    avoid spurious error message if file /etc/X11/default-display-manager does not exist
+
+commit 2de7052e6c459ed3babe61989200eb5ba3ea81d4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Sep 7 08:06:17 2025 +0000
+
+    bumped changelog version
+
 commit e216f77468d22bd570c3607d374a3294f65ce941
 Merge: cb20b08 78c9280
 Author: Patrick Schleizer <adrelanos@whonix.org>
