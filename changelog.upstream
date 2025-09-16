@@ -1,3 +1,22 @@
+commit a33f38a6a3765faa4a61787095a8232841445e18
+Merge: 5770584 0817334
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 16 01:00:14 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 0817334e169cb775bf76a3b48ad12cc8bdab2973
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Sep 15 22:53:05 2025 -0500
+
+    Fix memory ballooning under Qubes OS
+
+commit 5770584997e46a1ce4c9c53603a195c21d841f91
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Sep 13 07:29:56 2025 +0000
+
+    bumped changelog version
+
 commit d147cfec43679f09605fcc13ace1dbe38c7ade66
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Sep 13 01:37:18 2025 -0400
