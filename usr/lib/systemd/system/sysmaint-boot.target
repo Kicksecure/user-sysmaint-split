@@ -142,6 +142,7 @@ Wants=qubes-whonix-redirect-9050.socket
 Wants=qubes-whonix-sysinit.service
 Wants=qubes-whonix-redirect-9050.service
 Wants=qubes-whonix-postinit.service
+Wants=qubes-meminfo-writer.service
 
 ## ram-wipe
 Wants=ram-wipe-kexec-prepare.service
