@@ -82,12 +82,12 @@ Wants=mnt-shared-kvm.service
 ## Enables remount-secure, possibly other system setup tasks.
 Wants=sysinit-post.target
 
-## security-misc
+## security-misc-shared
 #Wants=hide-hardware-info.service
 #Wants=permission-hardener.service
 #Wants=harden-module-loading.service
 
-## security-misc
+## security-misc-shared
 Wants=remove-system-map.service
 
 ## Useful during USER session.
