@@ -15,7 +15,7 @@ Rules-Requires-Root: no
 Package: user-sysmaint-split
 Architecture: all
 Pre-Depends: helper-scripts
-Depends: security-misc, adduser, ${misc:Depends}
+Depends: security-misc-shared, adduser, ${misc:Depends}
 Breaks: qubes-core-agent-passwordless-root (>= 1)
 Description: Role-Based Boot Modes - user versus sysmaint
  Adds a GRUB boot menu entry:

@@ -85,4 +85,6 @@ if command -v pactl &>/dev/null; then
    pactl set-sink-mute @DEFAULT_SINK@ false || true
 fi
 
+leaprun signal-wayland-session-started
+
 wait "${sysmaint_app_pid}"
