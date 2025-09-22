@@ -1,3 +1,28 @@
+commit 80c6209bdfd1e282adf78e830bc4148e8d309771
+Merge: 7d0dca3 1147b4e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 22 13:05:44 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 1147b4e803ed45a6ee22daee9dfcd5fdeaf231f5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Sep 21 16:09:14 2025 -0500
+
+    Comment and dependency changes for security-misc split
+
+commit 6415255c67bdb217a42c83c34c24f063ae4e94c5
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Sep 20 22:15:50 2025 -0500
+
+    Signal to the system when the Wayland session has started
+
+commit 7d0dca3352b54adc944a7183a06b0742db0263b5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Sep 19 16:23:31 2025 +0000
+
+    bumped changelog version
+
 commit 53528034bf7b046a6058d1772b7b6e8dea12adad
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Sep 18 10:08:33 2025 -0400
