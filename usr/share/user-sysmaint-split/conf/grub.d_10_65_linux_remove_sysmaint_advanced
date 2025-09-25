@@ -24,7 +24,6 @@ fi
 
 GRUB_DISABLE_RECOVERY="true"
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX boot-role=sysmaint systemd.unit=sysmaint-boot.target remove-sysmaint"
-GRUB_DISABLE_LINUX_UUID="true"
 
 if test -x /etc/grub.d/10_50_linux_dist_advanced ; then
 	/etc/grub.d/10_50_linux_dist_advanced
