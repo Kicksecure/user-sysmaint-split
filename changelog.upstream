@@ -1,3 +1,28 @@
+commit 814c92cc738245426b11ffa358b5386e0d3aed49
+Merge: a2885c0 4d453cd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Sep 26 04:32:12 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 4d453cda101d40536ab3831ee222a5057fc025f0
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Sep 24 22:47:37 2025 -0500
+
+    Stop disabling UUIDs in grub.cfg
+
+commit 8a9586f5cf4a3977e6ee06b78738cad322bd066b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Sep 24 20:05:33 2025 -0500
+
+    Fix sysmaint session Wayland startup on physical hardware
+
+commit a2885c0b0c035a14b5b2c0f8f1dc6969b1fd6511
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 22 17:27:17 2025 +0000
+
+    bumped changelog version
+
 commit 80c6209bdfd1e282adf78e830bc4148e8d309771
 Merge: 7d0dca3 1147b4e
 Author: Patrick Schleizer <adrelanos@whonix.org>
