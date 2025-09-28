@@ -1,3 +1,28 @@
+commit 999a3f764c50a215ee9613244fe32cac739d16c6
+Merge: 75b5be2 4f9305d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Sep 28 17:02:35 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 4f9305d3e7095d93bdb4f79f36e178d9c88b921a
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Sep 28 12:48:05 2025 -0500
+
+    Export LABWC_PID to allow reconfiguring the compositor more easily
+
+commit fdf6c3eca91b654d8209f5c781d1bbff36db0111
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Sep 28 12:07:37 2025 -0500
+
+    Set XDG_SESSION_TYPE correctly in sysmaint sessions
+
+commit 75b5be23df33ca3a8f6f9c78a3057a4b88df1efd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Sep 26 09:33:49 2025 +0000
+
+    bumped changelog version
+
 commit 814c92cc738245426b11ffa358b5386e0d3aed49
 Merge: a2885c0 4d453cd
 Author: Patrick Schleizer <adrelanos@whonix.org>
