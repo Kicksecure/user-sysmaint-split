@@ -12,6 +12,7 @@ fi
 
 export XDG_CURRENT_DESKTOP='sysmaint-session-wayland'
 export QT_QPA_PLATFORMTHEME='lxqt'
+export XDG_SESSION_TYPE='wayland'
 
 window_manager_list=(
    '/usr/bin/labwc'

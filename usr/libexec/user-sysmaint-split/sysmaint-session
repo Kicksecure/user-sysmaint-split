@@ -6,6 +6,8 @@
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
+export XDG_SESSION_TYPE='x11'
+
 window_manager_list=(
    '/usr/bin/xfwm4'
    # Add other window managers here later
