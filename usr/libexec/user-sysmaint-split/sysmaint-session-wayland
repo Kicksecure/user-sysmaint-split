@@ -67,6 +67,7 @@ dbus-update-activation-environment --systemd --all
 write_sysmaint_account_specific_config_once
 
 "${selected_window_manager}" &
+window_manager_pid="$!"
 ## Needed to prevent window ordering and initialization problems
 ## WARNING: `sleep 1` IS NOT SUFFICIENT HERE. On machines with physical
 ## graphics hardware, the compositor takes more time than expected to
@@ -79,10 +80,16 @@ write_sysmaint_account_specific_config_once
 ## for slower systems, `sleep 3` is what we use here for now.
 sleep 3
 export WAYLAND_DISPLAY=wayland-0
+if [ "${selected_window_manager}" = '/usr/bin/labwc' ]; then
+   ## Allows dynamically reloading labwc configuration
+   export LABWC_PID="${window_manager_pid}"
+fi
+
 if [ -n "${selected_system_tray}" ]; then
    # shellcheck disable=SC2086
    "${selected_system_tray}" ${selected_system_tray_args} &
 fi
+
 "${selected_sysmaint_app}" &
 sysmaint_app_pid="$!"
 
