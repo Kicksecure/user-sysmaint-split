@@ -276,9 +276,10 @@ user = \"sysmaint\"" \
 }
 
 write_greetd_disable_autologin_config() {
-   printf "%s\n" "[initial_session]
-command =
-user =" \
+   # `~initial_session` masks out the `initial_session` key. Setting the keys
+   # within the section to blank values resulted in greetd crashing, so we
+   # just mask the section entirely now when necessary.
+   printf "%s\n" "[~initial_session]" \
       | sponge -- "${sysmaint_greetd_conf_file}"
 }
 
