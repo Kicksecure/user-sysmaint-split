@@ -18,11 +18,17 @@ window_manager_list=(
    '/usr/bin/labwc'
    # Add other window managers here later
 )
+window_manager_arg_list=(
+  # Enabled merged config for labwc, needed for the keyboard layout to be
+  # properly handled
+  '-m'
+)
 selected_window_manager=''
-for window_manager in "${window_manager_list[@]}"; do
-   if [ -e "${window_manager}" ]; then
-      selected_window_manager="${window_manager}"
-      break
+for idx in "${!window_manager_list[@]}"; do
+   if [ -e "${window_manager_list[idx]}" ]; then
+     selected_window_manager="${window_manager_list[idx]}"
+     selected_window_manager_args="${window_manager_arg_list[idx]}"
+     break
    fi
 done
 
@@ -66,7 +72,8 @@ dbus-update-activation-environment --systemd --all
 
 write_sysmaint_account_specific_config_once
 
-"${selected_window_manager}" &
+# shellcheck disable=SC2086
+"${selected_window_manager}" ${selected_window_manager_args} &
 window_manager_pid="$!"
 ## Needed to prevent window ordering and initialization problems
 ## WARNING: `sleep 1` IS NOT SUFFICIENT HERE. On machines with physical

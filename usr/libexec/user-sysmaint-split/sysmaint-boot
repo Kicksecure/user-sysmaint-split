@@ -276,16 +276,17 @@ user = \"sysmaint\"" \
 }
 
 write_greetd_disable_autologin_config() {
-   printf "%s\n" "[initial_session]
-command =
-user =" \
+   # `~initial_session` masks out the `initial_session` key. Setting the keys
+   # within the section to blank values resulted in greetd crashing, so we
+   # just mask the section entirely now when necessary.
+   printf "%s\n" "[~initial_session]" \
       | sponge -- "${sysmaint_greetd_conf_file}"
 }
 
 write_greetd_sysmaint_default_session_config() {
    ## Thanks in part to wlgreet's simplicity, we don't have to fight with
    ## backup state files here.
-   printf "%s\n" "command = \"/usr/libexec/desktop-config-dist/start-lxqt-session\"" \
+   printf "%s\n" "command = \"/usr/libexec/user-sysmaint-split/sysmaint-session-wayland\"" \
       | sponge -- "${sysmaint_wlgreet_conf_file}"
 }
 
