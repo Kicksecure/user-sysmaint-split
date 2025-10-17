@@ -442,6 +442,11 @@ remove_sysmaint_qubes() {
    printf "%s\n" "INFO: Qubes unrestricted mode detected. Removing user-sysmaint-split."
    printf "%s\n" "INFO: (kernel parameter 'remove-sysmaint-qubes' is present, ok.)"
    dummy-dependency --yes --purge user-sysmaint-split
+   if accountctl user is-pass-locked 2>/dev/null; then
+     printf "%s\n" "INFO: Account 'user' has a locked password. Running /usr/bin/passwordless-root to enable passwordless root escalation."
+     printf "%s\n" "INFO: (kernel parameter 'remove-sysmaint-qubes' is present, ok.)"
+     /usr/bin/passwordless-root
+   fi
 }
 
 sysmaint_boot() {
