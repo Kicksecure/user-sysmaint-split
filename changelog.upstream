@@ -1,3 +1,22 @@
+commit a82da7b0982606566e5ec955481ee17624f59c96
+Merge: 474a08c acdf596
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Oct 18 04:46:48 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit acdf596affe8c40232863a83f19f4101607600c9
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Oct 16 21:17:08 2025 -0500
+
+    Enable passwordless root in Qubes unrestricted admin mode if user password is locked
+
+commit 474a08c927dde782a66182f808cb699593ff77e1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 13 13:54:44 2025 +0000
+
+    bumped changelog version
+
 commit 45a527756289384a9226224feca8a1bc46a5b262
 Merge: 91df66a 88b382e
 Author: Patrick Schleizer <adrelanos@whonix.org>
