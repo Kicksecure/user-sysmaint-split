@@ -92,6 +92,7 @@ start_user_background_services() {
      'spice-vdagent'
      'livecheck'
      'lxqt-notifications'
+     'wlr-resize-watcher'
   )
 
   # Run background processes. These services are usually run as a non-root user
