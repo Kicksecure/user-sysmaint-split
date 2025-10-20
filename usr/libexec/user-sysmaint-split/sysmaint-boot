@@ -45,7 +45,7 @@ if [ -f /usr/lib/systemd/system/greetd.service ]; then
    default_display_manager='greetd'
 else
    if [ -f /etc/X11/default-display-manager ]; then
-      default_display_manager="$(basename "$(cat -- /etc/X11/default-display-manager)")" || true
+      default_display_manager="$(basename -- "$(cat -- /etc/X11/default-display-manager)")" || true
    else
       ## Non-Qubes: File /etc/X11/default-display-manager does not exist if no desktop environment is installed.
       ## Qubes: In App Qubes file /etc/X11/default-display-manager does usually not exist.
