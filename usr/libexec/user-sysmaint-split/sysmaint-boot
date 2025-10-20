@@ -52,7 +52,7 @@ else
       default_display_manager=""
    fi
 fi
-sysmaint_session_wayland='no'
+sysmaint_session_wayland='yes'
 sysmaint_autologin='no'
 lightdm_home_dir='/var/lib/lightdm'
 lightdm_state_dir='/var/lib/lightdm/.cache/lightdm-gtk-greeter'
