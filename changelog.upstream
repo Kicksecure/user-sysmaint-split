@@ -1,3 +1,21 @@
+commit 40be71f7f0cac6c8b755214d264f15b59712fe48
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 12:47:30 2025 -0400
+
+    change default to `sysmaint_session_wayland='yes'`
+
+commit 5774f355738588b8db9c456ae32aeaa14cf15c18
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 11:44:46 2025 -0400
+
+    end-of-options
+
+commit 94c4b8c941a592e1bb8e7fe035f6b4929e370ae8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 14:52:14 2025 +0000
+
+    bumped changelog version
+
 commit 0ad2e251d055ab50c4e4e6a422e452f7ef614046
 Merge: 6d37084 36aa0d3
 Author: Patrick Schleizer <adrelanos@whonix.org>
