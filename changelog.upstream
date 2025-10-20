@@ -1,3 +1,28 @@
+commit 0ad2e251d055ab50c4e4e6a422e452f7ef614046
+Merge: 6d37084 36aa0d3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 10:43:49 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 36aa0d32b93f3332d232fbe898ef11073dd32669
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 19 22:11:18 2025 -0500
+
+    Enable backlight restore in sysmaint sessions
+
+commit abc9f58a0d8e800a3a2b3754b3243ce94dad9c0d
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 19 14:10:49 2025 -0500
+
+    Run wlr-resize-watcher in sysmaint sessions
+
+commit 6d37084d88ba33ea2a9ef44af4d52575c070b0cc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Oct 18 09:20:54 2025 +0000
+
+    bumped changelog version
+
 commit a82da7b0982606566e5ec955481ee17624f59c96
 Merge: 474a08c acdf596
 Author: Patrick Schleizer <adrelanos@whonix.org>
