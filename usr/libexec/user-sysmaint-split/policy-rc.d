@@ -12,7 +12,12 @@
 ## - 'start' is always denied.
 ## - "other" actions (if any) are always denied.
 
-kernel_cmdline="$(cat -- /proc/cmdline)"
+kernel_cmdline=''
+if [ -f /proc/cmdline ]; then
+  kernel_cmdline="$(cat -- /proc/cmdline)"
+elif [ -f /proc/1/cmdline ]; then
+  kernel_cmdline="$(cat -- /proc/1/cmdline)"
+fi
 
 if [[ ! "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
   exit 0

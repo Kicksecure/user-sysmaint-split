@@ -39,7 +39,14 @@ exit_handler() {
 trap exit_handler EXIT
 
 user_sysmaint_split_config_dir='/etc/user-sysmaint-split.conf.d'
-kernel_cmdline="$(cat -- /proc/cmdline)"
+
+kernel_cmdline=''
+if [ -f /proc/cmdline ]; then
+  kernel_cmdline="$(cat -- /proc/cmdline)"
+elif [ -f /proc/1/cmdline ]; then
+  kernel_cmdline="$(cat -- /proc/1/cmdline)"
+fi
+
 ## greetd is the only supported Wayland greeter, use it if it exists
 if [ -f /usr/lib/systemd/system/greetd.service ]; then
    default_display_manager='greetd'
