@@ -1,3 +1,15 @@
+commit c6075a39978c60cdd3284495beaa8aa62d8c5848
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 08:09:02 2025 -0400
+
+    more robust, standardized kernel_cmdline variable detection
+
+commit cf22e2e9470bf74538db33863c496c3540312e51
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 16:50:37 2025 +0000
+
+    bumped changelog version
+
 commit 40be71f7f0cac6c8b755214d264f15b59712fe48
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Oct 20 12:47:30 2025 -0400
