@@ -114,6 +114,8 @@ Wants=qubes-sysinit.service
 
 Wants=qubes-updates-proxy.service
 
+Wants=qubes-bind-dirs.service
+
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
 
