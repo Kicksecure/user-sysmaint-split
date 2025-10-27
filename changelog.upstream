@@ -1,3 +1,15 @@
+commit c3632edba69290f1a2942b6563534885554e3960
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 09:29:52 2025 -0400
+
+    fix: start `qubes-bind-dirs.service` in sysmaint session
+
+commit 28d883f35f5ef36474b8ec47bd42a18e1f9c5776
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 13:15:50 2025 +0000
+
+    bumped changelog version
+
 commit 2563334bb0bd1aa7da135ac0e1dfae4b82b195ed
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Oct 27 09:14:16 2025 -0400
