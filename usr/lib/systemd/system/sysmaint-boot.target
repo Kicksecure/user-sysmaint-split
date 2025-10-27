@@ -112,6 +112,8 @@ Wants=qubes-gui-agent.service
 Wants=qubes-whonix-sysinit.service
 Wants=qubes-sysinit.service
 
+Wants=qubes-updates-proxy.service
+
 ## Proxy tooling is required for software updates.
 Wants=qubes-updates-proxy-forwarder.socket
 
