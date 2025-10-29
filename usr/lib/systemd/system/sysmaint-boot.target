@@ -94,6 +94,9 @@ Wants=remove-system-map.service
 ## Not so useful in SYSMAINT session as it breaks pkexec.
 #Wants=proc-hidepid.service
 
+## Users should get warrant canary updates even in sysmaint mode.
+Wants=canary.service
+
 ## VirtualBox
 Wants=virtualbox-guest-utils.service
 
@@ -123,9 +126,27 @@ Wants=qubes-updates-proxy-forwarder.socket
 ## StandaloneVMs.
 Wants=qubes-mount-dirs.service
 
-## qubes-mist-post.service is required to prevent apt from trying to use an
+## qubes-misc-post.service is required to prevent apt from trying to use an
 ## updates proxy if a StandaloneVM is initially booted in sysmaint mode.
 Wants=qubes-misc-post.service
+
+## qubes-firewall.service is a security feature
+Wants=qubes-firewall.service
+
+## qubes-update-check.timer is the Qubes equivalent of updatecheck, necessary
+## to get software update notifications
+Wants=qubes-update-check.timer
+
+## Misc important Qubes services that could break things if not active
+Wants=qubes-network-uplink.service
+Wants=qubes-rootfs-resize.service
+
+## May be necessary for hardware passthrough to work in some instances
+Wants=xendriverdomain.service
+
+## Does some Xen-related setup (mounting /proc/xen, loading Xen-related kernel
+## modules
+Wants=xen.service
 
 #Wants=tb-updater-dispvm.service
 #Wants=tb-updater-first-boot.service
