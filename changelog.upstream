@@ -1,3 +1,22 @@
+commit bf15078fd4e82423e099c21ba146ce8a6fc7bd6b
+Merge: 9d4f8fc fb4df27
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 29 03:21:09 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit fb4df279f80758e7bf3b3205ba101084f9c689d1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Oct 29 00:02:38 2025 -0500
+
+    Add more important systemd units to sysmaint-boot.target
+
+commit 9d4f8fcd8cc90942026c090a15ae5b89484b7ebb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 13:38:52 2025 +0000
+
+    bumped changelog version
+
 commit c3632edba69290f1a2942b6563534885554e3960
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Oct 27 09:29:52 2025 -0400
