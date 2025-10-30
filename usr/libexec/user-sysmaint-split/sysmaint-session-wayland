@@ -61,11 +61,11 @@ done
 
 if [ -z "${selected_window_manager}" ]; then
    printf "%s\n" "$0: ERROR: Could not find a supported window manager!" >&2
-   exit 1;
+   exit 1
 fi
 if [ -z "${selected_sysmaint_app}" ]; then
    printf "%s\n" "$0: ERROR: Could not find a supported sysmaint app!" >&2
-   exit 1;
+   exit 1
 fi
 
 dbus-update-activation-environment --systemd --all
