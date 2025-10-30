@@ -1,3 +1,22 @@
+commit cce2cf5bbaf0c4802fd00d596e67fc2b5c5fcace
+Merge: 574a7f9 7588685
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 30 01:43:14 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 7588685e59151865fc64d840554897c1e92b353d
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Oct 29 23:52:21 2025 -0500
+
+    Start lxqt-powermanagement service in sysmaint sessions for sleep and screen locking
+
+commit 574a7f91d912094cdc9b3b98be59db6e6fbb50b7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 29 07:38:28 2025 +0000
+
+    bumped changelog version
+
 commit bf15078fd4e82423e099c21ba146ce8a6fc7bd6b
 Merge: 9d4f8fc fb4df27
 Author: Patrick Schleizer <adrelanos@whonix.org>
