@@ -94,6 +94,7 @@ start_user_background_services() {
      'lxqt-notifications'
      'wlr-resize-watcher'
      'backlight-tool-dist-restore'
+     'lxqt-powermanagement'
   )
 
   # Run background processes. These services are usually run as a non-root user
