@@ -81,7 +81,7 @@ write_sysmaint_account_specific_config_once() {
 }
 
 start_user_background_services() {
-  user_service_list=(
+  early_user_service_list=(
      'polkit-mate-authentication-agent-1'
      'msgdispatcher'
      'xscreensaver'
@@ -94,16 +94,29 @@ start_user_background_services() {
      'lxqt-notifications'
      'wlr-resize-watcher'
      'backlight-tool-dist-restore'
+  )
+  late_user_service_list=(
      'lxqt-powermanagement'
   )
 
-  # Run background processes. These services are usually run as a non-root user
-  # by way of /etc/xdg/autostart. Running everything in /etc/xdg/autostart would
-  # be bad here because sysmaint's graphical session is intentionally running as
-  # few services as possible to keep attack surface low. Instead, just run the
-  # services we need, if they exist.
-  for (( i = 0; i < "${#user_service_list[@]}"; i++ )); do
-     service_desktop_file="/etc/xdg/autostart/${user_service_list[i]}.desktop"
+  ## Run background processes. These services are usually run as a non-root
+  ## user by way of /etc/xdg/autostart. Running everything in
+  ## /etc/xdg/autostart would be bad here because sysmaint's graphical session
+  ## is intentionally running as few services as possible to keep attack
+  ## surface low. Instead, just run the services we need, if they exist.
+  for i in "${!early_user_service_list[@]}"; do
+     service_desktop_file="/etc/xdg/autostart/${early_user_service_list[i]}.desktop"
+     if [ -f "${service_desktop_file}" ]; then
+        gio launch "${service_desktop_file}" &
+     fi
+  done
+
+  ## Some services need to start after the desktop has had some time to fully
+  ## initialize.
+  sleep 3
+
+  for i in "${!late_user_service_list[@]}"; do
+     service_desktop_file="/etc/xdg/autostart/${late_user_service_list[i]}.desktop"
      if [ -f "${service_desktop_file}" ]; then
         gio launch "${service_desktop_file}" &
      fi
