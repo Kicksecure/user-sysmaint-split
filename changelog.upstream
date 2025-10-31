@@ -1,3 +1,28 @@
+commit c5eb24cca95d57ceb6e6de2b0ddb0eaf606d9c98
+Merge: df7677b b710561
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 31 10:34:05 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit b710561ae29a98f0f6aa93671040eb2950f4be68
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Oct 30 21:14:47 2025 -0500
+
+    Clean up a prior sysmaint graphical session when starting a new one if necessary
+
+commit 53c69e7f096444cc7d2d5c7f5150c066b72c6d89
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Oct 30 20:14:26 2025 -0500
+
+    Fix lxqt-powermanagement startup, it was starting too soon
+
+commit df7677b62c994f937ff0a8457c042cfb2c075b79
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 30 08:25:53 2025 +0000
+
+    bumped changelog version
+
 commit 9901d877d4419f70b77525bc664f6ea401b58de7
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Oct 30 02:39:54 2025 -0400
