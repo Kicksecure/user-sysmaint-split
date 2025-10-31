@@ -6,6 +6,29 @@
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
+## Terminate any Wayland compositors that are already running in our user
+## account. Necessary to allow login to work after 'sudo systemctl restart
+## greetd' is run.
+for old_wl_sock in "/run/user/$(id -u)"/wayland-*; do
+  if ! [ -S "${old_wl_sock}" ]; then
+    continue
+  fi
+  old_wl_pid="$(/usr/libexec/helper-scripts/query-sock-pid "${old_wl_sock}")" \
+    || continue
+  kill "${old_wl_pid}" || true
+  old_wl_kill_timeout=5
+  while (( old_wl_kill_timeout != 0 )); do
+    sleep 1
+    if ! [ -d "/proc/${old_wl_pid}" ]; then
+      break
+    fi
+    (( old_wl_kill_timeout-- )) || true
+  done
+  if (( old_wl_kill_timeout == 0 )); then
+    printf '%s\n' "WARNING: Could not kill old Wayland compositor with pid '${old_wl_pid}'!"
+  fi
+done
+
 if [ "$PROFILE_SCRIPTS_WERE_SOURCED" != 'yes' ]; then
    source /etc/profile ## this pulls in /etc/profile.d as well
 fi
