@@ -5,7 +5,7 @@ Source: user-sysmaint-split
 Section: misc
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@kicksecure.com>
-Build-Depends: debhelper (>= 13), debhelper-compat (= 13)
+Build-Depends: debhelper (>= 13), debhelper-compat (= 13), config-package-dev
 Homepage: https://github.com/Kicksecure/user-sysmaint-split
 Vcs-Browser: https://github.com/Kicksecure/user-sysmaint-split
 Vcs-Git: https://github.com/Kicksecure/user-sysmaint-split.git
