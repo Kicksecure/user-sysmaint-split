@@ -46,6 +46,19 @@ enable_sysmaint_autologin() {
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
 
+debian_tor_group_configuration() {
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
+      return 0
+   fi
+   mkdir --parents "/var/lib/user-sysmaint-split/do_once"
+
+   ## Group debian-tor might not exist yet.
+   addgroup --quiet debian-tor 2>/dev/null || true
+   adduser --quiet sysmaint debian-tor 2>/dev/null || true
+
+   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+}
+
 configure_sysmaint_services() {
    if [ ! -x "$(command -v systemctl)" ]; then
       true "INFO: systemctl command unavailable."
@@ -101,6 +114,8 @@ case "$1" in
 
       ## Install default autologin configuration, but only once
       enable_sysmaint_autologin
+
+      debian_tor_group_configuration
 
       ## Configure services
       configure_sysmaint_services
