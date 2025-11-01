@@ -1,3 +1,22 @@
+commit 6f2e9066e73f84f230e0bf045d727aa25f080193
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 05:34:59 2025 -0400
+
+    fix: hide gsmartcontrol start menu entry because incompatible with user-sysmaint-split
+
+commit 1ba4355b9e421de526999779151b4966ae2e9007
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 05:29:04 2025 -0400
+
+    usability feature: restrict `su-to-root` (similar to `sudo`)
+    (This has no security impact because `su-to-root` is only a wrapper. Make `su-to-root` non-executable for non-root users to fail more obvious, closed and similar to attempting to execute `sudo`.)
+
+commit 71d297169266b795ff34ad66d5b0d309021cd8fd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 31 14:39:59 2025 +0000
+
+    bumped changelog version
+
 commit c5eb24cca95d57ceb6e6de2b0ddb0eaf606d9c98
 Merge: df7677b b710561
 Author: Patrick Schleizer <adrelanos@whonix.org>
