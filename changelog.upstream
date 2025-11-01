@@ -1,3 +1,15 @@
+commit 66acc8edb43c812c45ef43dd18cc621922002608
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 07:23:57 2025 -0400
+
+    debian-tor
+
+commit e50bda393422fc65bf84e5cb6234b392301a4825
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 09:43:54 2025 +0000
+
+    bumped changelog version
+
 commit 6f2e9066e73f84f230e0bf045d727aa25f080193
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Nov 1 05:34:59 2025 -0400
