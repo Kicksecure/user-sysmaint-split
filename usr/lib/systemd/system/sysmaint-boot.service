@@ -18,6 +18,8 @@ DefaultDependencies=no
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/libexec/user-sysmaint-split/sysmaint-boot handle-boot
+StandardOutput=journal+console
+StandardError=inherit
 
 [Install]
 WantedBy=basic.target
