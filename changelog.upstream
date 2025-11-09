@@ -1,3 +1,22 @@
+commit 2a933276d304463b13fc252dbc22f473beee6834
+Merge: 241c1da dabeba9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Nov 9 03:04:03 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit dabeba90a92a13e2e54a891ac20d42dbadae6a58
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Nov 8 21:07:47 2025 -0600
+
+    Improve exposure of info and error messages in sysmaint-boot.service
+
+commit 241c1da88e821806a2114faec12bce83f14af943
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 12:38:14 2025 +0000
+
+    bumped changelog version
+
 commit 66acc8edb43c812c45ef43dd18cc621922002608
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Nov 1 07:23:57 2025 -0400
