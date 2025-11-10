@@ -78,14 +78,6 @@ greetd_conf_dir='/etc/greetd/config.toml.d'
 greetd_master_conf_file='/etc/greetd/config.toml'
 wlgreet_conf_dir='/etc/greetd/wlgreet.toml.d'
 wlgreet_master_conf_file='/etc/greetd/wlgreet.toml'
-xscreensaver_config_file_list=(
-   '/etc/X11/app-defaults/XScreenSaver'
-   '/usr/lib/X11/app-defaults/XScreenSaver'
-)
-xscreensaver_backup_config_file_list=(
-   '/etc/X11/app-defaults/XScreenSaver.sysmaint-boot'
-   '/usr/lib/X11/app-defaults/XScreenSaver.sysmaint-boot'
-)
 sysmaint_lightdm_conf_file='/etc/lightdm/lightdm.conf.d/zzz-sysmaint-boot.conf'
 sysmaint_sddm_conf_file='/etc/sddm.conf.d/zzz-sysmaint-boot.conf'
 sysmaint_greetd_conf_file='/etc/greetd/config.toml.d/50_sysmaint-boot.conf'
@@ -95,19 +87,6 @@ old_sysmaint_conf_file_list=(
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 )
 sudo_to_sysmaint="sudo --non-interactive -u sysmaint"
-
-sysmaint_account_already_locked=no
-if accountctl sysmaint is-pass-locked 2>/dev/null; then
-   sysmaint_account_already_locked=yes
-fi
-
-lock_sysmaint_account() {
-   printf "%s\n" "INFO: sysmaint_account_already_locked: '$sysmaint_account_already_locked'" >&2
-   if [ "$sysmaint_account_already_locked" = "no" ]; then
-      printf "%s\n" "INFO: Therefore, locking account 'sysmaint' (and deleting auto generated sysmaint login manager configuration files)." >&2
-      accountctl sysmaint lock-pass 2>/dev/null
-   fi
-}
 
 restore_pre_sysmaint_autologin_config() {
    safe-rm -f -- "${sysmaint_lightdm_conf_file}"
@@ -130,19 +109,6 @@ restore_pre_sysmaint_autologin_config() {
       fi
    fi
    rebuild_greetd_config
-}
-
-restore_pre_sysmaint_xscreensaver_config() {
-   local i
-
-   for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
-      xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
-      xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"
-      if [ -f "${xscreensaver_backup_config_file}" ]; then
-         safe-rm -rf -- "${xscreensaver_config_file}"
-         mv --verbose -- "${xscreensaver_backup_config_file}" "${xscreensaver_config_file}"
-      fi
-   done
 }
 
 write_lightdm_enable_autologin_config() {
@@ -313,49 +279,22 @@ rebuild_greetd_config() {
    fi
 }
 
-write_xscreensaver_derived_config() {
-   local i
-
-   for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
-      xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
-      xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"
-      if [ -f "${xscreensaver_backup_config_file}" ]; then
-         continue
-      fi
-      if [ -f "${xscreensaver_config_file}" ]; then
-         safe-rm -rf -- "${xscreensaver_backup_config_file}"
-         cp --verbose -- "${xscreensaver_config_file}" "${xscreensaver_backup_config_file}"
-
-         sed -i '/newLoginCommand/d' "${xscreensaver_config_file}"
-         printf "%s\n" "INFO: Removed newLoginCommand from XScreenSaver configuration file '${xscreensaver_config_file}'.
-This prevents fast user switching. This is by design. See:
-https://www.kicksecure.com/wiki/Sysmaint#Fast_User_Switching" >&2
-      fi
-   done
-}
-
 handle_boot() {
    if ! accountctl sysmaint is-user 2>/dev/null; then
       printf "%s\n" "$0: ERROR: Account 'sysmaint' does not exist. Cleaning up system-wide sysmaint config and exiting." >&2
       restore_pre_sysmaint_autologin_config
-      restore_pre_sysmaint_xscreensaver_config
       exit 1
    fi
 
    if ! [[ "${kernel_cmdline}" =~ 'boot-role=sysmaint' ]]; then
       printf "%s\n" "INFO: USER Session boot detected." >&2
       printf "%s\n" "INFO: (kernel parameter 'boot-role=sysmaint' is not present, ok.)" >&2
-      lock_sysmaint_account
       restore_pre_sysmaint_autologin_config
-      restore_pre_sysmaint_xscreensaver_config
       exit 0
    fi
 
    printf "%s\n" "INFO: SYSMAINT Session detected." >&2
    printf "%s\n" "INFO: (kernel parameter 'boot-role=sysmaint' present, ok.)" >&2
-
-   ## Unlocking account 'sysmaint'.
-   accountctl sysmaint unlock-pass 2>/dev/null
 
    if [ "${default_display_manager}" = 'lightdm' ]; then
       mkdir --verbose --parents -- '/etc/lightdm/lightdm.conf.d'
@@ -400,8 +339,6 @@ handle_boot() {
 
       rebuild_greetd_config
    fi
-
-   write_xscreensaver_derived_config
 
    ## Qubes handling.
    if [ ! -f /usr/share/qubes/marker-vm ]; then

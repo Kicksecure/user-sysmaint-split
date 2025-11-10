@@ -89,6 +89,7 @@ Wants=sysinit-post.target
 
 ## security-misc-shared
 Wants=remove-system-map.service
+Wants=kill-vboxdrmclient-on-shutdown.service
 
 ## Useful during USER session.
 ## Not so useful in SYSMAINT session as it breaks pkexec.

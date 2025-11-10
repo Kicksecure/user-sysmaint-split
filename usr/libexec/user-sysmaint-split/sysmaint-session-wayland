@@ -3,6 +3,13 @@
 ## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+## Pipe all logs to the journal or to /dev/null. Prevents them from being seen
+## by the user and makes them more accessible if needed.
+## Taken from https://stackoverflow.com/a/54415774/19474638
+## For debugging, uncomment this line and comment out the next line.
+#exec > >(systemd-cat --identifier=sysmaint-session-wayland) 2>&1
+exec >/dev/null 2>&1
+
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
