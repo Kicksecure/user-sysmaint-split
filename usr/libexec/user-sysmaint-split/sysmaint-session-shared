@@ -84,7 +84,6 @@ start_user_background_services() {
   early_user_service_list=(
      'polkit-mate-authentication-agent-1'
      'msgdispatcher'
-     'xscreensaver'
      'nm-applet'
      'sdwdate-gui-client'
      'sdwdate-gui-server'
