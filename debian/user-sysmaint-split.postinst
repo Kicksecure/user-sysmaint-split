@@ -59,6 +59,20 @@ debian_tor_group_configuration() {
    touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
 }
 
+ensure_account_sysmaint_unlocked_once() {
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
+      return 0
+   fi
+   mkdir --parents "/var/lib/user-sysmaint-split/do_once"
+
+   ## Ensure account 'sysmaint' is unlocked, to ensure that it can still be
+   ## accessed even though we've gotten rid of the previous locking/unlocking
+   ## mechanism.
+   accountctl sysmaint unlock-pass 2>/dev/null
+
+   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+}
+
 configure_sysmaint_services() {
    if [ ! -x "$(command -v systemctl)" ]; then
       true "INFO: systemctl command unavailable."
@@ -71,15 +85,15 @@ configure_sysmaint_services() {
    ## sessions.
    local service_list
    service_list=(
-     'ensure-shutdown.service'
-     'ensure-shutdown-trigger.service'
-     'emerg-shutdown.service'
-     'firewalld.service'
-     'mullvad-daemon.service'
-     'openvpn.service'
-     'ssh.service'
-     'ufw.service'
-     'wg-quick@wg0.service'
+      'ensure-shutdown.service'
+      'ensure-shutdown-trigger.service'
+      'emerg-shutdown.service'
+      'firewalld.service'
+      'mullvad-daemon.service'
+      'openvpn.service'
+      'ssh.service'
+      'ufw.service'
+      'wg-quick@wg0.service'
    )
 
    local service_item
@@ -116,6 +130,8 @@ case "$1" in
       enable_sysmaint_autologin
 
       debian_tor_group_configuration
+
+      ensure_account_sysmaint_unlocked_once
 
       ## Configure services
       configure_sysmaint_services

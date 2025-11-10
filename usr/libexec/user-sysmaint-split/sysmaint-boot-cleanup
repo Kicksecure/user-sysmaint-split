@@ -16,14 +16,6 @@ greetd_conf_dir='/etc/greetd/config.toml.d'
 greetd_master_conf_file='/etc/greetd/config.toml'
 wlgreet_conf_dir='/etc/greetd/wlgreet.toml.d'
 wlgreet_master_conf_file='/etc/greetd/wlgreet.toml'
-xscreensaver_config_file_list=(
-   '/etc/X11/app-defaults/XScreenSaver'
-   '/usr/lib/X11/app-defaults/XScreenSaver'
-)
-xscreensaver_backup_config_file_list=(
-   '/etc/X11/app-defaults/XScreenSaver.sysmaint-boot'
-   '/usr/lib/X11/app-defaults/XScreenSaver.sysmaint-boot'
-)
 sysmaint_lightdm_conf_file='/etc/lightdm/lightdm.conf.d/zzz-sysmaint-boot.conf'
 sysmaint_sddm_conf_file='/etc/sddm.conf.d/zzz-sysmaint-boot.conf'
 sysmaint_greetd_conf_file='/etc/greetd/config.toml.d/50_sysmaint-boot.conf'
@@ -32,6 +24,7 @@ old_sysmaint_conf_file_list=(
   '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 )
+exit_code=0
 
 echo "INFO: Removing sysmaint autologin files because system is shutting down." >&2
 safe-rm -f --verbose -- "${sysmaint_lightdm_conf_file}"
@@ -77,21 +70,5 @@ fi
 if [ -d "${wlgreet_conf_dir}" ]; then
    build-config-file "${wlgreet_conf_dir}" "${wlgreet_master_conf_file}"
 fi
-
-echo "INFO: Restoring xscreensaver config backups if necessary because system is shutting down." >&2
-for (( i = 0; i < ${#xscreensaver_config_file_list[@]}; i++ )); do
-   xscreensaver_config_file="${xscreensaver_config_file_list[i]}"
-   xscreensaver_backup_config_file="${xscreensaver_backup_config_file_list[i]}"
-   if [ -f "${xscreensaver_backup_config_file}" ]; then
-      safe-rm -rf -- "${xscreensaver_config_file}"
-      mv --verbose -- "${xscreensaver_backup_config_file}" "${xscreensaver_config_file}"
-   fi
-done
-
-echo "INFO: Locking account 'sysmaint' because system is shutting down." >&2
-passwd --lock -- 'sysmaint'
-exit_code=0
-
-echo "INFO: Ok, account 'sysmaint' has been locked." >&2
 
 exit "$exit_code"
