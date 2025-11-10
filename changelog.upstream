@@ -1,3 +1,40 @@
+commit 3bc2fb256ae8731eb8e5db659349173d3009d595
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 10 02:54:29 2025 -0500
+
+    cleanup
+
+commit 27eda234c61c6d32ae3f5d65acf8d7513d70a078
+Merge: f043593 239d2ef
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 10 02:53:22 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 239d2ef0e201f5e042f3807a62c25a2efe087edc
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Nov 9 19:52:13 2025 -0600
+
+    Redirect desktop stdout/stderr to /dev/null unless debugging is needed
+
+commit 150e6f5ffab112155b54999b086ac4f7b997c9f2
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Nov 9 18:37:34 2025 -0600
+
+    Add sysmaint-boot dependency on kill-vboxdrmclient-on-shutdown.service
+
+commit 25cbf0819e6089f8ed4c7409a6de13d4aba2bbb1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Nov 9 18:13:02 2025 -0600
+
+    Stop locking sysmaint account, remove xscreensaver code
+
+commit f043593f8232f667635d7536e5f753df4cb19510
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Nov 9 08:18:33 2025 +0000
+
+    bumped changelog version
+
 commit 2a933276d304463b13fc252dbc22f473beee6834
 Merge: 241c1da dabeba9
 Author: Patrick Schleizer <adrelanos@whonix.org>
