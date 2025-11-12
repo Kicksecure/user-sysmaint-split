@@ -12,6 +12,12 @@ Before=sysinit.target
 Before=qubes-gui-agent.service
 Wants=local-fs.target
 After=local-fs.target
+
+## Wait for 'systemd-tmpfiles-setup.service' to parse
+## '/usr/lib/tmpfiles.d/qrexec-volatile-config.conf'
+## so folder '/run/qubes-rpc' exists.
+After=systemd-tmpfiles-setup.service
+
 DefaultDependencies=no
 
 [Service]
