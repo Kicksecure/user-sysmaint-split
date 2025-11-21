@@ -1,3 +1,22 @@
+commit c0145a5addb8c22ef77017a6524f45647b4127f8
+Merge: 57d71e4 ff31383
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Nov 21 04:08:46 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit ff3138398146b98de280ba4ff4207c2d2663cc0e
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Nov 13 18:23:07 2025 -0600
+
+    Ensure sysmaint account password is unlocked upon creation since we use a PAM-based locking mechanism now
+
+commit 57d71e41e389df487a98346c19fdfbd6178d8de6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Nov 13 12:25:15 2025 +0000
+
+    bumped changelog version
+
 commit 2069dbe07c96e7efee06292528bda51a563cc310
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Nov 13 07:22:14 2025 -0500
