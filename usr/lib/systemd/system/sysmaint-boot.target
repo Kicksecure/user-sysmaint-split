@@ -111,9 +111,7 @@ Wants=qubes-qrexec-agent.service
 ## qubes-gui-agent lets us open graphical programs like the sysmaint panel
 Wants=qubes-gui-agent.service
 
-## qubes-sysinit and qubes-whonix-sysinit provide essential Qubes-specific
-## system services.
-Wants=qubes-whonix-sysinit.service
+## qubes-sysinit provides essential Qubes-specific system services.
 Wants=qubes-sysinit.service
 
 Wants=qubes-updates-proxy.service
@@ -165,7 +163,6 @@ Wants=qubes-whonix-qubes-updates-proxy-enable-maybe.service
 Wants=qubes-whonix-torified-updates-proxy-check.service
 Wants=qubes-whonix-redirect-9050.socket
 #Wants=qubes-whonix-remote-support.service
-Wants=qubes-whonix-sysinit.service
 Wants=qubes-whonix-redirect-9050.service
 Wants=qubes-whonix-postinit.service
 Wants=qubes-meminfo-writer.service
