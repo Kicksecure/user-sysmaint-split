@@ -88,6 +88,18 @@ old_sysmaint_conf_file_list=(
 )
 sudo_to_sysmaint="sudo --non-interactive -u sysmaint"
 
+bail_if_read_only() {
+   if test -w /etc; then
+      return
+   fi
+   if ! test -d /etc; then
+      printf "%s\n" "$0: ERROR: Folder '/etc' does not exist!" >&2
+      exit 1
+   fi
+   printf "%s\n" "$0: ERROR: Folder '/etc' exists but is read-only! Full read-only disk without ephemeral overlay is unsupported!" >&2
+   exit 1
+}
+
 restore_pre_sysmaint_autologin_config() {
    safe-rm -f -- "${sysmaint_lightdm_conf_file}"
    safe-rm -f -- "${sysmaint_sddm_conf_file}"
@@ -280,6 +292,8 @@ rebuild_greetd_config() {
 }
 
 handle_boot() {
+   bail_if_read_only
+
    if ! accountctl sysmaint is-user 2>/dev/null; then
       printf "%s\n" "$0: ERROR: Account 'sysmaint' does not exist. Cleaning up system-wide sysmaint config and exiting." >&2
       restore_pre_sysmaint_autologin_config
@@ -398,8 +412,8 @@ remove_sysmaint_qubes() {
 }
 
 sysmaint_boot() {
+   local mode="${1-}"
    parse_user_sysmaint_split_config
-   local mode="$1"
    case "${mode}" in
       'handle-boot') handle_boot;;
       'cleanup-autologin') restore_pre_sysmaint_autologin_config;;
