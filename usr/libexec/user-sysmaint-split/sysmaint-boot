@@ -21,7 +21,7 @@ $0: ERROR:
 BASH_COMMAND: '$BASH_COMMAND'
 failed with exit code '$last_exit_code'.
 ###" >&2
-   light_sleep 5;
+   light_sleep 5
    exit "$last_exit_code"
 }
 
@@ -35,7 +35,7 @@ exit_handler() {
       printf "%s\n" "$0: END: with OK exit code: '$exit_code'" >&2
    else
       printf "%s\n" "$0: END: with ERROR exit code: '$exit_code'" >&2
-      light_sleep 5;
+      light_sleep 5
    fi
    exit "$exit_code"
 }
