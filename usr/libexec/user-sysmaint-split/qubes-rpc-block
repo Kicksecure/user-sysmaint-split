@@ -8,7 +8,7 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
-rpc_config_file="$(basename "$0")" || rpc_config_file=''
+rpc_config_file="$(basename -- "$0")" || rpc_config_file=''
 if [ -z "$rpc_config_file" ]; then
   rpc_config_file='UNKNOWN'
 fi
