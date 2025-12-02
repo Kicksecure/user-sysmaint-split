@@ -1,0 +1,23 @@
+#!/bin/bash
+
+## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+rpc_config_file="$(basename "$0")" || rpc_config_file=''
+if [ -z "$rpc_config_file" ]; then
+  rpc_config_file='UNKNOWN'
+fi
+msg="Qrexec action '${rpc_config_file}' is prohibited when booted into 'PERSISTENT Mode - SYSMAINT Session'."
+
+printf '%s\n' "${msg}"
+if command -v notify-send >/dev/null 2>/dev/null; then
+  notify-send --app-name='user-sysmaint-split' 'Qrexec action blocked!' "${msg}"
+fi
+if command -v logger >/dev/null 2>/dev/null; then
+  logger -t 'user-sysmaint-split' "${msg}"
+fi
