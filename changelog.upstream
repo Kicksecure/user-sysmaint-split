@@ -1,3 +1,40 @@
+commit 56f4825a9f25548fb190db175b3fe9dc5f1041cc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 2 07:07:12 2025 -0500
+
+    end-of-options
+
+commit c4b0e41e5ccaba16de7eb4805ba0131797c10580
+Merge: 8cbfbf3 29dbd62
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 2 07:05:34 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 29dbd625256b353e16bc100a842f8ce51b78eb97
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Nov 30 13:23:52 2025 -0600
+
+    Show a notification and log an entry to the system journal if a qrexec action is blocked in sysmaint mode
+
+commit 8cbfbf3cf152b14a22611ff152b00b6d244e813c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 29 08:01:50 2025 -0500
+
+    better error handling in case disk is read-only without ephemeral overlay
+
+commit 060b6194b4a27595ff0a699763d4a0a39700ccdd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 29 07:39:05 2025 -0500
+
+    minor
+
+commit c82941f96562a1ab2d4dea33bd08763b5242623b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 24 08:45:27 2025 +0000
+
+    bumped changelog version
+
 commit 9b0c77a1ebd8ab590594954d1279a04096dcc434
 Merge: ef754cf 83a91ba
 Author: Patrick Schleizer <adrelanos@whonix.org>
