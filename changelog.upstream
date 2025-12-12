@@ -1,3 +1,15 @@
+commit c57c5c96cc0ea5c8c2f31b1cc395632fd9c7828e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 12 08:16:00 2025 -0500
+
+    panic-on-ops sysmaint integration (manually cherry picked changes by @arraybolt3)
+
+commit 1d56e035a1a1145481e0a8415c0288d032b32c7e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Dec 3 08:33:58 2025 +0000
+
+    bumped changelog version
+
 commit 56f4825a9f25548fb190db175b3fe9dc5f1041cc
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Dec 2 07:07:12 2025 -0500
