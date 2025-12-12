@@ -397,6 +397,17 @@ parse_user_sysmaint_split_config() {
 }
 
 remove_sysmaint_qubes() {
+   if [ -f /run/qubes/this-is-templatevm ]; then
+     ## We don't support using unrestricted admin mode in templates, because
+     ## the uninstallation of user-sysmaint-split would persist across
+     ## reboots.
+     ##
+     ## Don't make this an error, to avoid cluttering up systemcheck too much.
+     ## systemcheck will already detect this condition and warn about it.
+     printf '%s\n' "INFO: Refusing to remove user-sysmaint-split even though kernel parameter 'remove-sysmaint-qubes' is present, because this is a TemplateVM."
+     return 0
+   fi
+
    printf "%s\n" "INFO: Qubes unrestricted mode detected. Removing user-sysmaint-split."
    printf "%s\n" "INFO: (kernel parameter 'remove-sysmaint-qubes' is present, ok.)"
    dummy-dependency --yes --purge user-sysmaint-split

@@ -51,7 +51,6 @@ Wants=getty.target
 
 ## Basics.
 Wants=console-setup.service
-Wants=panic-on-oops.service
 Wants=dist-skel-first-boot.service
 Wants=udisks2.service
 Wants=upower.service
@@ -64,6 +63,9 @@ Wants=orca-kill-at-shutdown.service
 Wants=legacy-dist.service
 Wants=mnt-shared-vbox.service
 Wants=mnt-shared-kvm.service
+
+## Might be intentionally turned off by the user.
+#Wants=panic-on-oops.service
 
 ## Users should not be using VMs in Whonix-Host while booted in sysmaint session.
 #Wants=libvirt-dist-install.service

@@ -94,6 +94,7 @@ configure_sysmaint_services() {
       'ssh.service'
       'ufw.service'
       'wg-quick@wg0.service'
+      'panic-on-oops.service'
    )
 
    local service_item
