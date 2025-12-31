@@ -21,6 +21,7 @@ Wants=sysinit.target
 ## NetworkManager
 Wants=network.target
 Wants=NetworkManager.service
+Wants=detect-ipv6-enabled-in-kernel.service
 ## ifupdown
 Wants=ifupdown-pre.service
 Wants=networking.service
