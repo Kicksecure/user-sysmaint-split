@@ -1,3 +1,22 @@
+commit e6d18274285d1d32527bae3dcd2dcae40383190b
+Merge: 96d0aed 79a10c9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 7 05:10:15 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 79a10c9a005c84539bc012136875719067b94770
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 31 17:53:06 2025 -0600
+
+    Enable IPv6 detection unit in sysmaint session
+
+commit 96d0aedc10873a1fd65732ed4105ca4d875340c2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 12 13:19:31 2025 +0000
+
+    bumped changelog version
+
 commit c57c5c96cc0ea5c8c2f31b1cc395632fd9c7828e
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Dec 12 08:16:00 2025 -0500
