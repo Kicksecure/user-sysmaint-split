@@ -135,8 +135,28 @@ start_user_background_services
 ## Audio may start muted by default. Waybar provides no good way to unmute it,
 ## so let's unmute it for the user. If they want to mute the speakers, they
 ## can set the volume to 0%.
+max_audio_wait_count=20
+current_audio_wait_count=0
+while [ "$(pactl get-default-sink)" = '@DEFAULT_SINK@' ] \
+  && (( current_audio_wait_count <= max_audio_wait_count )); do
+  sleep 0.1
+  (( current_audio_wait_count++ )) || true
+done
 if command -v pactl &>/dev/null; then
    pactl set-sink-mute @DEFAULT_SINK@ false || true
+fi
+
+## When not running under a VM, try to set the speaker volume to a safe
+## default (50%). Only do this once.
+## Also in
+## desktop-config-dist/usr/libexec/desktop-config-dist/start-lxqt-session.
+do_once_dir="$HOME/.local/share/kicksecure/do_once"
+mkdir --parents -- "${do_once_dir}"
+if ! [ -f "${do_once_dir}/set_safe_speaker_volume" ]; then
+  touch "${do_once_dir}/set_safe_speaker_volume"
+  if [ "$(systemd-detect-virt 2>/dev/null || true)" = 'none' ]; then
+      pactl set-sink-volume @DEFAULT_SINK@ 50% || true
+  fi
 fi
 
 leaprun signal-wayland-session-started
