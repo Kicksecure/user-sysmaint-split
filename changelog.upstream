@@ -1,3 +1,28 @@
+commit 1b2a24de18cbab21dca0cba3f78b21fc4d50e99b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 11 05:38:18 2026 -0500
+
+    end-of-options
+
+commit b3322c1e1bcc22c2885809d5d083e927aa60e1d2
+Merge: 9446cc5 5208c2c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 11 05:35:15 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 5208c2cba40aae198f6b1fa5a82592c8daa530c1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Jan 10 22:19:24 2026 -0600
+
+    Set speaker volume to 50% on login one time
+
+commit 9446cc5446075e078f21be6a2dce8a259b749d38
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 7 10:22:09 2026 +0000
+
+    bumped changelog version
+
 commit e6d18274285d1d32527bae3dcd2dcae40383190b
 Merge: 96d0aed 79a10c9
 Author: Patrick Schleizer <adrelanos@whonix.org>
