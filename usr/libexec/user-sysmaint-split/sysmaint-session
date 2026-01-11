@@ -3,6 +3,9 @@
 ## Copyright (C) 2024 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
+# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/light_sleep.bsh
+source /usr/libexec/helper-scripts/light_sleep.bsh
+
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
@@ -62,7 +65,7 @@ write_sysmaint_account_specific_config_once
 
 "${selected_window_manager}" &
 # Needed to prevent window ordering problems
-sleep 1
+light_sleep 1
 if [ -n "${selected_system_tray}" ]; then
    # shellcheck disable=SC2086
    "${selected_system_tray}" ${selected_system_tray_args} &

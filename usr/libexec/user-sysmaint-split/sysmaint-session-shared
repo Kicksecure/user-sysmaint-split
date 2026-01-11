@@ -112,7 +112,10 @@ start_user_background_services() {
 
   ## Some services need to start after the desktop has had some time to fully
   ## initialize.
-  sleep 3
+  ## 'light_sleep' provided by /usr/libexec/helper-scripts/light_sleep.bsh,
+  ## which is sourced by both sysmaint-session and sysmaint-session-wayland
+  ## prior to calling this function.
+  light_sleep 3
 
   for i in "${!late_user_service_list[@]}"; do
      service_desktop_file="/etc/xdg/autostart/${late_user_service_list[i]}.desktop"
