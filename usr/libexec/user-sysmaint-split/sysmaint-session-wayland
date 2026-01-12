@@ -10,6 +10,15 @@
 #exec > >(systemd-cat --identifier=sysmaint-session-wayland) 2>&1
 exec >/dev/null 2>&1
 
+# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/light_sleep.bsh
+source /usr/libexec/helper-scripts/light_sleep.bsh
+
+# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/has.sh
+source /usr/libexec/helper-scripts/has.sh
+
+# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/try_wait_for_audio_ready.bsh
+source /usr/libexec/helper-scripts/try_wait_for_audio_ready.bsh
+
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
@@ -25,7 +34,7 @@ for old_wl_sock in "/run/user/$(id -u)"/wayland-*; do
   kill "${old_wl_pid}" || true
   old_wl_kill_timeout=5
   while (( old_wl_kill_timeout != 0 )); do
-    sleep 1
+    light_sleep 1
     if ! [ -d "/proc/${old_wl_pid}" ]; then
       break
     fi
@@ -102,20 +111,46 @@ dbus-update-activation-environment --systemd --all
 
 write_sysmaint_account_specific_config_once
 
+do_once_dir="$HOME/.local/share/kicksecure/do_once"
+mkdir --parents -- "${do_once_dir}"
+
+if has pactl; then
+   try_wait_for_audio_ready
+
+   ## Audio may start muted by default. Waybar provides no good way to unmute
+   ## it, so let's unmute it for the user. If they want to mute the speakers,
+   ## they can set the volume to 0%.
+   timeout --kill-after="1" "1" pactl set-sink-mute @DEFAULT_SINK@ false || true
+
+   ## When not running under a VM, try to set the speaker volume to a safe
+   ## default (50%). Only do this once. If the attempt fails for whatever
+   ## reason, or the use of a VM is detected, skip setting the speaker volume
+   ## and don't try to set it again in the future.
+   ## Also in
+   ## desktop-config-dist/usr/libexec/desktop-config-dist/start-lxqt-session.
+   if ! [ -f "${do_once_dir}/set_safe_speaker_volume" ]; then
+      touch -- "${do_once_dir}/set_safe_speaker_volume"
+      if [ "$(systemd-detect-virt 2>/dev/null || true)" = 'none' ]; then
+          timeout --kill-after="1" "1" pactl set-sink-volume @DEFAULT_SINK@ 50% || true
+      fi
+   fi
+fi
+
 # shellcheck disable=SC2086
 "${selected_window_manager}" ${selected_window_manager_args} &
 window_manager_pid="$!"
 ## Needed to prevent window ordering and initialization problems
-## WARNING: `sleep 1` IS NOT SUFFICIENT HERE. On machines with physical
+## WARNING: `light_sleep 1` IS NOT SUFFICIENT HERE. On machines with physical
 ## graphics hardware, the compositor takes more time than expected to
 ## initialize. Other applications will try to start before the Wayland
-## compositor is fully initialized if `sleep 1` is used, crashing the
+## compositor is fully initialized if `light_sleep 1` is used, crashing the
 ## compositor in the process.
 ##
-## On an i5-13500H system, `sleep 2` was sufficient to allow the compositor to
-## fully initialize before other applications were run. To allow some leeway
-## for slower systems, `sleep 3` is what we use here for now.
-sleep 3
+## On an i5-13500H system, `light_sleep 2` is sufficient to allow the
+## compositor to fully initialize before other applications are run. To allow
+## some leeway for slower systems, `light_sleep 3` is what we use here for
+## now.
+light_sleep 3
 export WAYLAND_DISPLAY=wayland-0
 if [ "${selected_window_manager}" = '/usr/bin/labwc' ]; then
    ## Allows dynamically reloading labwc configuration
@@ -131,33 +166,6 @@ fi
 sysmaint_app_pid="$!"
 
 start_user_background_services
-
-## Audio may start muted by default. Waybar provides no good way to unmute it,
-## so let's unmute it for the user. If they want to mute the speakers, they
-## can set the volume to 0%.
-max_audio_wait_count=20
-current_audio_wait_count=0
-while [ "$(pactl get-default-sink)" = '@DEFAULT_SINK@' ] \
-  && (( current_audio_wait_count <= max_audio_wait_count )); do
-  sleep 0.1
-  (( current_audio_wait_count++ )) || true
-done
-if command -v pactl &>/dev/null; then
-   pactl set-sink-mute @DEFAULT_SINK@ false || true
-fi
-
-## When not running under a VM, try to set the speaker volume to a safe
-## default (50%). Only do this once.
-## Also in
-## desktop-config-dist/usr/libexec/desktop-config-dist/start-lxqt-session.
-do_once_dir="$HOME/.local/share/kicksecure/do_once"
-mkdir --parents -- "${do_once_dir}"
-if ! [ -f "${do_once_dir}/set_safe_speaker_volume" ]; then
-  touch -- "${do_once_dir}/set_safe_speaker_volume"
-  if [ "$(systemd-detect-virt 2>/dev/null || true)" = 'none' ]; then
-      pactl set-sink-volume @DEFAULT_SINK@ 50% || true
-  fi
-fi
 
 leaprun signal-wayland-session-started
 
