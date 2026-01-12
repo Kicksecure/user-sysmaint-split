@@ -1,3 +1,22 @@
+commit bd2835f9889096b5421f53f4b2a9090763a36178
+Merge: f2199ea 83b058c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 12 10:15:02 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 83b058c0635dbc7578dc66051fda163625c4bf8b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 11 10:55:33 2026 +0000
+
+    Simplify and improve robustness of volume fix code, use light_sleep in several places
+
+commit f2199ea8dab7d1734a45c5cb64dd6e9bdca16403
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 11 10:55:33 2026 +0000
+
+    bumped changelog version
+
 commit 1b2a24de18cbab21dca0cba3f78b21fc4d50e99b
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Jan 11 05:38:18 2026 -0500
