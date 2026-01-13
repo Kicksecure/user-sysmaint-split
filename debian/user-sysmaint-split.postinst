@@ -95,6 +95,7 @@ configure_sysmaint_services() {
       'ufw.service'
       'wg-quick@wg0.service'
       'panic-on-oops.service'
+      'usbguard-dbus.service'
    )
 
    local service_item
