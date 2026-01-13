@@ -1,3 +1,22 @@
+commit 6132af544a658851f16c2f7f1fa38ae53c5e505f
+Merge: ce35aa3 dcaf6b7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 13 02:59:29 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit dcaf6b7a924e832e646023fc8f81865389e50764
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jan 12 19:21:20 2026 -0600
+
+    Enable usbguard-dbus.service in sysmaint sessions by default
+
+commit ce35aa3d635f8576b160cebb1148a9f276802beb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 12 15:16:45 2026 +0000
+
+    bumped changelog version
+
 commit bd2835f9889096b5421f53f4b2a9090763a36178
 Merge: f2199ea 83b058c
 Author: Patrick Schleizer <adrelanos@whonix.org>
