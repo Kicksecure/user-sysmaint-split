@@ -107,17 +107,17 @@ restore_pre_sysmaint_autologin_config() {
    safe-rm -f -- "${sysmaint_greetd_conf_file}"
    safe-rm -f -- "${sysmaint_wlgreet_conf_file}"
    if [ -f "${lightdm_state_backup_file}" ]; then
-      safe-rm -rf -- "${lightdm_state_file}"
+      safe-rm -r -f -- "${lightdm_state_file}"
       mv --verbose -- "${lightdm_state_backup_file}" "${lightdm_state_file}"
       if [ ! -f "${lightdm_state_file}" ] || ! [ -s "${lightdm_state_file}" ]; then
-        safe-rm -rf -- "${lightdm_state_file}"
+        safe-rm -r -f -- "${lightdm_state_file}"
       fi
    fi
    if [ -f "${sddm_state_backup_file}" ]; then
-      safe-rm -rf -- "${sddm_state_file}"
+      safe-rm -r -f -- "${sddm_state_file}"
       mv --verbose -- "${sddm_state_backup_file}" "${sddm_state_file}"
       if [ ! -f "${sddm_state_file}" ] || ! [ -s "${sddm_state_file}" ]; then
-        safe-rm -rf -- "${sddm_state_file}"
+        safe-rm -r -f -- "${sddm_state_file}"
       fi
    fi
    rebuild_greetd_config
@@ -164,7 +164,7 @@ Session=sysmaint-session" \
    fi
 
    if ! [ -d "${lightdm_state_dir}" ]; then
-      safe-rm -rf -- "${lightdm_state_dir}"
+      safe-rm -r -f -- "${lightdm_state_dir}"
       mkdir --verbose --parents -- "${lightdm_state_dir}" || exit 1
       if accountctl lightdm is-user 2>/dev/null \
          && accountctl lightdm is-group 2>/dev/null; then
@@ -180,7 +180,7 @@ Session=sysmaint-session" \
    ## here. The undo logic will later detect that this file is empty and
    ## delete it if necessary.
    touch -- "${lightdm_state_file}"
-   safe-rm -rf -- "${lightdm_state_backup_file}"
+   safe-rm -r -f -- "${lightdm_state_backup_file}"
    mv --verbose -- "${lightdm_state_file}" "${lightdm_state_backup_file}"
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
@@ -228,7 +228,7 @@ write_sddm_sysmaint_default_session_config() {
    fi
 
    if ! [ -d "${sddm_state_dir}" ]; then
-      safe-rm -rf -- "${sddm_state_dir}"
+      safe-rm -r -f -- "${sddm_state_dir}"
       mkdir --verbose --parents -- "${sddm_state_dir}" || exit 1
       if accountctl sddm is-user 2>/dev/null \
          && accountctl sddm is-group 2>/dev/null; then
@@ -240,7 +240,7 @@ write_sddm_sysmaint_default_session_config() {
    ## here. The undo logic will later detect that this file is empty and
    ## delete it if necessary.
    touch -- "${sddm_state_file}"
-   safe-rm -rf -- "${sddm_state_backup_file}"
+   safe-rm -r -f -- "${sddm_state_backup_file}"
    mv --verbose -- "${sddm_state_file}" "${sddm_state_backup_file}"
 
    if [ "${sysmaint_session_wayland}" = 'yes' ]; then
