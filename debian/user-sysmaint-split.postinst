@@ -4,27 +4,34 @@
 ## See the file COPYING for copying conditions.
 
 if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
+   # shellcheck source=../../helper-scripts/usr/libexec/helper-scripts/pre.bsh
    source /usr/libexec/helper-scripts/pre.bsh
+fi
+if [ -f /usr/libexec/helper-scripts/boot-session-detection.sh ]; then
+   ## Sets variable 'boot_session'.
+   # shellcheck source=../../helper-scripts/usr/libexec/helper-scripts/boot-session-detection.sh
+   source /usr/libexec/helper-scripts/boot-session-detection.sh
 fi
 
 set -e
 
 true "
 #####################################################################
-## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $*
 #####################################################################
 "
 
 disable_sysmaint_normal_user_autologin() {
    ## do_once code intentionally omitted, this needs to be done any time this
-   ## package is installed in case the user removes and reinstalls it
-   if [ ! -f /usr/share/qubes/marker-vm ]; then
+   ## package is installed in case the user removes and reinstalls it.
+   if [ ! -f /usr/share/qubes/marker-vm ] \
+      && [ "${boot_session}" != 'sysmaint_session' ]; then
       /usr/sbin/autologinchange -r -d -- sysmaint 2>/dev/null
    fi
 }
 
 enable_sysmaint_autologin() {
-   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME[0]}_version_1" ]; then
       return 0
    fi
    mkdir --parents "/var/lib/user-sysmaint-split/do_once"
@@ -43,11 +50,11 @@ enable_sysmaint_autologin() {
       /usr/sbin/autologinchange -e -- sysmaint 2>/dev/null
    fi
 
-   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME[0]}_version_1"
 }
 
 debian_tor_group_configuration() {
-   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME[0]}_version_1" ]; then
       return 0
    fi
    mkdir --parents "/var/lib/user-sysmaint-split/do_once"
@@ -56,11 +63,11 @@ debian_tor_group_configuration() {
    addgroup --quiet debian-tor 2>/dev/null || true
    adduser --quiet sysmaint debian-tor 2>/dev/null || true
 
-   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME[0]}_version_1"
 }
 
 ensure_account_sysmaint_unlocked_once() {
-   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1" ]; then
+   if [ -f "/var/lib/user-sysmaint-split/do_once/${FUNCNAME[0]}_version_1" ]; then
       return 0
    fi
    mkdir --parents "/var/lib/user-sysmaint-split/do_once"
@@ -70,7 +77,7 @@ ensure_account_sysmaint_unlocked_once() {
    ## mechanism.
    accountctl sysmaint unlock-pass 2>/dev/null
 
-   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME}_version_1"
+   touch "/var/lib/user-sysmaint-split/do_once/${FUNCNAME[0]}_version_1"
 }
 
 configure_sysmaint_services() {
@@ -157,7 +164,7 @@ fi
 
 true "
 #####################################################################
-## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $*
 #####################################################################
 "
 
