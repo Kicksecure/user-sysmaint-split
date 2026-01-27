@@ -1,3 +1,29 @@
+commit ce7dde7f996483c9541cef99543766cc2363e76f
+Merge: bca31fa 259f09f
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 27 12:16:22 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 259f09f97faf4ef703d3e13cdcc9fedacdee536c
+Merge: d9d6763 bca31fa
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jan 25 13:24:24 2026 -0600
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit d9d67637198333f65ec476b27240b2f6e0204492
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jan 25 12:02:07 2026 -0600
+
+    Do not disable sysmaint autologin in raw mode if booted in sysmaint mode, make shellcheck happier
+
+commit bca31fa072d0d9a6103f2dc0e6d16a778697e5de
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 25 11:26:35 2026 +0000
+
+    bumped changelog version
+
 commit b47070d05ea974fde89c19c0d7833f00ed3c3b2e
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Jan 25 04:05:37 2026 -0500
