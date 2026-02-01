@@ -150,8 +150,8 @@ Wants=xendriverdomain.service
 ## modules
 Wants=xen.service
 
-#Wants=tb-updater-dispvm.service
-#Wants=tb-updater-first-boot.service
+Wants=tb-updater-dispvm.service
+Wants=tb-updater-first-boot.service
 
 ## Whonix
 Wants=anon-gw-anonymizer-config.service
