@@ -138,7 +138,6 @@ fi
 
 # shellcheck disable=SC2086
 "${selected_window_manager}" ${selected_window_manager_args} &
-window_manager_pid="$!"
 ## Needed to prevent window ordering and initialization problems
 ## WARNING: `light_sleep 1` IS NOT SUFFICIENT HERE. On machines with physical
 ## graphics hardware, the compositor takes more time than expected to
@@ -151,11 +150,28 @@ window_manager_pid="$!"
 ## some leeway for slower systems, `light_sleep 3` is what we use here for
 ## now.
 light_sleep 3
-export WAYLAND_DISPLAY=wayland-0
-if [ "${selected_window_manager}" = '/usr/bin/labwc' ]; then
-   ## Allows dynamically reloading labwc configuration
-   export LABWC_PID="${window_manager_pid}"
-fi
+
+## labwc updates systemd's activation environment with environment variables
+## like $DISPLAY, $WAYLAND_DISPLAY, and $LABWC_PID. Import any variables from
+## systemd that are not already set in our environment.
+##
+## From the systemctl manpage:
+##
+##     If no special characters or whitespace is present in the variable
+##     values, no escaping is performed, and the assignments have the form
+##     "VARIABLE=value". If whitespace or characters which have special
+##     meaning to the shell are present, dollar-single-quote escaping is used,
+##     and assignments have the form "VARIABLE=$'value'".
+##
+## Thus we can safely process the output of 'systemctl show-environment'
+## line-by-line and import variables using 'eval'.
+while read -r systemd_env_line; do
+   systemd_env_var_name="$(cut -z -d'=' -f1 <<< "${systemd_env_line}")"
+   if ! [ -v "${systemd_env_var_name}" ]; then
+      eval "${systemd_env_line}"
+      export "${systemd_env_var_name}"
+   fi
+done < <(systemctl --user show-environment)
 
 if [ -n "${selected_system_tray}" ]; then
    # shellcheck disable=SC2086
