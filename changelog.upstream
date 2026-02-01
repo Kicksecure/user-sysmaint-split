@@ -1,3 +1,22 @@
+commit f4233d10e50c4a844d04a1a8b4b717328a9873db
+Merge: d56f637 2455289
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 1 09:32:23 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 2455289baf8550c837333b4dceea3fa93856669c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Feb 1 08:25:36 2026 -0600
+
+    Import environment variables from systemd after labwc starts
+
+commit d56f637a5979a3c9425fdf94f0e45b2a886ce363
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 1 14:03:32 2026 +0000
+
+    bumped changelog version
+
 commit 3b08267c94da29afec6c830583a72779d743a052
 Merge: 8d7a4da e2f96d1
 Author: Patrick Schleizer <adrelanos@whonix.org>
