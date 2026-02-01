@@ -7,10 +7,10 @@ if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
    # shellcheck source=../../helper-scripts/usr/libexec/helper-scripts/pre.bsh
    source /usr/libexec/helper-scripts/pre.bsh
 fi
-if [ -f /usr/libexec/helper-scripts/boot-session-detection.sh ]; then
+if [ -f /usr/libexec/helper-scripts/boot-session-detection.bsh ]; then
    ## Sets variable 'boot_session'.
-   # shellcheck source=../../helper-scripts/usr/libexec/helper-scripts/boot-session-detection.sh
-   source /usr/libexec/helper-scripts/boot-session-detection.sh
+   # shellcheck source=../../helper-scripts/usr/libexec/helper-scripts/boot-session-detection.bsh
+   source /usr/libexec/helper-scripts/boot-session-detection.bsh
 fi
 
 set -e
