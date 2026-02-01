@@ -1,3 +1,28 @@
+commit 3b08267c94da29afec6c830583a72779d743a052
+Merge: 8d7a4da e2f96d1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 1 08:04:46 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit e2f96d142502e0f9edba06296f07a4634434137f
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Feb 1 06:04:00 2026 -0600
+
+    Rename boot-session-detection.sh to boot-session-detection.bsh
+
+commit c38a843cc05978536ec88ec46ddb00e982f52a9b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Feb 1 05:02:15 2026 -0600
+
+    Enable launching Tor Browser in sysmaint sessions
+
+commit 8d7a4dad673a90459057090cd83a303f773d4862
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 27 17:20:01 2026 +0000
+
+    bumped changelog version
+
 commit ce7dde7f996483c9541cef99543766cc2363e76f
 Merge: bca31fa 259f09f
 Author: Patrick Schleizer <adrelanos@whonix.org>
