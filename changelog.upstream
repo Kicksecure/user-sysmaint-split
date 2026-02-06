@@ -1,3 +1,22 @@
+commit ae652e669163da08009755e69233e7b852befad8
+Merge: c24764c 48b640e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Feb 6 05:08:52 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 48b640e24b8df10c0a8935f928274d889cf6d166
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Wed Feb 4 21:52:48 2026 -0600
+
+    Remove Qubes sysmaint boot mode when removed even if not fully purged
+
+commit c24764c89ef25e8d1ed28b3c21cf971f5c0325c1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 1 15:06:35 2026 +0000
+
+    bumped changelog version
+
 commit f4233d10e50c4a844d04a1a8b4b717328a9873db
 Merge: d56f637 2455289
 Author: Patrick Schleizer <adrelanos@whonix.org>
