@@ -1,0 +1,5 @@
+## Copyright (C) 2026 - 2026 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+## moved to being a symlink
+rm_conffile /etc/qubes/post-install.d/21-qubes-persistent-mode-sysmaint.sh
