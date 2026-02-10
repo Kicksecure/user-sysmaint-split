@@ -1,3 +1,22 @@
+commit fe2b56152b34a985d0bcd3a2be71169db9199092
+Merge: b650880 9169eda
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Feb 10 07:11:22 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 9169eda85069d95b1b871c11b7168bf43d4455dd
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Feb 8 17:06:17 2026 -0600
+
+    Add a missing runtime dependency that provides the 'gio' command used for launching session background services
+
+commit b650880e9e3b8d2839b4c7c958edaa9ce44fcbbe
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Feb 6 10:12:01 2026 +0000
+
+    bumped changelog version
+
 commit ae652e669163da08009755e69233e7b852befad8
 Merge: c24764c 48b640e
 Author: Patrick Schleizer <adrelanos@whonix.org>
