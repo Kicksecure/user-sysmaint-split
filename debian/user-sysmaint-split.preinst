@@ -26,7 +26,7 @@ sysmaint_user_creation_and_groups_setup() {
    USER_CREATE_USERNAME='sysmaint'
    add_linux_user_account
    password_empty_for_user_account
-   USER_CREATE_GROUP_ADD_LIST=( 'sudo' 'ssh' 'console' )
+   USER_CREATE_GROUP_ADD_LIST=( 'sudo' 'ssh' 'console' 'privleap' )
    if [ -f /usr/share/qubes/marker-vm ]; then
       USER_CREATE_GROUP_ADD_LIST+=( 'qubes' )
    fi
