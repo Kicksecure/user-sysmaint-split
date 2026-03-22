@@ -183,6 +183,4 @@ sysmaint_app_pid="$!"
 
 start_user_background_services
 
-leaprun signal-wayland-session-started
-
 wait "${sysmaint_app_pid}"
