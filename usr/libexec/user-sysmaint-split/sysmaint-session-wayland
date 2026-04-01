@@ -80,6 +80,8 @@ system_tray_list=(
 system_tray_arg_list=(
    ''
 )
+selected_system_tray=''
+selected_system_tray_args=''
 
 for (( idx = 0; idx < ${#system_tray_list[@]}; idx++ )); do
    if [ -e "${system_tray_list[idx]}" ]; then
