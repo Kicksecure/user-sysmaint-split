@@ -131,6 +131,10 @@ case "$1" in
       ## Install policy-rc.d alternative
       update-alternatives --install /usr/sbin/policy-rc.d policy-rc.d /usr/libexec/user-sysmaint-split/policy-rc.d 100
 
+      ## Migrate an existing sysmaint account from using password locking to
+      ## using PAM-based unsafe login prevention if necessary.
+      ensure_account_sysmaint_unlocked_once
+
       ## Make sure that if the sysmaint account has normal account autologin
       ## enabled, it's disabled to avoid security problems
       disable_sysmaint_normal_user_autologin
@@ -139,8 +143,6 @@ case "$1" in
       enable_sysmaint_autologin
 
       debian_tor_group_configuration
-
-      ensure_account_sysmaint_unlocked_once
 
       ## Configure services
       configure_sysmaint_services
