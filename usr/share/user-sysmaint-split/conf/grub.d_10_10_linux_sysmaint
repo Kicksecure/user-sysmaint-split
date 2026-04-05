@@ -16,15 +16,7 @@ make_boot_entry='true'
 : "${session_detail:="system maintenance tasks"}"
 
 grub_distributor_appendix="$persistence_type Mode | SYSMAINT Session | $session_detail"
-if [ -e '/usr/share/kicksecure/marker' ]; then
-   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
-elif [ -e '/usr/share/anon-ws-base-files/workstation' ]; then
-   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
-elif [ -e '/usr/share/anon-gw-base-files/gateway' ]; then
-   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
-else
-   GRUB_DISTRIBUTOR="$grub_distributor_appendix"
-fi
+GRUB_DISTRIBUTOR="$grub_distributor_appendix"
 
 GRUB_DISABLE_RECOVERY="true"
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX boot-role=sysmaint systemd.unit=sysmaint-boot.target"
