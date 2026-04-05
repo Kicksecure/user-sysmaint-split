@@ -1,3 +1,39 @@
+commit 611576fdea31a2a4ece5d8c372fb2b871c75cce9
+Merge: 76591a3 155f118
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Apr 5 06:18:55 2026 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 155f1186501dfcdfd031e2519c59cf84c5b9819e
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Apr 3 16:39:06 2026 -0400
+
+    Move the sysmaint locked password migration earlier to avoid spurious error messages caused by running autologinchange later
+
+commit 2d00f184831e54b316133af8177e5f075dc240a4
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Apr 3 16:10:34 2026 -0400
+
+    Apply slightly tweaked fixes from Claude
+    
+    * Some lines of text that were being erroneously printed to stdout are
+      now printed to stderr.
+    * Some uninitialized variables in sysmaint-session and
+      sysmaint-session-wayland are now initialized. (Because these scripts
+      don't use 'set -o nounset', this was benign, but it's still good to
+      fix.)
+    * Got rid of an useless if/elif/else tree in
+      grub.d_10_10_linux_sysmaint.
+    * Unbroke the sysmaint GUI login check in
+      X11_Xsession.d_15_sysmaint_no_desktop.
+
+commit 76591a3720ab0629ffa729d53eefe846f13c4030
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Mar 22 11:16:11 2026 +0000
+
+    bumped changelog version
+
 commit 754b7bc6257b0d1beb0bda57b9f5e18d7db94152
 Merge: 75d0fdd ea80c22
 Author: Patrick Schleizer <adrelanos@whonix.org>
