@@ -19,6 +19,9 @@ source /usr/libexec/helper-scripts/has.sh
 # shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/try_wait_for_audio_ready.bsh
 source /usr/libexec/helper-scripts/try_wait_for_audio_ready.bsh
 
+# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/strings.bsh
+source /usr/libexec/helper-scripts/strings.bsh
+
 # shellcheck source=./sysmaint-session-shared
 source /usr/libexec/user-sysmaint-split/sysmaint-session-shared
 
@@ -169,6 +172,7 @@ light_sleep 3
 ## line-by-line and import variables using 'eval'.
 while read -r systemd_env_line; do
    systemd_env_var_name="$(cut -z -d'=' -f1 <<< "${systemd_env_line}")"
+   check_variable_name "${systemd_env_var_name}" || continue
    if ! [ -v "${systemd_env_var_name}" ]; then
       eval "${systemd_env_line}"
       export "${systemd_env_var_name}"
