@@ -1,3 +1,22 @@
+commit a217aed4d6e8302d8f98041fa897b50cfc5ad3ba
+Merge: d4e5211 a9e9516
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Apr 22 07:31:27 2026 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit a9e95160ff6cf36332acd6f8d2bd78d939eac03d
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Mon Apr 20 22:24:38 2026 -0400
+
+    Harden against command injection
+
+commit d4e5211c594b6d2a6c48d89d5bc69c4f29839ba4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Apr 5 10:29:31 2026 +0000
+
+    bumped changelog version
+
 commit 611576fdea31a2a4ece5d8c372fb2b871c75cce9
 Merge: 76591a3 155f118
 Author: Patrick Schleizer <adrelanos@whonix.org>
@@ -16,7 +35,7 @@ Author: Aaron Rainbolt <arraybolt3@gmail.com>
 Date:   Fri Apr 3 16:10:34 2026 -0400
 
     Apply slightly tweaked fixes from Claude
-    
+
     * Some lines of text that were being erroneously printed to stdout are
       now printed to stderr.
     * Some uninitialized variables in sysmaint-session and
@@ -378,7 +397,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Nov 12 01:10:12 2025 -0500
 
     fix: add `After=systemd-tmpfiles-setup.service`
-    
+
     Wait for 'systemd-tmpfiles-setup.service' to parse '/usr/lib/tmpfiles.d/qrexec-volatile-config.conf' folder '/run/qubes-rpc' exists.
 
 commit f21056998ba216d9b69f775a410b9bed0beb4991
@@ -566,7 +585,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Oct 27 09:14:16 2025 -0400
 
     fix: start qubes-updates-proxy.service (Qubes UpdatesProxy) also in sysmaint session
-    
+
     This fixes Template updates if Whonix-Gateway (sys-whonix) has been booted in sysmaint session.
 
 commit b31562334a79657bb3dded86beb1d38b1cd467f2
@@ -1161,7 +1180,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 21 09:10:12 2025 -0400
 
     fix: show /etc/profile.d sysmaint account notification only if tty has been detected
-    
+
     This is to avoid confusing non-login scripts with terminal output.
 
 commit 70147191f4e0cc0cd4a0c7de6cf8ea8bd8af495c
@@ -2203,7 +2222,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jan 29 08:01:36 2025 -0500
 
     Merge pull request #1 from ben-grande/pass-state
-    
+
     Use helper scripts to manage account state
 
 commit e6f38b93897ce1f7f56f547b55a6f2e2df2722f3
@@ -2229,7 +2248,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Jan 24 10:04:04 2025 -0500
 
     add `Breaks: qubes-core-agent-passwordless-root`
-    
+
     to simplify installation of `user-sysmaint-split`,
     to automatically remove `qubes-core-agent-passwordless-root` once
     `sudo apt isntall user-sysmaint-split`.
@@ -2478,7 +2497,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Jan 10 10:18:53 2025 -0500
 
     usrmerge
-    
+
     https://github.com/Kicksecure/security-misc/pull/294
 
 commit f37104f40267b01bb0dd308f36f72ce4d1dbe9b7
@@ -2817,7 +2836,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Dec 24 01:07:11 2024 -0500
 
     chmod +x /usr/share/user-sysmaint-split/conf/X11_Xsession.d_15_sysmaint_no_desktop
-    
+
     to fix lintian warning
 
 commit 9485de81216aea100e3335f003680404a529fcf9
@@ -2850,7 +2869,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Dec 20 03:28:03 2024 -0500
 
     Revert "improve robustness of postrm"
-    
+
     This reverts commit 4cf12e3aa2725b3c6954b37665c401490a46132f.
 
 commit 4cf12e3aa2725b3c6954b37665c401490a46132f
@@ -2889,7 +2908,7 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Dec 20 01:48:02 2024 -0500
 
     override lintian warning
-    
+
     `W: user-sysmaint-split: systemd-service-file-refers-to-unusual-wantedby-target basic.target [usr/lib/systemd/system/sysmaint-boot.service]`
 
 commit c830453e13fb84de2f6403e4cb03858e28596203
@@ -2897,9 +2916,9 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Dec 20 00:59:13 2024 -0500
 
     move permission-hardener config snippet from etc to lib
-    
+
     to allow easy, safe apt `remove`
-    
+
     therefore apt `purge` isn't needed
 
 commit 4637ead556c1946033b48a606d62432fc463a8bb
