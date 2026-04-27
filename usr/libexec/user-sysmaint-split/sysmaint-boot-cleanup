@@ -24,7 +24,16 @@ old_sysmaint_conf_file_list=(
   '/etc/lightdm/lightdm.conf.d/60_sysmaint-boot.conf'
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 )
+sysmaint_temp_password_flag='/run/user-sysmaint-split/temp-password-set'
 exit_code=0
+
+## Restore empty password for sysmaint if a temporary password was set
+## during boot (when autologin was disabled and the account had no password).
+if [ -f "${sysmaint_temp_password_flag}" ]; then
+   echo "INFO: Restoring empty password for sysmaint account." >&2
+   passwd -d sysmaint >/dev/null 2>&1 || true
+   rm -f -- "${sysmaint_temp_password_flag}"
+fi
 
 echo "INFO: Removing sysmaint autologin files because system is shutting down." >&2
 safe-rm -f --verbose -- "${sysmaint_lightdm_conf_file}"
