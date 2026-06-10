@@ -105,6 +105,7 @@ Wants=canary.service
 Wants=virtualbox-guest-utils.service
 
 ## KVM
+Wants=spice-vdagentd.socket
 Wants=spice-vdagentd.service
 
 ## qrexec is required for many Qubes features, and also is mandatory to
