@@ -1,3 +1,9 @@
+user-sysmaint-split (3:12.3-1) unstable; urgency=medium
+
+  * New upstream version (local package).
+
+ -- Patrick Schleizer <adrelanos@whonix.org>  Wed, 10 Jun 2026 17:50:28 +0000
+
 user-sysmaint-split (3:12.2-1) unstable; urgency=medium
 
   * New upstream version (local package).

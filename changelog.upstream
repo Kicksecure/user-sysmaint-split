@@ -1,3 +1,17 @@
+commit d52ba8e613628562b655bb199618a632f1f4e46f
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jun 10 13:44:43 2026 -0400
+
+    `Wants=spice-vdagentd.socket`
+
+    https://forums.whonix.org/t/whonix-18-nitpicks/23255
+
+commit d701c05ef0d1e8ab327505939b141612d58e7770
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 20 22:27:24 2026 +0000
+
+    bumped changelog version
+
 commit b3a62fc64d7d91d649b9e4046cde8f1b1bbf4545
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 20 16:57:27 2026 -0400
