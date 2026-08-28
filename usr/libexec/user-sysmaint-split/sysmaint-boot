@@ -87,6 +87,7 @@ old_sysmaint_conf_file_list=(
   '/etc/sddm.conf.d/z-sysmaint-boot.conf'
 )
 sudo_to_sysmaint="sudo --non-interactive -u sysmaint"
+sysmaint_temp_password_flag='/run/user-sysmaint-split/temp-password-set'
 
 bail_if_read_only() {
    if test -w /etc; then
@@ -100,7 +101,39 @@ bail_if_read_only() {
    exit 1
 }
 
+ensure_sysmaint_has_password() {
+   ## When autologin is disabled, the display manager greeter requires manual
+   ## authentication. If the sysmaint account has an empty password, PAM will
+   ## reject login attempts because pam_unix does not allow empty passwords
+   ## without the nullok option (which security-hardened systems remove).
+   ## Detect this and set a temporary password so manual login works.
+   if [ "${sysmaint_autologin}" = "yes" ]; then
+      return
+   fi
+   local pass_status
+   pass_status="$(passwd -S sysmaint 2>/dev/null)" || true
+   if printf '%s\n' "${pass_status}" | grep -qw 'NP'; then
+      printf '%s\n' "WARNING: sysmaint account has no password and autologin is disabled." >&2
+      printf '%s\n' "WARNING: Setting temporary password 'changeme' for sysmaint account." >&2
+      printf '%s\n' "WARNING: Please change it after login using the 'passwd' command." >&2
+      printf '%s\n' 'sysmaint:changeme' | chpasswd
+      mkdir --parents -- "$(dirname -- "${sysmaint_temp_password_flag}")"
+      touch -- "${sysmaint_temp_password_flag}"
+   fi
+}
+
+restore_sysmaint_empty_password() {
+   ## If we set a temporary password during boot, restore the empty password
+   ## state on shutdown so the system returns to its original configuration.
+   if [ -f "${sysmaint_temp_password_flag}" ]; then
+      printf '%s\n' "INFO: Restoring empty password for sysmaint account." >&2
+      passwd -d sysmaint >/dev/null 2>&1 || true
+      safe-rm -f -- "${sysmaint_temp_password_flag}"
+   fi
+}
+
 restore_pre_sysmaint_autologin_config() {
+   restore_sysmaint_empty_password
    safe-rm -f -- "${sysmaint_lightdm_conf_file}"
    safe-rm -f -- "${sysmaint_sddm_conf_file}"
    safe-rm -f -- "${old_sysmaint_conf_file_list[@]}"
@@ -353,6 +386,8 @@ handle_boot() {
 
       rebuild_greetd_config
    fi
+
+   ensure_sysmaint_has_password
 
    ## Qubes handling.
    if [ ! -f /usr/share/qubes/marker-vm ]; then
