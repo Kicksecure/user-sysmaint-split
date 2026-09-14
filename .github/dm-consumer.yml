@@ -8,8 +8,9 @@
 
 dist-ai-tests:
   ## sysmaint-session and sysmaint-session-wayland source helper-scripts
-  ## (light_sleep.bsh, has.sh, ...) by the '${HELPER_SCRIPTS_PATH:-}' path with a
-  ## relative '# shellcheck source=' directive. Provide helper-scripts as the
-  ## repo sibling so the pre-push-static gate's shellcheck FOLLOWS the source
-  ## instead of emitting SC1091 -- no per-line '# shellcheck disable=SC1091'.
+  ## (light_sleep.bsh, has.bsh, ...) by the '${HELPER_SCRIPTS_PATH:-}' path
+  ## with a relative '# shellcheck source=' directive. Provide helper-scripts
+  ## as the repo sibling so the pre-push-static gate's shellcheck FOLLOWS the
+  ## source instead of emitting SC1091 -- no per-line
+  ## '# shellcheck disable=SC1091'.
   helper-scripts: true
