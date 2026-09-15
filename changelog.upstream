@@ -1,3 +1,60 @@
+commit 615d1ee5511c293fb9145d340019528c1aef1e61
+Merge: 1029d42 44ec632
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 14 02:01:33 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit 44ec632649dc8060113712b5a46e10f2823b73ac
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Sep 11 17:11:41 2026 -0400
+
+    Reflow comment text
+
+commit d4199a9711bef7a0c41b752ca0151f82dc82821e
+Merge: 1029d42 c354fda
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Sep 11 17:09:56 2026 -0400
+
+    Merge branch 'ai' into arraybolt3/trixie
+
+commit c354fda60590f7235d7f6788cc34652e12931b17
+Merge: c82f28e b2d204a
+Author: claude <noreply@anthropic.com>
+Date:   Tue Sep 8 13:38:38 2026 -0400
+
+    Merge branch 'master' into ai
+
+commit b2d204a6c81efa00c67e3826f6e41ec446dbd3c2
+Merge: 1029d42 c82f28e
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Mon Sep 7 22:13:03 2026 -0400
+
+    Merge pull request #2 from org-ai-assisted/ai
+
+    rename has.sh -> has.bsh (bashism convention)
+
+commit c82f28ee3f355f22ceda6122d5dc1e1e43296da4
+Author: claude (dev474 c7439536-fad8-4884-b71a-d2f3c4c23905) <noreply@anthropic.com>
+Date:   Mon Sep 7 11:10:10 2026 -0400
+
+    rename has.sh to has.bsh (bashism convention)
+
+    Sourced helper-scripts lib uses bashisms; .bsh marks it. Path-only edit.
+
+commit 702e6a845b56d5cc612750695d2a071faa88fe5c
+Merge: 4426ce2 1029d42
+Author: claude (dev474 c7439536-fad8-4884-b71a-d2f3c4c23905) <noreply@anthropic.com>
+Date:   Mon Sep 7 11:10:10 2026 -0400
+
+    Merge branch 'master' into ai
+
+commit 1029d420ae759c39b21428351afb80d81437e603
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Sep 6 17:05:47 2026 +0000
+
+    bumped changelog version
+
 commit 73dbe4a8b505d4839f65dfe76524afd757aac266
 Merge: 8fce9d3 3dbddb1
 Author: Patrick Schleizer <adrelanos@whonix.org>
